@@ -41,7 +41,7 @@ unnecessarily disrupting legitimate system use.
 
 # Research Question
 
-To what extent to selected CIS Benchmark configuration controls change
+To what extent do selected CIS Benchmark configuration controls change
 the outcome of attacks against an Ubuntu 24.04 LTS system, and what
 operational consequences result from implementing those controls?
 
@@ -473,7 +473,7 @@ UBUNTU_CODENAME=noble
 LOGO=ubuntu-logo
 
 $ uname -a | tee uname.txt
-Linux lab 6.8.0-139-generic #139-Ubuntu SMP PREEMPT_DYNAMIC 
+Linux lab 6.8.0-139-generic #139-Ubuntu SMP PREEMPT_DYNAMIC
 Sat Aug  1 03:52:05 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 
 $ uname -r
@@ -582,9 +582,9 @@ Core(s) per socket:                      2
 Socket(s):                               1
 Stepping:                                1
 BogoMIPS:                                6199.99
-Flags:                                   fpu de pse tsc msr pae mce cx8 apic 
-sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm 
-constant_tsc nopl xtopology cpuid tsc_known_freq pni ssse3 cx16 sse4_1 sse4_2 
+Flags:                                   fpu de pse tsc msr pae mce cx8 apic
+sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm
+constant_tsc nopl xtopology cpuid tsc_known_freq pni ssse3 cx16 sse4_1 sse4_2
 x2apic popcnt aes hypervisor lahf_lm cpuid_fault pti
 Hypervisor vendor:                       KVM
 Virtualization type:                     full
@@ -606,10 +606,10 @@ Vulnerability Reg file data sampling:    Not affected
 Vulnerability Retbleed:                  Not affected
 Vulnerability Spec rstack overflow:      Not affected
 Vulnerability Spec store bypass:         Vulnerable
-Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers 
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers
                                                  and __user pointer sanitization
-Vulnerability Spectre v2:                Mitigation; Retpolines; STIBP disabled; 
-                                         RSB filling; PBRSB-eIBRS Not affected; 
+Vulnerability Spectre v2:                Mitigation; Retpolines; STIBP disabled;
+                                         RSB filling; PBRSB-eIBRS Not affected;
                                          BHI Retpoline
 Vulnerability Srbds:                     Not affected
 Vulnerability Tsa:                       Not affected
@@ -864,7 +864,7 @@ table ip6 filter {
 }
 table ip6 nat {
 	chain ts-postrouting {
-		meta mark & 0x00ff0000 == 0x00040000 counter packets 0 bytes 0 xt 
+		meta mark & 0x00ff0000 == 0x00040000 counter packets 0 bytes 0 xt
         target "MASQUERADE"
 	}
 
@@ -876,26 +876,26 @@ table ip6 nat {
 table ip mangle {
 	chain PREROUTING {
 		type filter hook prerouting priority mangle; policy accept;
-		ct state related,established ct mark and 0xff0000 != 0x0 counter packets 
+		ct state related,established ct mark and 0xff0000 != 0x0 counter packets
         574 bytes 59657 meta mark set ct mark and 0xff0000
 	}
 
 	chain OUTPUT {
 		type route hook output priority mangle; policy accept;
-		ct state new meta mark & 0x00ff0000 != 0x00000000 counter packets 267 
+		ct state new meta mark & 0x00ff0000 != 0x00000000 counter packets 267
         bytes 26430 ct mark set mark and 0xff0000
 	}
 }
 table ip6 mangle {
 	chain PREROUTING {
 		type filter hook prerouting priority mangle; policy accept;
-		ct state related,established ct mark and 0xff0000 != 0x0 counter packets 
+		ct state related,established ct mark and 0xff0000 != 0x0 counter packets
         0 bytes 0 meta mark set ct mark and 0xff0000
 	}
 
 	chain OUTPUT {
 		type route hook output priority mangle; policy accept;
-		ct state new meta mark & 0x00ff0000 != 0x00000000 counter packets 0 
+		ct state new meta mark & 0x00ff0000 != 0x00000000 counter packets 0
         bytes 0 ct mark set mark and 0xff0000
 	}
 }
