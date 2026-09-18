@@ -1,9 +1,7 @@
 ---
 title: Proposal Experiment Workflow
 author: Christopher Wiggins
-
 geometry: margin=1in
-
 ---
 
 \newpage
