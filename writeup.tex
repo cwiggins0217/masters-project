@@ -1,4 +1,4 @@
-% Created 2026-10-08 Thu 13:10
+% Created 2026-10-08 Thu 13:54
 % Intended LaTeX compiler: xelatex
 \documentclass[12pt,letterpaper]{article}
 \usepackage{graphicx}
@@ -25,16 +25,23 @@
 \usepackage{sectsty}
 \sectionfont{\centering}
 \usepackage{tocloft}
-\renewcommand{\contentsname}{\hfill\bfseries\Large Table of Contents\hfill}
+\renewcommand{\contentsname}{\hfill\bfseries Table of Contents\hfill}
 \renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftdotsep}{0.5}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsubsubsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftsecpagefont}{\normalfont}
 \renewcommand{\cftsubsecfont}{\bfseries}
 \renewcommand{\cftsubsecpagefont}{\normalfont}
-\renewcommand{\cftsubsubsecfont}{\bfseries}
+\renewcommand{\cftsubsubsecfont}{\bfseries\itshape}
 \renewcommand{\cftsubsubsecpagefont}{\normalfont}
+\renewcommand{\listfigurename}{\hfill\bfseries List of Figures\hfill}
+\renewcommand{\cftafterloftitle}{\hfill}
+\renewcommand{\listtablename}{\hfill\bfseries List of Tables\hfill}
+\renewcommand{\cftafterlottitle}{\hfill}
+\renewcommand{\cftfigdotsep}{1}
+\renewcommand{\cfttabdotsep}{1}
 \author{Christopher Wiggins}
 \date{Working draft -- October 7, 2026}
 \title{Assessing the Operational and Security Impact of CIS Hardening\\\medskip
@@ -114,7 +121,7 @@ Dean of the Graduate School\par
 
 \newpage
 \section*{Abstract}
-\label{sec:org4c0cea0}
+\label{sec:orgd71f244}
 \phantomsection
 \addcontentsline{toc}{section}{Abstract}
 
@@ -123,17 +130,35 @@ Security hardening changes how a server permits access, executes software, and s
 
 \newpage
 
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{3}
 \tableofcontents
 
 \newpage
-\pagenumbering{arabic}
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+
+
+\clearpage
 \section*{Preface}
-\label{sec:org6263f4b}
+\label{sec:org678a4c6}
 \phantomsection
 \addcontentsline{toc}{section}{Preface}
+
+
+
+\clearpage
+\pagenumbering{arabic}
 \section*{Introduction}
-\label{sec:org658fb94}
+\label{sec:orgd35bd1e}
 \phantomsection
 \addcontentsline{toc}{section}{Introduction}
 
@@ -145,7 +170,7 @@ A configuration assessment and an attack experiment answer different questions. 
 
 The project addresses two practical questions: ``Will hardening my existing server break its intended function?'' and ``Is the security benefit worth the operational cost?'' The initial experiment will address a limited, testable version of these questions. It will examine one recommendation, one application workflow, and one attacker objective. Its findings will describe that combination rather than establish the overall effectiveness of the entire CIS Benchmark.
 \section{Purpose and Research Questions}
-\label{sec:orgfa39fe7}
+\label{sec:orgd54981c}
 
 The purpose of this study is to evaluate the effect of a selected CIS hardening recommendation on both legitimate server operation and a defined attack scenario. The initial pilot will establish a repeatable method that can later be applied to additional recommendations without changing the meaning of the measured outcomes.
 
@@ -159,7 +184,7 @@ The study will address the following research questions:
 
 The working expectation is that the selected recommendation will restrict a specific unwanted behavior. Whether that restriction also affects legitimate operation will depend on the application's reliance on the capability being restricted. Before data collection, this expectation will be converted into a control-specific hypothesis identifying the exact setting, predicted mechanism, and observable outcomes. No hypothesis about a particular recommendation is asserted in this draft because that recommendation has not yet been selected.
 \section{Scope and Experimental Environment}
-\label{sec:org8b826d8}
+\label{sec:orga2568e3}
 
 The pilot will use Ubuntu Server 24.04 LTS hosted in Proxmox. The proposed target VM, \texttt{baseline-web}, will have two virtual CPUs, 4 GB of memory, and a 40 GB virtual disk. A separate test VM will act as the workload client and security-test origin. The environment will be isolated from production services and will use synthetic files and test accounts.
 
@@ -169,10 +194,10 @@ The application will have a documented processing operation with a known expecte
 
 The pilot will not initially apply an entire Level 2 profile. The treatment system will be described as having the selected recommendation applied; it will not be described as fully CIS-compliant. Additional controls, applications, operating systems, and attack scenarios fall outside this first experiment.
 \section{Proposed Methodology}
-\label{sec:orge12a802}
+\label{sec:org841eefc}
 
 \subsection{Selection of the Recommendation and Security Scenario}
-\label{sec:org1b17ad6}
+\label{sec:org3cb4f89}
 
 Before testing, the study will record the exact CIS Benchmark title, version, recommendation identifier, recommendation title, and associated profile. The recommendation must be applicable to the target and have a plausible relationship to a measurable unwanted action. The application will be defined and validated before treatment is applied so that observed breakage can be assessed against a pre-existing functional requirement.
 
@@ -180,7 +205,7 @@ The security scenario will specify the actor's starting privileges, access path,
 
 The security test must demonstrate the attacker objective in the baseline. If it cannot, a failure in the treatment condition will not establish a hardening benefit. Failed prerequisites, tooling errors, and unrelated connectivity failures will be recorded separately from prevention attributable to the selected setting.
 \subsection{Experimental Conditions}
-\label{sec:org589da09}
+\label{sec:org2198010}
 
 Two conditions will be derived from the same validated workload snapshot:
 
@@ -193,13 +218,13 @@ The independent variable is whether the selected recommendation is applied. The 
 
 If the baseline already satisfies the recommendation, a meaningful contrast must be established and documented before testing. Likewise, if applying the recommendation requires several configuration changes, the treatment will be identified as that set of changes; effects will not be attributed to an individual component without further experimentation.
 \subsection{Baseline Preparation}
-\label{sec:orgb779fd8}
+\label{sec:org074e459}
 
 The operating system and required packages will be installed and their versions recorded. Snapshot \texttt{01-os-ready} will preserve the operating-system starting point. The application will then be configured and its expected behavior validated. Snapshot \texttt{02-workload-ready} will preserve the working baseline from which experimental conditions are derived.
 
 The baseline record will include service status, listening sockets, relevant permissions, mount options, application configuration, and test inputs. Package updates and unrelated configuration changes will be excluded during a comparison. If a required environmental change occurs, both conditions will be rebuilt or revalidated from an equivalent starting point.
 \subsection{Trial Procedure}
-\label{sec:org77e93f5}
+\label{sec:org703661b}
 
 Each trial will use the following sequence:
 
@@ -215,10 +240,11 @@ The legitimate workflow will precede the security test so that attack-induced ch
 
 As an initial protocol choice, five valid trials per condition are proposed to check repeatability. Baseline and treatment runs will be alternated to reduce simple order effects. Exclusion criteria will be fixed before collection; excluded runs and their reasons will remain in the experiment record. Repeated trials on one application and VM design will not be treated as independent samples of the wider server population.
 \subsection{Outcome Measures}
-\label{sec:org222b00b}
+\label{sec:org4d5cdfb}
 
 The primary operational outcome will be end-to-end completion of the legitimate workflow with correct output. Secondary observations will include elapsed time, error messages, service failures, and manual intervention. Timing measurements will be descriptive in this pilot unless a separate performance protocol is established.
-
+\subsubsection{Test third level heading}
+\label{sec:orgc844f01}
 The primary security outcome will be whether the predefined attacker objective is achieved. The evidence must show the relevant effect on the target, rather than rely only on a test tool's success or failure message. Outcomes will distinguish objective achieved, objective prevented with supporting evidence, and inconclusive execution.
 
 For descriptive reporting, the functionality success fraction for condition c will be:
@@ -235,7 +261,7 @@ A_c = \frac{\text{valid trials achieving the attacker objective}}{\text{valid se
 
 Raw counts and inconclusive runs will accompany these fractions. A reduction in attacker success from B to H will support a benefit for the tested scenario, provided that the control mechanism and experimental validity checks support that interpretation. It will not establish a general probability of real-world compromise.
 \subsection{Interpretation and Recovery}
-\label{sec:org6de1250}
+\label{sec:org44e29a6}
 
 Results will be interpreted across both dimensions. Preserved functionality with a prevented attacker objective would support applying the recommendation for this workload and threat scenario. A prevented objective accompanied by legitimate workflow failure would demonstrate an operational trade-off requiring further investigation. Unchanged attacker success would show that the tested recommendation did not prevent that objective under the stated conditions, rather than show that it has no security value in other circumstances.
 
@@ -243,15 +269,15 @@ If functionality fails after treatment, a separate diagnostic rollback will test
 
 The study will report measured consequences and any adaptation effort separately. A universal judgment that hardening is ``worth it'' would require organizational risk and cost assumptions beyond this pilot.
 \section{Related Work - To Be Developed}
-\label{sec:org0f4fe93}
+\label{sec:org76b829b}
 
 The literature review will examine empirical studies of secure configuration, compatibility effects of hardening, and experimental measurement of attack outcomes. It will distinguish studies of benchmark conformance from studies that measure legitimate application behavior and adversarial outcomes together. Claims of novelty or of a research gap will be deferred until that review is completed.
 \section{Results - Pending Experimentation}
-\label{sec:org0ed5355}
+\label{sec:org39bc6ff}
 
 No experimental results are available. This section will report the selected recommendation, verified configuration differences, valid and excluded trial counts, functionality outcomes, security outcomes, and evidence supporting causal interpretation. Unexpected findings and unsuccessful hypotheses will be retained.
 \section{Discussion and Limitations}
-\label{sec:orgb343828}
+\label{sec:org4601877}
 
 This pilot will examine one application, one operating-system release, one recommendation, and one security scenario in a virtualized environment. Its results will therefore be bounded by those conditions. They will not establish the effectiveness of an entire benchmark or predict compatibility with unrelated applications.
 
@@ -259,13 +285,13 @@ The demonstration workload may omit dependencies present in production systems. 
 
 The expected contribution is a reproducible account of a specific hardening decision: what changed, what behavior continued or failed, what attacker objective remained possible or was restricted, and what evidence supports those conclusions.
 \section{Conclusion - Pending Results}
-\label{sec:org2886239}
+\label{sec:org03acdcc}
 
 A final conclusion will be written after testing. It will answer each research question using the observed results and identify the conditions under which those answers apply.
 \section{References}
-\label{sec:org0dac638}
+\label{sec:org2242b89}
 \section*{Biographical Sketch}
-\label{sec:org017becb}
+\label{sec:orga37f160}
 \phantomsection
 \addcontentsline{toc}{section}{Biographical Sketch}
 

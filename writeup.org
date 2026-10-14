@@ -28,15 +28,16 @@
 
 # TOC settings... I'm almost certain there's an easier way to do this.
 #+LATEX_HEADER: \usepackage{tocloft}
-#+LATEX_HEADER: \renewcommand{\contentsname}{\hfill\bfseries\Large Table of Contents\hfill}
+#+LATEX_HEADER: \renewcommand{\contentsname}{\hfill\bfseries Table of Contents\hfill}
 #+LATEX_HEADER: \renewcommand{\cftaftertoctitle}{\hfill}
+#+LATEX_HEADER: \renewcommand{\cftdotsep}{0.5}
 #+LATEX_HEADER: \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 #+LATEX_HEADER: \renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
 #+LATEX_HEADER: \renewcommand{\cftsubsubsecleader}{\cftdotfill{\cftdotsep}}
 #+LATEX_HEADER: \renewcommand{\cftsecpagefont}{\normalfont}
 #+LATEX_HEADER: \renewcommand{\cftsubsecfont}{\bfseries}
 #+LATEX_HEADER: \renewcommand{\cftsubsecpagefont}{\normalfont}
-#+LATEX_HEADER: \renewcommand{\cftsubsubsecfont}{\bfseries}
+#+LATEX_HEADER: \renewcommand{\cftsubsubsecfont}{\bfseries\itshape}
 #+LATEX_HEADER: \renewcommand{\cftsubsubsecpagefont}{\normalfont}
 
 # this is for headers
@@ -129,10 +130,30 @@ Security hardening changes how a server permits access, executes software, and s
 
 \newpage
 
-#+TOC: headlines 2
+#+TOC: headlines 3
 
 \newpage
-#+LATEX: \pagenumbering{arabic}
+
+
+#+LATEX_HEADER: \renewcommand{\listfigurename}{\hfill\bfseries List of Figures\hfill}
+#+LATEX_HEADER: \renewcommand{\cftafterloftitle}{\hfill}
+#+LATEX_HEADER: \renewcommand{\listtablename}{\hfill\bfseries List of Tables\hfill}
+#+LATEX_HEADER: \renewcommand{\cftafterlottitle}{\hfill}
+#+LATEX_HEADER: \renewcommand{\cftfigdotsep}{1}
+#+LATEX_HEADER: \renewcommand{\cfttabdotsep}{1}
+
+#+LATEX: \clearpage
+#+LATEX: \phantomsection
+#+LATEX: \addcontentsline{toc}{section}{List of Figures}
+#+LATEX: \listoffigures
+
+#+LATEX: \clearpage
+#+LATEX: \phantomsection
+#+LATEX: \addcontentsline{toc}{section}{List of Tables}
+#+LATEX: \listoftables
+
+
+#+LATEX: \clearpage
 
 * Preface
 :PROPERTIES:
@@ -144,7 +165,8 @@ Security hardening changes how a server permits access, executes software, and s
 
 
 
-
+#+LATEX: \clearpage
+#+LATEX: \pagenumbering{arabic}
 * Introduction
 :PROPERTIES:
 :UNNUMBERED: t
@@ -228,6 +250,7 @@ As an initial protocol choice, five valid trials per condition are proposed to c
 
 The primary operational outcome will be end-to-end completion of the legitimate workflow with correct output. Secondary observations will include elapsed time, error messages, service failures, and manual intervention. Timing measurements will be descriptive in this pilot unless a separate performance protocol is established.
 
+*** Test third level heading
 The primary security outcome will be whether the predefined attacker objective is achieved. The evidence must show the relevant effect on the target, rather than rely only on a test tool's success or failure message. Outcomes will distinguish objective achieved, objective prevented with supporting evidence, and inconclusive execution.
 
 For descriptive reporting, the functionality success fraction for condition c will be:
