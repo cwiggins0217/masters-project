@@ -1,0 +1,1232 @@
+Remediating rule 1/136: 'xccdf_org.ssgproject.content_rule_package_aide_installed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  aide-common bsd-mailx liblockfile-bin liblockfile1 libmhash2 libnsl2 postfix
+  ssl-cert
+Suggested packages:
+  figlet postfix-cdb postfix-doc postfix-ldap postfix-lmdb
+  postfix-mta-sts-resolver postfix-mysql postfix-pcre postfix-pgsql
+  postfix-sqlite procmail sasl2-bin | dovecot-common
+The following NEW packages will be installed:
+  aide aide-common bsd-mailx liblockfile-bin liblockfile1 libmhash2 libnsl2
+  postfix ssl-cert
+0 upgraded, 9 newly installed, 0 to remove and 3 not upgraded.
+Need to get 1,694 kB of archives.
+After this operation, 5,574 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu noble/main amd64 ssl-cert all 1.1.2ubuntu1 [17.8 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu noble/main amd64 libnsl2 amd64 1.3.0-3build3 [41.4 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 postfix amd64 3.8.6-1ubuntu0.1 [1,255 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu noble/main amd64 libmhash2 amd64 0.9.9.9-9build3 [94.2 kB]
+Get:5 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 aide amd64 0.18.6-2ubuntu0.1 [118 kB]
+Get:6 http://us.archive.ubuntu.com/ubuntu noble/main amd64 liblockfile-bin amd64 1.17-1build3 [11.2 kB]
+Get:7 http://us.archive.ubuntu.com/ubuntu noble/main amd64 liblockfile1 amd64 1.17-1build3 [6,840 B]
+Get:8 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 aide-common all 0.18.6-2ubuntu0.1 [82.2 kB]
+Get:9 http://us.archive.ubuntu.com/ubuntu noble/main amd64 bsd-mailx amd64 8.1.2-0.20220412cvs-1build1 [67.2 kB]
+Preconfiguring packages ...
+Fetched 1,694 kB in 1s (2,702 kB/s)
+Selecting previously unselected package ssl-cert.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 129837 files and directories currently installed.)
+Preparing to unpack .../0-ssl-cert_1.1.2ubuntu1_all.deb ...
+Unpacking ssl-cert (1.1.2ubuntu1) ...
+Selecting previously unselected package libnsl2:amd64.
+Preparing to unpack .../1-libnsl2_1.3.0-3build3_amd64.deb ...
+Unpacking libnsl2:amd64 (1.3.0-3build3) ...
+Selecting previously unselected package postfix.
+Preparing to unpack .../2-postfix_3.8.6-1ubuntu0.1_amd64.deb ...
+Unpacking postfix (3.8.6-1ubuntu0.1) ...
+Selecting previously unselected package libmhash2:amd64.
+Preparing to unpack .../3-libmhash2_0.9.9.9-9build3_amd64.deb ...
+Unpacking libmhash2:amd64 (0.9.9.9-9build3) ...
+Selecting previously unselected package aide.
+Preparing to unpack .../4-aide_0.18.6-2ubuntu0.1_amd64.deb ...
+Unpacking aide (0.18.6-2ubuntu0.1) ...
+Selecting previously unselected package liblockfile-bin.
+Preparing to unpack .../5-liblockfile-bin_1.17-1build3_amd64.deb ...
+Unpacking liblockfile-bin (1.17-1build3) ...
+Selecting previously unselected package liblockfile1:amd64.
+Preparing to unpack .../6-liblockfile1_1.17-1build3_amd64.deb ...
+Unpacking liblockfile1:amd64 (1.17-1build3) ...
+Selecting previously unselected package aide-common.
+Preparing to unpack .../7-aide-common_0.18.6-2ubuntu0.1_all.deb ...
+Unpacking aide-common (0.18.6-2ubuntu0.1) ...
+Selecting previously unselected package bsd-mailx.
+Preparing to unpack .../8-bsd-mailx_8.1.2-0.20220412cvs-1build1_amd64.deb ...
+Unpacking bsd-mailx (8.1.2-0.20220412cvs-1build1) ...
+Setting up liblockfile-bin (1.17-1build3) ...
+Setting up ssl-cert (1.1.2ubuntu1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/ssl-cert.service → /usr/lib/systemd/system/ssl-cert.service.
+Setting up libmhash2:amd64 (0.9.9.9-9build3) ...
+Setting up libnsl2:amd64 (1.3.0-3build3) ...
+Setting up liblockfile1:amd64 (1.17-1build3) ...
+Setting up aide (0.18.6-2ubuntu0.1) ...
+Setting up postfix (3.8.6-1ubuntu0.1) ...
+info: Selecting GID from range 100 to 999 ...
+info: Adding group `postfix' (GID 111) ...
+info: Selecting UID from range 100 to 999 ...
+
+info: Adding system user `postfix' (UID 110) ...
+info: Adding new user `postfix' (UID 110) with group `postfix' ...
+info: Not creating home directory `/var/spool/postfix'.
+Creating /etc/postfix/dynamicmaps.cf
+info: Selecting GID from range 100 to 999 ...
+info: Adding group `postdrop' (GID 112) ...
+setting myhostname: H0
+setting alias maps
+setting alias database
+mailname is not a fully qualified domain name.  Not changing /etc/mailname.
+setting destinations: $myhostname, H0, localhost.localdomain, , localhost
+setting relayhost: 
+setting mynetworks: 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+setting mailbox_size_limit: 0
+setting recipient_delimiter: +
+setting inet_interfaces: all
+setting inet_protocols: all
+/etc/aliases does not exist, creating it.
+WARNING: /etc/aliases exists, but does not have a root alias.
+
+Postfix (main.cf) is now set up with a default configuration.  If you need to 
+make changes, edit /etc/postfix/main.cf (and others) as needed.  To view 
+Postfix configuration values, see postconf(1).
+
+After modifying main.cf, be sure to run 'systemctl reload postfix'.
+
+Running newaliases
+Created symlink /etc/systemd/system/multi-user.target.wants/postfix.service → /usr/lib/systemd/system/postfix.service.
+Setting up aide-common (0.18.6-2ubuntu0.1) ...
+
+Creating config file /etc/cron.daily/dailyaidecheck with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_grub-efi with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_dmeventd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_libvirt with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_portmap with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_cups with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_needrestart with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_haproxy with new version
+
+Creating config file /etc/aide/aide.conf.d/10_aide_hostname with new version
+
+Creating config file /etc/aide/aide.conf.d/70_aide_var with new version
+
+Creating config file /etc/aide/aide.conf.d/20_aide_run_systemd-journald with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_modules with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_dcc-common with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_systemd-timesyncd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_schroot with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_slapd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_console-log with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_systemd-resolved with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_apt-listbugs with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_exim4_exiscan with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_boinc-client with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_lighttpd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_kerberos with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_exim4 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_x11-common with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_systemd-nspawn with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_bind9 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_cron with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_syslog-ng with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_tmux with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_apcupsd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_inn2 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_sniproxy with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_tlp with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_apt-cacher-ng with new version
+
+Creating config file /etc/aide/aide.conf.d/30_aide_apache2 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_haveged with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_snmpd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_mlocate with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_network with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_amavisd-new with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_etckeeper with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_openvpn with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_munin-nodes with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_rsnapshot with new version
+
+Creating config file /etc/aide/aide.conf.d/10_aide_machineid with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_openvpn-server with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_awstats with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_cereal with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_redis with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_php-common with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_cron-apt with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_xe-guest-utilities with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_apt-listchanges with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_ifplugd with new version
+
+Creating config file /etc/aide/aide.conf.d/70_aide_run with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_runuser with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_systemd-machined with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_fcron with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_pcscd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_netdata with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_mariadb with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_smartmontools with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_slrn with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_spamassassin with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_anubis with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_man with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_vpnc with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_console-setup with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_at with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_greylistd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_php-fpm with new version
+
+Creating config file /etc/aide/aide.conf.d/10_aide_logext with new version
+
+Creating config file /etc/aide/aide.conf.d/10_aide_prevyear with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_inetd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_ippl with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_ssh-server with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_aide with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_systemd-cron with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_uuidd-runtime with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_adjtime with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_proftpd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_postgresql-15 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_rsyslog with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_dlocate with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_dovecot with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_ifupdown with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_postfix with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_ntpsec with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_e2fsprogs with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_nginx with new version
+
+Creating config file /etc/aide/aide.conf.d/70_aide_proc_sys with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_libapache2-mod-fastcgi with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_pm-utils with new version
+
+Creating config file /etc/aide/aide.conf.d/70_aide_dev with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_lastlog with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_screen with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_checksecurity with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_ufw with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_chrony with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_lldpd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_run_tmpfiles with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_isc-dhcp-client with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_ssh-agent with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_acpid with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_trac with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_util-linux with new version
+
+Creating config file /etc/aide/aide.conf.d/99_aide_root with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_rkhunter with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_apache2-fcgid with new version
+
+Creating config file /etc/aide/aide.conf.d/30_aide_bind9 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_samba with new version
+
+Creating config file /etc/aide/aide.conf.d/21_aide_run_agetty with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_locales with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_resolvconf with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_cracklib-runtime with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_unbound with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_debsecan with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_apache2 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_exim4_logs with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_udev with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_xinetd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_mdadm with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_wpasupplicant with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_anacron with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_asterisk with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_dpkg with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_isc-dhcp-server with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_vsftpd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_tt-rss with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_munin-node with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_avahi-daemon with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_initscripts with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_xdm with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_amanda-client with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_debspawn with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_alsa with new version
+
+Creating config file /etc/aide/aide.conf.d/10_aide_year with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_smokeping with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_logrotate with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_saslauthd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_aptitude with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_hapsd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_utmp with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_btmp with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_nscd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_mail with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_webalizer with new version
+
+Creating config file /etc/aide/aide.conf.d/10_aide_distribution with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_systemd_sessions with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_run_systemd_resolve with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_logcheck with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_clamav with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_laptop-mode-tools with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_fail2ban with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_wtmp with new version
+
+Creating config file /etc/aide/aide.conf.d/70_aide_tmp with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_systemd-journald with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_lpd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_irqbalance with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_dbus with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_atop with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_icinga2 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_php7 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_run_systemd_netif with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_opie-server with new version
+
+Creating config file /etc/aide/aide.conf.d/21_aide_spamassassin with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_nslcd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_sudo with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_postgrey with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_lvm2 with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_pam_motd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_network-manager with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_dokuwiki with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_hald with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_ddclient with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_courier-authlib with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_tiger with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_initramfs-tools with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_privoxy with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_systemd-networkd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_torrus with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_debconf with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_apt with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_clamav-unofficial-sigs with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_systemd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_spampd with new version
+
+Creating config file /etc/aide/aide.conf.d/30_inn2_vars with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_gnupg with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_nrpe with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_rngd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_munin with new version
+
+Creating config file /etc/aide/aide.conf.d/10_aide_run with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_fake-hwclock with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_mysql-server with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_oidentd with new version
+
+Creating config file /etc/aide/aide.conf.d/70_aide_etc with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_bandwidthd with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_amanda-server with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_root-dotfiles with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_findutils with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_plocate with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_clamav-freshclam with new version
+
+Creating config file /etc/aide/aide.conf.d/10_aide_constants with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_borgbackup with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_postfix-cluebringer with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_dehydrated with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_nfs with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_apt-show-versions with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_svn-server with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_dev with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_squid with new version
+
+Creating config file /etc/aide/aide.conf.d/31_aide_x11-xkb-utils with new version
+
+Creating config file /etc/aide/aide.conf with new version
+
+Creating config file /etc/aide/aide.settings.d/10_aide_sourceslist with new version
+
+Creating config file /etc/aide/aide.settings.d/31_aide_apt_settings with new version
+
+Creating config file /etc/aide/aide.settings.d/31_aide_torrus_settings with new version
+
+Creating config file /etc/aide/aide.settings.d/31_aide_svn-server_settings with new version
+
+Creating config file /etc/aide/aide.settings.d/31_aide_trac_settings with new version
+
+Creating config file /etc/default/aide with new version
+Creating group '_aide' with GID 988.
+Creating user '_aide' (Advanced Intrusion Detection Environment) with UID 988 and GID 988.
+Created symlink /etc/systemd/system/timers.target.wants/dailyaidecheck.timer → /usr/lib/systemd/system/dailyaidecheck.timer.
+dailyaidecheck.service is a disabled or a static unit, not starting it.
+dailyaidecheck.service is a disabled or a static unit, not starting it.
+Setting up bsd-mailx (8.1.2-0.20220412cvs-1build1) ...
+update-alternatives: using /usr/bin/bsd-mailx to provide /usr/bin/mailx (mailx) in auto mode
+Processing triggers for rsyslog (8.2312.0-3ubuntu9.4) ...
+Processing triggers for ufw (0.36.2-6) ...
+Rules updated for profile 'Nginx HTTP'
+Rules updated for profile 'OpenSSH'
+
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Remediating rule 2/136: 'xccdf_org.ssgproject.content_rule_aide_build_database'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+aide is already the newest version (0.18.6-2ubuntu0.1).
+0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+Running aide --init...
+Remediating rule 3/136: 'xccdf_org.ssgproject.content_rule_aide_check_audit_tools'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+aide is already the newest version (0.18.6-2ubuntu0.1).
+0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+Remediating rule 4/136: 'xccdf_org.ssgproject.content_rule_partition_for_home'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_home' IS MISSING!
+Remediating rule 5/136: 'xccdf_org.ssgproject.content_rule_partition_for_tmp'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_tmp' IS MISSING!
+Remediating rule 6/136: 'xccdf_org.ssgproject.content_rule_partition_for_var'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_var' IS MISSING!
+Remediating rule 7/136: 'xccdf_org.ssgproject.content_rule_partition_for_var_log'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_var_log' IS MISSING!
+Remediating rule 8/136: 'xccdf_org.ssgproject.content_rule_partition_for_var_log_audit'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_var_log_audit' IS MISSING!
+Remediating rule 9/136: 'xccdf_org.ssgproject.content_rule_partition_for_var_tmp'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_var_tmp' IS MISSING!
+Remediating rule 10/136: 'xccdf_org.ssgproject.content_rule_sudo_custom_logfile'
+Remediating rule 11/136: 'xccdf_org.ssgproject.content_rule_sudo_require_reauthentication'
+Remediating rule 12/136: 'xccdf_org.ssgproject.content_rule_banner_etc_issue_cis'
+Remediating rule 13/136: 'xccdf_org.ssgproject.content_rule_banner_etc_issue_net_cis'
+Remediating rule 14/136: 'xccdf_org.ssgproject.content_rule_package_pam_pwquality_installed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  cracklib-runtime libcrack2 libpwquality-common libpwquality1 wamerican
+The following NEW packages will be installed:
+  cracklib-runtime libcrack2 libpam-pwquality libpwquality-common
+  libpwquality1 wamerican
+0 upgraded, 6 newly installed, 0 to remove and 3 not upgraded.
+Need to get 446 kB of archives.
+After this operation, 1,932 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu noble/main amd64 libcrack2 amd64 2.9.6-5.1build2 [29.0 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu noble/main amd64 cracklib-runtime amd64 2.9.6-5.1build2 [147 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu noble/main amd64 libpwquality-common all 1.4.5-3build1 [7,748 B]
+Get:4 http://us.archive.ubuntu.com/ubuntu noble/main amd64 libpwquality1 amd64 1.4.5-3build1 [13.5 kB]
+Get:5 http://us.archive.ubuntu.com/ubuntu noble/main amd64 libpam-pwquality amd64 1.4.5-3build1 [11.7 kB]
+Get:6 http://us.archive.ubuntu.com/ubuntu noble/main amd64 wamerican all 2020.12.07-2 [236 kB]
+Preconfiguring packages ...
+Fetched 446 kB in 0s (1,156 kB/s)
+Selecting previously unselected package libcrack2:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130345 files and directories currently installed.)
+Preparing to unpack .../0-libcrack2_2.9.6-5.1build2_amd64.deb ...
+Unpacking libcrack2:amd64 (2.9.6-5.1build2) ...
+Selecting previously unselected package cracklib-runtime.
+Preparing to unpack .../1-cracklib-runtime_2.9.6-5.1build2_amd64.deb ...
+Unpacking cracklib-runtime (2.9.6-5.1build2) ...
+Selecting previously unselected package libpwquality-common.
+Preparing to unpack .../2-libpwquality-common_1.4.5-3build1_all.deb ...
+Unpacking libpwquality-common (1.4.5-3build1) ...
+Selecting previously unselected package libpwquality1:amd64.
+Preparing to unpack .../3-libpwquality1_1.4.5-3build1_amd64.deb ...
+Unpacking libpwquality1:amd64 (1.4.5-3build1) ...
+Selecting previously unselected package libpam-pwquality:amd64.
+Preparing to unpack .../4-libpam-pwquality_1.4.5-3build1_amd64.deb ...
+Unpacking libpam-pwquality:amd64 (1.4.5-3build1) ...
+Selecting previously unselected package wamerican.
+Preparing to unpack .../5-wamerican_2020.12.07-2_all.deb ...
+Unpacking wamerican (2020.12.07-2) ...
+Setting up libpwquality-common (1.4.5-3build1) ...
+Setting up wamerican (2020.12.07-2) ...
+Setting up libcrack2:amd64 (2.9.6-5.1build2) ...
+Setting up cracklib-runtime (2.9.6-5.1build2) ...
+Setting up libpwquality1:amd64 (1.4.5-3build1) ...
+Setting up libpam-pwquality:amd64 (1.4.5-3build1) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Remediating rule 15/136: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_enabled'
+Remediating rule 16/136: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_enforce_root'
+Remediating rule 17/136: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember'
+Remediating rule 18/136: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_use_authtok'
+Remediating rule 19/136: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny'
+Remediating rule 20/136: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_enabled'
+Remediating rule 21/136: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_root_unlock_time'
+Remediating rule 22/136: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_unlock_time'
+Remediating rule 23/136: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_enabled'
+PAM configuration
+-----------------
+
+Incompatible PAM profiles selected.
+
+The following PAM profiles cannot be used together:
+
+Pwquality password strength checking, Pwquality password strength checking
+
+Please select a different set of modules to enable.
+
+Remediating rule 24/136: 'xccdf_org.ssgproject.content_rule_account_disable_post_pw_expiration'
+Remediating rule 25/136: 'xccdf_org.ssgproject.content_rule_accounts_maximum_age_login_defs'
+Remediating rule 26/136: 'xccdf_org.ssgproject.content_rule_accounts_minimum_age_login_defs'
+Remediating rule 27/136: 'xccdf_org.ssgproject.content_rule_accounts_password_set_max_life_existing'
+Remediating rule 28/136: 'xccdf_org.ssgproject.content_rule_accounts_password_set_min_life_existing'
+Remediating rule 29/136: 'xccdf_org.ssgproject.content_rule_no_empty_passwords_unix'
+PAM configuration
+-----------------
+
+Incompatible PAM profiles selected.
+
+The following PAM profiles cannot be used together:
+
+Unix authentication, Unix authentication
+
+Please select a different set of modules to enable.
+
+Remediating rule 30/136: 'xccdf_org.ssgproject.content_rule_ensure_pam_wheel_group_empty'
+Remediating rule 31/136: 'xccdf_org.ssgproject.content_rule_use_pam_wheel_group_for_su'
+Remediating rule 32/136: 'xccdf_org.ssgproject.content_rule_accounts_tmout'
+Remediating rule 33/136: 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files'
+Remediating rule 34/136: 'xccdf_org.ssgproject.content_rule_root_path_all_dirs'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_root_path_all_dirs' IS MISSING!
+Remediating rule 35/136: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_bashrc'
+Remediating rule 36/136: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_login_defs'
+Remediating rule 37/136: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_profile'
+Remediating rule 38/136: 'xccdf_org.ssgproject.content_rule_package_apparmor-utils_installed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  apparmor libapparmor1 python3-apparmor python3-libapparmor
+Suggested packages:
+  apparmor-profiles-extra vim-addon-manager
+The following NEW packages will be installed:
+  apparmor-utils python3-apparmor python3-libapparmor
+The following packages will be upgraded:
+  apparmor libapparmor1
+2 upgraded, 3 newly installed, 0 to remove and 1 not upgraded.
+Need to get 853 kB of archives.
+After this operation, 1,042 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 libapparmor1 amd64 4.0.1really4.0.1-0ubuntu0.24.04.9 [51.5 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 apparmor amd64 4.0.1really4.0.1-0ubuntu0.24.04.9 [640 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-libapparmor amd64 4.0.1really4.0.1-0ubuntu0.24.04.9 [30.2 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-apparmor all 4.0.1really4.0.1-0ubuntu0.24.04.9 [84.5 kB]
+Get:5 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 apparmor-utils all 4.0.1really4.0.1-0ubuntu0.24.04.9 [46.6 kB]
+Preconfiguring packages ...
+Fetched 853 kB in 0s (2,096 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130409 files and directories currently installed.)
+Preparing to unpack .../libapparmor1_4.0.1really4.0.1-0ubuntu0.24.04.9_amd64.deb ...
+Unpacking libapparmor1:amd64 (4.0.1really4.0.1-0ubuntu0.24.04.9) over (4.0.1really4.0.1-0ubuntu0.24.04.8) ...
+Preparing to unpack .../apparmor_4.0.1really4.0.1-0ubuntu0.24.04.9_amd64.deb ...
+Unpacking apparmor (4.0.1really4.0.1-0ubuntu0.24.04.9) over (4.0.1really4.0.1-0ubuntu0.24.04.8) ...
+Selecting previously unselected package python3-libapparmor.
+Preparing to unpack .../python3-libapparmor_4.0.1really4.0.1-0ubuntu0.24.04.9_amd64.deb ...
+Unpacking python3-libapparmor (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+Selecting previously unselected package python3-apparmor.
+Preparing to unpack .../python3-apparmor_4.0.1really4.0.1-0ubuntu0.24.04.9_all.deb ...
+Unpacking python3-apparmor (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+Selecting previously unselected package apparmor-utils.
+Preparing to unpack .../apparmor-utils_4.0.1really4.0.1-0ubuntu0.24.04.9_all.deb ...
+Unpacking apparmor-utils (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+Setting up libapparmor1:amd64 (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+Setting up apparmor (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+Installing new version of config file /etc/apparmor.d/transmission ...
+/var/lib/dpkg/info/apparmor.postinst: 148: [: Illegal number: yes
+Reloading AppArmor profiles 
+Setting up python3-libapparmor (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+Setting up python3-apparmor (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+Setting up apparmor-utils (4.0.1really4.0.1-0ubuntu0.24.04.9) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+ /etc/needrestart/restart.d/systemd-manager
+
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ cis-test @ user manager service: systemd[868]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Remediating rule 39/136: 'xccdf_org.ssgproject.content_rule_all_apparmor_profiles_enforced'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+apparmor-utils is already the newest version (4.0.1really4.0.1-0ubuntu0.24.04.9).
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+Setting /etc/apparmor.d/rssguard to enforce mode.
+Setting /etc/apparmor.d/lsb_release to enforce mode.
+Setting /etc/apparmor.d/element-desktop to enforce mode.
+Setting /etc/apparmor.d/vdens to enforce mode.
+Setting /etc/apparmor.d/flatpak to enforce mode.
+Setting /etc/apparmor.d/github-desktop to enforce mode.
+Setting /etc/apparmor.d/libcamerify to enforce mode.
+Setting /etc/apparmor.d/ipa_verify to enforce mode.
+Setting /etc/apparmor.d/balena-etcher to enforce mode.
+Setting /etc/apparmor.d/qutebrowser to enforce mode.
+Setting /etc/apparmor.d/wpcom to enforce mode.
+Setting /etc/apparmor.d/ubuntu_pro_apt_news to enforce mode.
+Setting /etc/apparmor.d/lc-compliance to enforce mode.
+Setting /etc/apparmor.d/1password to enforce mode.
+Setting /etc/apparmor.d/evolution to enforce mode.
+Setting /etc/apparmor.d/unprivileged_userns to enforce mode.
+Setting /etc/apparmor.d/epiphany to enforce mode.
+Setting /etc/apparmor.d/runc to enforce mode.
+Setting /etc/apparmor.d/rootlesskit to enforce mode.
+Setting /etc/apparmor.d/sbuild-clean to enforce mode.
+Setting /etc/apparmor.d/notepadqq to enforce mode.
+Setting /etc/apparmor.d/lxc-unshare to enforce mode.
+Setting /etc/apparmor.d/transmission to enforce mode.
+Setting /etc/apparmor.d/vpnns to enforce mode.
+Setting /etc/apparmor.d/goldendict to enforce mode.
+Setting /etc/apparmor.d/slirp4netns to enforce mode.
+Setting /etc/apparmor.d/lxc-execute to enforce mode.
+Setting /etc/apparmor.d/sbuild to enforce mode.
+Setting /etc/apparmor.d/geary to enforce mode.
+Setting /etc/apparmor.d/vivaldi-bin to enforce mode.
+Setting /etc/apparmor.d/scide to enforce mode.
+Setting /etc/apparmor.d/sbuild-checkpackages to enforce mode.
+Setting /etc/apparmor.d/polypane to enforce mode.
+Setting /etc/apparmor.d/stress-ng to enforce mode.
+Setting /etc/apparmor.d/tup to enforce mode.
+Setting /etc/apparmor.d/slack to enforce mode.
+Setting /etc/apparmor.d/rpm to enforce mode.
+Setting /etc/apparmor.d/keybase to enforce mode.
+Setting /etc/apparmor.d/usr.bin.tcpdump to enforce mode.
+Setting /etc/apparmor.d/cam to enforce mode.
+Setting /etc/apparmor.d/kchmviewer to enforce mode.
+Setting /etc/apparmor.d/MongoDB_Compass to enforce mode.
+Setting /etc/apparmor.d/mmdebstrap to enforce mode.
+Setting /etc/apparmor.d/sbuild-unhold to enforce mode.
+Setting /etc/apparmor.d/code to enforce mode.
+Setting /etc/apparmor.d/podman to enforce mode.
+Setting /etc/apparmor.d/userbindmount to enforce mode.
+Setting /etc/apparmor.d/sbuild-adduser to enforce mode.
+Setting /etc/apparmor.d/QtWebEngineProcess to enforce mode.
+Setting /etc/apparmor.d/unix-chkpwd to enforce mode.
+Setting /etc/apparmor.d/lxc-usernsexec to enforce mode.
+Setting /etc/apparmor.d/Discord to enforce mode.
+Setting /etc/apparmor.d/sbuild-upgrade to enforce mode.
+Setting /etc/apparmor.d/lxc-destroy to enforce mode.
+Setting /etc/apparmor.d/usr.lib.snapd.snap-confine.real to enforce mode.
+Setting /etc/apparmor.d/foliate to enforce mode.
+Setting /etc/apparmor.d/obsidian to enforce mode.
+Setting /etc/apparmor.d/linux-sandbox to enforce mode.
+Setting /etc/apparmor.d/steam to enforce mode.
+Setting /etc/apparmor.d/usr.bin.man to enforce mode.
+Setting /etc/apparmor.d/nvidia_modprobe to enforce mode.
+Setting /etc/apparmor.d/crun to enforce mode.
+Setting /etc/apparmor.d/tuxedo-control-center to enforce mode.
+Setting /etc/apparmor.d/ubuntu_pro_esm_cache to enforce mode.
+Setting /etc/apparmor.d/sbuild-hold to enforce mode.
+Setting /etc/apparmor.d/opera to enforce mode.
+Setting /etc/apparmor.d/privacybrowser to enforce mode.
+Setting /etc/apparmor.d/sbuild-destroychroot to enforce mode.
+Setting /etc/apparmor.d/lxc-attach to enforce mode.
+Setting /etc/apparmor.d/chrome to enforce mode.
+Setting /etc/apparmor.d/ch-checkns to enforce mode.
+Setting /etc/apparmor.d/signal-desktop to enforce mode.
+Setting /etc/apparmor.d/sbuild-abort to enforce mode.
+Setting /etc/apparmor.d/loupe to enforce mode.
+Setting /etc/apparmor.d/qmapshack to enforce mode.
+Setting /etc/apparmor.d/wike to enforce mode.
+Setting /etc/apparmor.d/buildah to enforce mode.
+Setting /etc/apparmor.d/pageedit to enforce mode.
+Setting /etc/apparmor.d/surfshark to enforce mode.
+Setting /etc/apparmor.d/lxc-stop to enforce mode.
+Setting /etc/apparmor.d/qcam to enforce mode.
+Setting /etc/apparmor.d/systemd-coredump to enforce mode.
+Setting /etc/apparmor.d/opam to enforce mode.
+Setting /etc/apparmor.d/devhelp to enforce mode.
+Setting /etc/apparmor.d/sbuild-shell to enforce mode.
+Setting /etc/apparmor.d/thunderbird to enforce mode.
+Setting /etc/apparmor.d/brave to enforce mode.
+Setting /etc/apparmor.d/firefox to enforce mode.
+Setting /etc/apparmor.d/sbuild-createchroot to enforce mode.
+Setting /etc/apparmor.d/trinity to enforce mode.
+Setting /etc/apparmor.d/ch-run to enforce mode.
+Setting /etc/apparmor.d/msedge to enforce mode.
+Setting /etc/apparmor.d/sbuild-apt to enforce mode.
+Setting /etc/apparmor.d/toybox to enforce mode.
+Setting /etc/apparmor.d/virtiofsd to enforce mode.
+Setting /etc/apparmor.d/lxc-create to enforce mode.
+Setting /etc/apparmor.d/sbuild-update to enforce mode.
+Setting /etc/apparmor.d/uwsgi-core to enforce mode.
+Setting /etc/apparmor.d/sbuild-distupgrade to enforce mode.
+Setting /etc/apparmor.d/usr.sbin.rsyslogd to enforce mode.
+Setting /etc/apparmor.d/plasmashell to enforce mode.
+Remediating rule 40/136: 'xccdf_org.ssgproject.content_rule_all_apparmor_profiles_in_enforce_complain_mode'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+apparmor-utils is already the newest version (4.0.1really4.0.1-0ubuntu0.24.04.9).
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+***WARNING***: This remediation will not modify any existing AppArmor profiles.
+Remediating rule 41/136: 'xccdf_org.ssgproject.content_rule_grub2_enable_apparmor'
+Sourcing file `/etc/default/grub'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-6.8.0-147-generic
+Found initrd image: /boot/initrd.img-6.8.0-147-generic
+Found linux image: /boot/vmlinuz-6.8.0-146-generic
+Found initrd image: /boot/initrd.img-6.8.0-146-generic
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Remediating rule 42/136: 'xccdf_org.ssgproject.content_rule_grub2_password'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_grub2_password' IS MISSING!
+Remediating rule 43/136: 'xccdf_org.ssgproject.content_rule_grub2_uefi_password'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_grub2_uefi_password' IS MISSING!
+Remediating rule 44/136: 'xccdf_org.ssgproject.content_rule_journald_forward_to_syslog'
+Remediating rule 45/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_ra'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 46/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_redirects'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 47/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_source_route'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 48/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_forwarding'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 49/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_ra'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 50/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_redirects'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 51/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_source_route'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 52/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_redirects'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 53/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_source_route'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 54/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_log_martians'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 55/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_rp_filter'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 56/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_secure_redirects'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 57/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_redirects'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 58/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_source_route'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 59/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_log_martians'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 60/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_rp_filter'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 61/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_secure_redirects'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 62/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_tcp_syncookies'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 63/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_send_redirects'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 64/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_send_redirects'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 65/136: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_ip_forward'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 66/136: 'xccdf_org.ssgproject.content_rule_service_nftables_enabled'
+Created symlink /etc/systemd/system/sysinit.target.wants/nftables.service → /usr/lib/systemd/system/nftables.service.
+Remediating rule 67/136: 'xccdf_org.ssgproject.content_rule_nftables_rules_permanent'
+Remediating rule 68/136: 'xccdf_org.ssgproject.content_rule_set_nftables_base_chain'
+Remediating rule 69/136: 'xccdf_org.ssgproject.content_rule_set_nftables_loopback_traffic'
+Remediating rule 70/136: 'xccdf_org.ssgproject.content_rule_set_nftables_table'
+table inet filter {
+	chain input {
+		type filter hook input priority filter; policy accept;
+		iif "lo" accept
+		ip saddr 127.0.0.0/8 counter packets 0 bytes 0 drop
+		ip6 saddr ::1 counter packets 0 bytes 0 drop
+	}
+
+	chain forward {
+		type filter hook forward priority filter; policy accept;
+	}
+
+	chain output {
+		type filter hook output priority filter; policy accept;
+	}
+}
+Remediating rule 71/136: 'xccdf_org.ssgproject.content_rule_package_ufw_removed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be REMOVED:
+  ufw
+0 upgraded, 0 newly installed, 1 to remove and 1 not upgraded.
+After this operation, 869 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130512 files and directories currently installed.)
+Removing ufw (0.36.2-6) ...
+Skip stopping firewall: ufw (not enabled)
+Processing triggers for man-db (2.12.0-4build2) ...
+Remediating rule 72/136: 'xccdf_org.ssgproject.content_rule_check_ufw_active'
+Remediation is not applicable, nothing was done
+Remediating rule 73/136: 'xccdf_org.ssgproject.content_rule_set_ufw_default_rule'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_set_ufw_default_rule' IS MISSING!
+Remediating rule 74/136: 'xccdf_org.ssgproject.content_rule_set_ufw_loopback_traffic'
+Remediation is not applicable, nothing was done
+Remediating rule 75/136: 'xccdf_org.ssgproject.content_rule_ufw_rules_for_open_ports'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_ufw_rules_for_open_ports' IS MISSING!
+Remediating rule 76/136: 'xccdf_org.ssgproject.content_rule_kernel_module_dccp_disabled'
+grep: /etc/modprobe.d/dccp.conf: No such file or directory
+Remediating rule 77/136: 'xccdf_org.ssgproject.content_rule_kernel_module_rds_disabled'
+grep: /etc/modprobe.d/rds.conf: No such file or directory
+Remediating rule 78/136: 'xccdf_org.ssgproject.content_rule_kernel_module_sctp_disabled'
+grep: /etc/modprobe.d/sctp.conf: No such file or directory
+Remediating rule 79/136: 'xccdf_org.ssgproject.content_rule_kernel_module_tipc_disabled'
+grep: /etc/modprobe.d/tipc.conf: No such file or directory
+Remediating rule 80/136: 'xccdf_org.ssgproject.content_rule_permissions_local_var_log'
+Remediating rule 81/136: 'xccdf_org.ssgproject.content_rule_kernel_module_cramfs_disabled'
+grep: /etc/modprobe.d/cramfs.conf: No such file or directory
+Remediating rule 82/136: 'xccdf_org.ssgproject.content_rule_kernel_module_freevxfs_disabled'
+grep: /etc/modprobe.d/freevxfs.conf: No such file or directory
+Remediating rule 83/136: 'xccdf_org.ssgproject.content_rule_kernel_module_hfs_disabled'
+grep: /etc/modprobe.d/hfs.conf: No such file or directory
+Remediating rule 84/136: 'xccdf_org.ssgproject.content_rule_kernel_module_hfsplus_disabled'
+grep: /etc/modprobe.d/hfsplus.conf: No such file or directory
+Remediating rule 85/136: 'xccdf_org.ssgproject.content_rule_kernel_module_jffs2_disabled'
+grep: /etc/modprobe.d/jffs2.conf: No such file or directory
+Remediating rule 86/136: 'xccdf_org.ssgproject.content_rule_kernel_module_overlayfs_disabled'
+grep: /etc/modprobe.d/overlay.conf: No such file or directory
+Remediating rule 87/136: 'xccdf_org.ssgproject.content_rule_kernel_module_udf_disabled'
+grep: /etc/modprobe.d/udf.conf: No such file or directory
+Remediating rule 88/136: 'xccdf_org.ssgproject.content_rule_kernel_module_usb-storage_disabled'
+grep: /etc/modprobe.d/usb-storage.conf: No such file or directory
+Remediating rule 89/136: 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nodev'
+Remediating rule 90/136: 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_noexec'
+Remediating rule 91/136: 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nosuid'
+Remediating rule 92/136: 'xccdf_org.ssgproject.content_rule_disable_users_coredumps'
+Remediating rule 93/136: 'xccdf_org.ssgproject.content_rule_sysctl_fs_suid_dumpable'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 94/136: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_randomize_va_space'
+grep: /run/sysctl.d/*.conf: No such file or directory
+grep: /usr/local/lib/sysctl.d/*.conf: No such file or directory
+Remediating rule 95/136: 'xccdf_org.ssgproject.content_rule_service_apport_disabled'
+Synchronizing state of apport.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install disable apport
+Removed "/etc/systemd/system/multi-user.target.wants/apport.service".
+Created symlink /etc/systemd/system/apport.service → /dev/null.
+Failed to reset failed state of unit apport.service: Unit apport.service not loaded.
+Remediating rule 96/136: 'xccdf_org.ssgproject.content_rule_file_permissions_cron_d'
+Remediating rule 97/136: 'xccdf_org.ssgproject.content_rule_file_permissions_cron_daily'
+Remediating rule 98/136: 'xccdf_org.ssgproject.content_rule_file_permissions_cron_hourly'
+Remediating rule 99/136: 'xccdf_org.ssgproject.content_rule_file_permissions_cron_monthly'
+Remediating rule 100/136: 'xccdf_org.ssgproject.content_rule_file_permissions_cron_weekly'
+Remediating rule 101/136: 'xccdf_org.ssgproject.content_rule_file_permissions_crontab'
+Remediating rule 102/136: 'xccdf_org.ssgproject.content_rule_file_at_allow_exists'
+Remediating rule 103/136: 'xccdf_org.ssgproject.content_rule_file_cron_allow_exists'
+Remediating rule 104/136: 'xccdf_org.ssgproject.content_rule_package_ftp_removed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be REMOVED:
+  ftp
+0 upgraded, 0 newly installed, 1 to remove and 1 not upgraded.
+After this operation, 24.6 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130417 files and directories currently installed.)
+Removing ftp (20230507-2build3) ...
+Remediating rule 105/136: 'xccdf_org.ssgproject.content_rule_package_tnftp_removed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be REMOVED:
+  tnftp ubuntu-standard
+0 upgraded, 0 newly installed, 2 to remove and 1 not upgraded.
+After this operation, 256 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130414 files and directories currently installed.)
+Removing ubuntu-standard (1.539.2) ...
+Removing tnftp (20230507-2build3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Remediating rule 106/136: 'xccdf_org.ssgproject.content_rule_package_nginx_removed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following package was automatically installed and is no longer required:
+  nginx-common
+Use 'sudo apt autoremove' to remove it.
+The following packages will be REMOVED:
+  nginx
+0 upgraded, 0 newly installed, 1 to remove and 1 not upgraded.
+After this operation, 1,355 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130403 files and directories currently installed.)
+Removing nginx (1.24.0-2ubuntu7.18) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Remediating rule 107/136: 'xccdf_org.ssgproject.content_rule_service_nginx_disabled'
+Synchronizing state of nginx.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install disable nginx
+Removed "/etc/systemd/system/multi-user.target.wants/nginx.service".
+Created symlink /etc/systemd/system/nginx.service → /dev/null.
+Failed to reset failed state of unit nginx.service: Unit nginx.service not loaded.
+Remediating rule 108/136: 'xccdf_org.ssgproject.content_rule_service_timesyncd_configured'
+Remediating rule 109/136: 'xccdf_org.ssgproject.content_rule_package_rsync_removed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following package was automatically installed and is no longer required:
+  nginx-common
+Use 'sudo apt autoremove' to remove it.
+The following packages will be REMOVED:
+  rsync
+0 upgraded, 0 newly installed, 1 to remove and 1 not upgraded.
+After this operation, 820 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130398 files and directories currently installed.)
+Removing rsync (3.2.7-1ubuntu1.5) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Remediating rule 110/136: 'xccdf_org.ssgproject.content_rule_service_rsyncd_disabled'
+Failed to stop rsync.service: Unit rsync.service not loaded.
+rsync.service is not a native service, redirecting to systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install disable rsync
+Unit rsync.service does not exist, proceeding anyway.
+Created symlink /etc/systemd/system/rsync.service → /dev/null.
+Failed to reset failed state of unit rsync.service: Unit rsync.service not loaded.
+Remediating rule 111/136: 'xccdf_org.ssgproject.content_rule_package_inetutils-telnet_removed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following package was automatically installed and is no longer required:
+  nginx-common
+Use 'sudo apt autoremove' to remove it.
+The following packages will be REMOVED:
+  inetutils-telnet telnet
+0 upgraded, 0 newly installed, 2 to remove and 1 not upgraded.
+After this operation, 295 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130366 files and directories currently installed.)
+Removing telnet (0.17+2.5-3ubuntu4.2) ...
+Removing inetutils-telnet (2:2.5-3ubuntu4.2) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Remediating rule 112/136: 'xccdf_org.ssgproject.content_rule_package_telnet_removed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Package 'telnet' is not installed, so not removed
+The following package was automatically installed and is no longer required:
+  nginx-common
+Use 'sudo apt autoremove' to remove it.
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+Remediating rule 113/136: 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_config'
+Remediating rule 114/136: 'xccdf_org.ssgproject.content_rule_sshd_set_keepalive'
+Remediating rule 115/136: 'xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout'
+Remediating rule 116/136: 'xccdf_org.ssgproject.content_rule_disable_host_auth'
+Remediating rule 117/136: 'xccdf_org.ssgproject.content_rule_sshd_disable_empty_passwords'
+Remediating rule 118/136: 'xccdf_org.ssgproject.content_rule_sshd_disable_forwarding'
+Remediating rule 119/136: 'xccdf_org.ssgproject.content_rule_sshd_disable_gssapi_auth'
+Remediating rule 120/136: 'xccdf_org.ssgproject.content_rule_sshd_disable_rhosts'
+Remediating rule 121/136: 'xccdf_org.ssgproject.content_rule_sshd_disable_root_login'
+Remediating rule 122/136: 'xccdf_org.ssgproject.content_rule_sshd_do_not_permit_user_env'
+Remediating rule 123/136: 'xccdf_org.ssgproject.content_rule_sshd_enable_warning_banner_net'
+Remediating rule 124/136: 'xccdf_org.ssgproject.content_rule_sshd_limit_user_access'
+FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_sshd_limit_user_access' IS MISSING!
+Remediating rule 125/136: 'xccdf_org.ssgproject.content_rule_sshd_set_login_grace_time'
+Remediating rule 126/136: 'xccdf_org.ssgproject.content_rule_sshd_set_loglevel_info'
+Remediating rule 127/136: 'xccdf_org.ssgproject.content_rule_sshd_set_max_auth_tries'
+Remediating rule 128/136: 'xccdf_org.ssgproject.content_rule_sshd_set_max_sessions'
+Remediating rule 129/136: 'xccdf_org.ssgproject.content_rule_sshd_set_maxstartups'
+Remediating rule 130/136: 'xccdf_org.ssgproject.content_rule_sshd_use_strong_ciphers'
+Remediating rule 131/136: 'xccdf_org.ssgproject.content_rule_sshd_use_strong_kex'
+Remediating rule 132/136: 'xccdf_org.ssgproject.content_rule_sshd_use_strong_macs'
+Remediating rule 133/136: 'xccdf_org.ssgproject.content_rule_package_audit-audispd-plugins_installed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following package was automatically installed and is no longer required:
+  nginx-common
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  auditd libauparse0t64
+The following NEW packages will be installed:
+  audispd-plugins auditd libauparse0t64
+0 upgraded, 3 newly installed, 0 to remove and 1 not upgraded.
+Need to get 312 kB of archives.
+After this operation, 1,027 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 libauparse0t64 amd64 1:3.1.2-2.1ubuntu0.1 [59.0 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu noble-updates/main amd64 auditd amd64 1:3.1.2-2.1ubuntu0.1 [215 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu noble-updates/universe amd64 audispd-plugins amd64 1:3.1.2-2.1ubuntu0.1 [38.9 kB]
+Fetched 312 kB in 0s (731 kB/s)
+Selecting previously unselected package libauparse0t64:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 130352 files and directories currently installed.)
+Preparing to unpack .../libauparse0t64_1%3a3.1.2-2.1ubuntu0.1_amd64.deb ...
+Adding 'diversion of /lib/x86_64-linux-gnu/libauparse.so.0 to /lib/x86_64-linux-gnu/libauparse.so.0.usr-is-merged by libauparse0t64'
+Adding 'diversion of /lib/x86_64-linux-gnu/libauparse.so.0.0.0 to /lib/x86_64-linux-gnu/libauparse.so.0.0.0.usr-is-merged by libauparse0t64'
+Unpacking libauparse0t64:amd64 (1:3.1.2-2.1ubuntu0.1) ...
+Selecting previously unselected package auditd.
+Preparing to unpack .../auditd_1%3a3.1.2-2.1ubuntu0.1_amd64.deb ...
+Unpacking auditd (1:3.1.2-2.1ubuntu0.1) ...
+Selecting previously unselected package audispd-plugins.
+Preparing to unpack .../audispd-plugins_1%3a3.1.2-2.1ubuntu0.1_amd64.deb ...
+Unpacking audispd-plugins (1:3.1.2-2.1ubuntu0.1) ...
+Setting up libauparse0t64:amd64 (1:3.1.2-2.1ubuntu0.1) ...
+Setting up auditd (1:3.1.2-2.1ubuntu0.1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/auditd.service → /usr/lib/systemd/system/auditd.service.
+Setting up audispd-plugins (1:3.1.2-2.1ubuntu0.1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ cis-test @ user manager service: systemd[868]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Remediating rule 134/136: 'xccdf_org.ssgproject.content_rule_package_audit_installed'
+Reading package lists...
+Building dependency tree...
+Reading state information...
+auditd is already the newest version (1:3.1.2-2.1ubuntu0.1).
+auditd set to manually installed.
+The following package was automatically installed and is no longer required:
+  nginx-common
+Use 'sudo apt autoremove' to remove it.
+0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded.
+Remediating rule 135/136: 'xccdf_org.ssgproject.content_rule_grub2_audit_argument'
+Sourcing file `/etc/default/grub'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-6.8.0-147-generic
+Found initrd image: /boot/initrd.img-6.8.0-147-generic
+Found linux image: /boot/vmlinuz-6.8.0-146-generic
+Found initrd image: /boot/initrd.img-6.8.0-146-generic
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Remediating rule 136/136: 'xccdf_org.ssgproject.content_rule_grub2_audit_backlog_limit_argument'
+Sourcing file `/etc/default/grub'
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-6.8.0-147-generic
+Found initrd image: /boot/initrd.img-6.8.0-147-generic
+Found linux image: /boot/vmlinuz-6.8.0-146-generic
+Found initrd image: /boot/initrd.img-6.8.0-146-generic
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
