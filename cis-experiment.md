@@ -22,18 +22,17 @@ date: "[2026-10-16]"
 
 # Systems and provenance
 
-| Field                          | C0 reference (optional) | H0 | H1 |
-|---                             |---                      |--- |--- |
-| Proxmox VM ID                  |                         |    |    |
-| Parent snapshot and timestamp  |                         |    |    |
-| Hostname / IP                  |                         |    |    |
-| Ubuntu release / kernel        |                         |    |    |
-| vCPU / RAM / disk              |                         |    |    |
-| OpenSCAP version               |                         |    |    |
-| Content release / SHA-256      |                         |    |    |
-| Profile ID / benchmark version |                         |    |    |
-| Nginx package version          |                         |    |    |
-| Network / firewall state       |                         |    |    |
+| Field                          | B0                             | H0                                                  |
+|---                             |---                             |---                                                  |
+| Proxmox VM ID                  |                                |                                                     |
+| Parent snapshot and timestamp  | os-ready-01 10/07/26 3:35:47pm | H0-pre-remediation 10/14/26 8:46:43am               |
+| Hostname / IP                  | baseline-web 10.10.20.117      | H0 10.10.20.199                                     |
+| Ubuntu release / kernel        | Ubuntu 24.04/6.8.0-147         | Ubuntu 24.04/6.8.0-147                              |
+| vCPU / RAM / disk              | 2core/8gb/60gb                 | 2core/8gb/60gb                                      |
+| OpenSCAP version               | none, baseline is not hardened | 1.3.9                                               |
+| Profile ID / benchmark version | none                           | xxccdf_org.ssgproject.content_profile_level2_server |
+| Nginx package version          | 1.24.0                         | 1.24.0                                              |
+| Network / firewall state       |                                |                                                     |
 
 Use the same saved data stream and profile for every scan. H0 is the observed post-remediation baseline; full CIS compliance has not been established. Assign the clone a unique IP before running it alongside H0. Record identity changes separately from experimental changes.
 
