@@ -282,7 +282,6 @@ Repetitions :: Minimum 5 per condition
 ├── evidence
 ├── img
 ├── init.md
-├── init.org
 ├── logs
 └── scripts
 ```
