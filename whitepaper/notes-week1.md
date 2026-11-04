@@ -132,4 +132,48 @@ $ sudo grep -RniE \
 /etc/ssh/sshd_config.d/50-cloud-init.conf:1:PasswordAuthentication yes
 ```
 
+```sh
+$ perl <<'PERL'
+use strict;
+use warnings;
+use XML::LibXML;
+use XML::LibXML::XPathContext;
 
+my $path = "$ENV{HOME}/masters-project/content/"
+         . "scap-security-guide-0.1.82/ssg-ubuntu2404-ds.xml";
+
+my $doc = XML::LibXML->load_xml(location => $path);
+my $xc = XML::LibXML::XPathContext->new($doc);
+$xc->registerNs(x => 'http://checklists.nist.gov/xccdf/1.2');
+
+for my $name (qw(
+    sshd_disable_root_login
+    sshd_disable_empty_passwords
+    file_permissions_sshd_config
+)) {
+    my $id = "xccdf_org.ssgproject.content_rule_$name";
+    my ($rule) = $xc->findnodes("//x:Rule[\@id='$id']");
+    die "Rule not found: $id\n" unless $rule;
+
+    print "\n$name\n";
+    for my $field (qw(title description)) {
+        my $text = $xc->findvalue("x:$field", $rule);
+        $text =~ s/\s+/ /g;
+        print "$field: $text\n";
+    }
+}
+PERL
+
+sshd_disable_root_login
+title: Disable SSH Root Login
+description: The root user should never be allowed to login to a system directly over a network. To disable root login via SSH, add or correct the following line in /etc/ssh/sshd_config.d/00-complianceascode-hardening.conf: PermitRootLogin no 
+
+sshd_disable_empty_passwords
+title: Disable SSH Access via Empty Passwords
+description: Disallow SSH login with empty passwords. The default SSH configuration disables logins with empty passwords. The appropriate configuration is used if no value is set for PermitEmptyPasswords. To explicitly disallow SSH login from accounts with empty passwords, add or correct the following line in /etc/ssh/sshd_config.d/00-complianceascode-hardening.conf: PermitEmptyPasswords no Any accounts with empty passwords should be disabled immediately, and PAM configuration should prevent users from being able to assign themselves empty passwords.
+
+file_permissions_sshd_config
+title: Verify Permissions on SSH Server config file
+description: To properly set the permissions of /etc/ssh/sshd_config, run the command: $ sudo chmod 0600 /etc/ssh/sshd_config
+
+```
