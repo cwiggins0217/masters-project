@@ -98,5 +98,38 @@ cis-test@scap-b:~/masters-project$ sha256sum content/scap-security-guide-0.1.82.
 
 765e84bdce7f9055f9b9c2dd0ee2b713d4255f8eec94eac6d35ea4973c28919c  content/scap-security-guide-0.1.82.zip
 e311189ac70ff73be54121311fca324d6188f8c12ab53416090f595ff00e070c  content/scap-security-guide-0.1.82/ssg-ubuntu2404-ds.xml
-
 ```
+
+```sh
+$ sudo /usr/sbin/sshd -T | grep -E \
+'^(permitrootlogin|permitemptypasswords|passwordauthentication|kbdinteractiveauthentication|usepam|authenticationmethods|maxauthtries) '
+usepam yes
+maxauthtries 6
+permitrootlogin without-password
+passwordauthentication yes
+kbdinteractiveauthentication no
+permitemptypasswords no
+authenticationmethods any
+
+$ sudo passwd -S root
+root L 2026-02-10 0 99999 7 -1
+
+$ sudo stat -Lc '%a %U:%G %n' /etc/ssh/sshd_config /etc/shadow
+644 root:root /etc/ssh/sshd_config
+640 root:shadow /etc/shadow
+
+$ sudo grep -RniE \
+'[[:space:]]*(Include|Match|PermitRootLogin|PermitEmptyPasswords|PasswordAuthentication|AuthenticationMethods)' \ /etc/ssh/sshd_config /etc/ssh/sshd_config.d
+/etc/ssh/sshd_config:12:Include /etc/ssh/sshd_config.d/*.conf
+
+/etc/ssh/sshd_config:42:#PermitRootLogin prohibit-password
+/etc/ssh/sshd_config:66:#PasswordAuthentication yes
+/etc/ssh/sshd_config:67:#PermitEmptyPasswords no
+/etc/ssh/sshd_config:88:# PasswordAuthentication.  Depending on your PAM configuration,
+/etc/ssh/sshd_config:90:# the setting of "PermitRootLogin prohibit-password".
+/etc/ssh/sshd_config:92:# PAM authentication, then enable this but set PasswordAuthentication
+/etc/ssh/sshd_config:127:#Match User anoncvs
+/etc/ssh/sshd_config.d/50-cloud-init.conf:1:PasswordAuthentication yes
+```
+
+
