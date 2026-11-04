@@ -58,8 +58,8 @@ Use the same saved data stream and profile for every scan. H0 is the observed po
 
 | Step                              | Timestamp | Command / action | Expected outcome | Actual outcome | Evidence file |
 |---                                |---        |---               |---               |---             |---            |
-| Preserve H0 snapshot              |           |                  |                  |                |               |
-| Clone and assign H1 identity      |           |                  |                  |                |               |
+| Preserve H0 snapshot              |           | proxmox function |                  |                |  image?       |
+| Clone and assign H1 identity      |           | proxmox function |                  |                |               |
 | Capture baseline and scan         |           |                  |                  |                |               |
 | Test HTTP before restoration      |           |                  |                  |                |               |
 | Reinstall Nginx                   |           |                  |                  |                |               |
