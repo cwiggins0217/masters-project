@@ -177,3 +177,60 @@ title: Verify Permissions on SSH Server config file
 description: To properly set the permissions of /etc/ssh/sshd_config, run the command: $ sudo chmod 0600 /etc/ssh/sshd_config
 
 ```
+
+For exp-001, we will use root-login restriction as the primary
+intervention.
+
+# scap-exp01
+```sh
+sudo hostnamectl set-hostname scap-exp01
+
+ip -br address
+lo               UNKNOWN        127.0.0.1/8 ::1/128
+ens18            UP             10.10.20.198/24 metric 100 fe80::be24:11ff:fe5a:fd6/64 
+```
+
+Generate experiment key on attack/test workstation.
+
+```sh
+ssh-keygen -t ed25519 -f ~/.ssh/scap-exp001-root \
+-C "EXP-01 root access test"
+```
+
+Copy the public key to the clone
+```sh
+scp ~/.ssh/scap-exp01-root.pub \
+    cis-test@10.10.20.198:~/exp01-root.pub
+
+ssh cis-test@10.10.20.198
+```
+
+```sh
+$ sudo install -d -m 0700 -o root -g root /root/.ssh
+$ sudo sh -c 'cat /home/cis-test/exp01-root.pub >> /root/.ssh/authorized_keys'
+$ sudo chown root:root /root/.ssh/authorized_keys
+$ sudo chmod 0600 /root/.ssh/authorized_keys
+
+$ sudo /usr/sbin/sshd -t
+$ sudo /usr/sbin/sshd -T | grep -E '^(permitrootlogin|pubkeyauthentication|authorizedkeysfile) '
+permitrootlogin without-password
+pubkeyauthentication yes
+authorizedkeysfile .ssh/authorized_keys .ssh/authorized_keys2
+```
+
+test access paths from test workstation
+
+```sh
+$ ssh -o IdentitiesOnly=yes \
+  -o PreferredAuthentications=publickey \
+  -o PasswordAuthentication=no \
+  -o KbdInteractiveAuthentication=no \
+  -i ~/.ssh/scap-exp001-root \
+  root@CLONE_IP 'id'
+
+uid=0(root) gid=0(root) groups=0(root)
+
+$ ssh -t cis-test@10.10.20.198 'sudo id'
+uid=0(root) gid=0(root) groups=0(root)
+```
+
