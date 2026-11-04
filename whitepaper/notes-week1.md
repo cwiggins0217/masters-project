@@ -234,3 +234,153 @@ $ ssh -t cis-test@10.10.20.198 'sudo id'
 uid=0(root) gid=0(root) groups=0(root)
 ```
 
+## capture fresh pre-intervention scan
+```sh
+cd ~/masters-project
+
+DS="$HOME/masters-project/content/scap-security-guide-0.1.82/ssg-ubuntu2404-ds.xml"
+PROFILE="xccdf_org.ssgproject.content_profile_cis_level1_server"
+EXP="$HOME/masters-project/evidence/EXP-001/$(date -u +%Y%m%dT%H%M%SZ)"
+
+mkdir -p "$EXP"/{pre,post}
+sudo -v
+
+date -Is > "$EXP/pre/start-time.txt"
+sudo /usr/sbin/sshd -T > "$EXP/pre/sshd-effective.txt"
+
+sudo oscap xccdf eval \
+  --profile "$PROFILE" \
+  --results "$EXP/pre/results.xml" \
+  --results-arf "$EXP/pre/results-arf.xml" \
+  --report "$EXP/pre/report.html" \
+  "$DS" > "$EXP/pre/scan.log" 2>&1
+
+$ SCAN_RC=$?
+$ printf '%s\n' "$SCAN_RC" > "$EXP/pre/exit-code.txt"
+$ date -Is > "$EXP/pre/end-time.txt"
+$ printf 'Exit: %s\nEvidence: %s\n' "$SCAN_RC" "$EXP"
+Exit: 2
+Evidence: /home/cis-test/masters-project/evidence/EXP-001/20261104T203112Z
+```
+
+Confirm root-login rule's result
+```sh
+$ perl -MXML::LibXML -MXML::LibXML::XPathContext \
+  - "$EXP/pre/results.xml" <<'PERL'
+use strict;
+use warnings;
+
+my $doc = XML::LibXML->load_xml(location => $ARGV[0]);
+my $xc = XML::LibXML::XPathContext->new($doc);
+$xc->registerNs(x => 'http://checklists.nist.gov/xccdf/1.2');
+
+my $id = 'xccdf_org.ssgproject.content_rule_sshd_disable_root_login';
+my ($result) = $xc->findnodes("//x:rule-result[\@idref='$id']");
+die "Rule result missing\n" unless $result;
+
+print "sshd_disable_root_login: ",
+      $xc->findvalue('x:result', $result), "\n";
+PERL
+
+sshd_disable_root_login: fail
+```
+
+next, apply intervention, changing root-login policy on scap-exp01, then
+repeat both access tests
+
+```sh
+$ sudo test -e /etc/ssh/sshd_config.d/00-complianceascode-hardening.conf \
+    && echo "EXISTS — inspect before editing" \
+    || echo "ABSENT — ready to create"
+ABSENT — ready to create
+
+$ printf '%s\n' 'PermitRootLogin no' |
+    sudo tee /etc/ssh/sshd_config.d/00-complianceascode-hardening.conf
+PermitRootLogin no
+
+$ sudo /usr/sbin/sshd -t && sudo systemctl reload ssh
+
+$ sudo /usr/sbin/sshd -T | grep '^permitrootlogin '
+permitrootlogin no
+```
+expected result was 'permitrootlogin no'
+
+repeat tests from testing workstation
+
+```sh
+$ ssh -o ControlPath=none \
+  -o IdentitiesOnly=yes \
+  -o PreferredAuthentications=publickey \
+  -o PasswordAuthentication=no \
+  -o KbdInteractiveAuthentication=no \
+  -i ~/.ssh/scap-exp01-root \
+  root@10.10.20.198 'id'
+
+$ printf 'Root SSH exit: %s\n' "$?"
+
+Root SSH exit: 255
+```
+expected authentication denied, and exit 255. A timeout or connection
+refusal would be a different outcome.
+
+Test normal admin:
+```sh
+$ ssh -o ControlPath=none -t \
+  cis-test@10.10.20.198 'sudo id'
+
+$ printf 'Admin SSH exit: %s\n' "$?"
+
+uid=0(root) gid=0(root) groups=0(root)
+Connection to 10.10.20.198 closed.
+Admin SSH exit: 0
+```
+expected uid=0(root) and exit 0
+
+capture post-intervention scan:
+```sh
+$ date -Is > "$EXP/post/start-time.txt"
+$ sudo /usr/sbin/sshd -T > "$EXP/post/sshd-effective.txt"
+
+$ sudo oscap xccdf eval \
+  --profile "$PROFILE" \
+  --results "$EXP/post/results.xml" \
+  --results-arf "$EXP/post/results-arf.xml" \
+  --report "$EXP/post/report.html" \
+  "$DS" > "$EXP/post/scan.log" 2>&1
+
+$ SCAN_RC=$?
+$ printf '%s\n' "$SCAN_RC" > "$EXP/post/exit-code.txt"
+$ date -Is > "$EXP/post/end-time.txt"
+$ printf 'Post-scan exit: %s\n' "$SCAN_RC"
+
+Post-scan exit: 2
+```
+expected 2
+
+```sh
+$ perl -MXML::LibXML -MXML::LibXML::XPathContext \
+  - "$EXP/pre/results.xml" "$EXP/post/results.xml" <<'PERL'
+use strict;
+use warnings;
+
+my @labels = qw(pre post);
+my $id = 'xccdf_org.ssgproject.content_rule_sshd_disable_root_login';
+
+for my $path (@ARGV) {
+    my $label = shift @labels;
+    my $doc = XML::LibXML->load_xml(location => $path);
+    my $xc = XML::LibXML::XPathContext->new($doc);
+    $xc->registerNs(x => 'http://checklists.nist.gov/xccdf/1.2');
+
+    my ($result) = $xc->findnodes("//x:rule-result[\@idref='$id']");
+    die "Rule result missing in $path\n" unless $result;
+
+    printf "%s: %s\n", $label, $xc->findvalue('x:result', $result);
+}
+PERL
+
+pre: fail
+post: pass
+```
+The rule changed from fail to pass, and normal administration still
+works.
