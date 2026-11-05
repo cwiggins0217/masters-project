@@ -1,10 +1,0 @@
---- Starting Evaluation ---
-
-Title	Verify Permissions on SSH Server Config File
-Rule	xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config
-Result	pass
-
-Title	Disable SSH Root Login
-Rule	xccdf_org.ssgproject.content_rule_sshd_disable_root_login
-Result	pass
-
