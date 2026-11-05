@@ -1,0 +1,1 @@
+{"product_name": "ubuntu2604", "rules": {}, "profiles": {"default": {"rules": ["installed_OS_is_vendor_supported", "ufw_rules_for_open_ports"], "values": []}}}

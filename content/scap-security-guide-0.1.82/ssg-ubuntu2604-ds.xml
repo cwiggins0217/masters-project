@@ -1,0 +1,1563 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ds:data-stream-collection xmlns:cat="urn:oasis:names:tc:entity:xmlns:xml:catalog" xmlns:cpe-dict="http://cpe.mitre.org/dictionary/2.0" xmlns:cpe-lang="http://cpe.mitre.org/language/2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ds="http://scap.nist.gov/schema/scap/source/1.2" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:ind="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" xmlns:linux="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" xmlns:ocil="http://scap.nist.gov/schema/ocil/2.0" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:sce="http://open-scap.org/page/SCE_xccdf_stream" xmlns:unix="http://oval.mitre.org/XMLSchema/oval-definitions-5#unix" xmlns:xccdf-1.2="http://checklists.nist.gov/xccdf/1.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="scap_org.open-scap_collection_from_xccdf_ssg-ubuntu2604-xccdf.xml" schematron-version="1.3">
+  <ds:data-stream id="scap_org.open-scap_datastream_from_xccdf_ssg-ubuntu2604-xccdf.xml" scap-version="1.3" use-case="OTHER" timestamp="2026-09-01T13:38:56">
+    <ds:dictionaries>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-ubuntu2604-cpe-dictionary.xml" xlink:href="#scap_org.open-scap_comp_ssg-ubuntu2604-cpe-dictionary.xml">
+        <cat:catalog>
+          <cat:uri name="ssg-ubuntu2604-cpe-oval.xml" uri="#scap_org.open-scap_cref_ssg-ubuntu2604-cpe-oval.xml"/>
+        </cat:catalog>
+      </ds:component-ref>
+    </ds:dictionaries>
+    <ds:checklists>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-ubuntu2604-xccdf.xml" xlink:href="#scap_org.open-scap_comp_ssg-ubuntu2604-xccdf.xml">
+        <cat:catalog>
+          <cat:uri name="ssg-ubuntu2604-oval.xml" uri="#scap_org.open-scap_cref_ssg-ubuntu2604-oval.xml"/>
+          <cat:uri name="ssg-ubuntu2604-ocil.xml" uri="#scap_org.open-scap_cref_ssg-ubuntu2604-ocil.xml"/>
+          <cat:uri name="ssg-ubuntu2604-cpe-oval.xml" uri="#scap_org.open-scap_cref_ssg-ubuntu2604-cpe-oval.xml"/>
+          <cat:uri name="ubuntu2604/checks/sce/ufw_rules_for_open_ports.sh" uri="#scap_org.open-scap_cref_ubuntu2604-checks-sce-ufw_rules_for_open_ports.sh"/>
+        </cat:catalog>
+      </ds:component-ref>
+    </ds:checklists>
+    <ds:checks>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-ubuntu2604-oval.xml" xlink:href="#scap_org.open-scap_comp_ssg-ubuntu2604-oval.xml"/>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-ubuntu2604-ocil.xml" xlink:href="#scap_org.open-scap_comp_ssg-ubuntu2604-ocil.xml"/>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-ubuntu2604-cpe-oval.xml" xlink:href="#scap_org.open-scap_comp_ssg-ubuntu2604-cpe-oval.xml"/>
+      <ds:component-ref id="scap_org.open-scap_cref_ubuntu2604-checks-sce-ufw_rules_for_open_ports.sh" xlink:href="#scap_org.open-scap_ecomp_ubuntu2604-checks-sce-ufw_rules_for_open_ports.sh"/>
+    </ds:checks>
+  </ds:data-stream>
+  <ds:component id="scap_org.open-scap_comp_ssg-ubuntu2604-cpe-dictionary.xml" timestamp="2026-09-01T13:38:56">
+    <cpe-dict:cpe-list xsi:schemaLocation="http://cpe.mitre.org/dictionary/2.0 http://cpe.mitre.org/files/cpe-dictionary_2.1.xsd">
+      <cpe-dict:cpe-item name="cpe:/o:canonical:ubuntu_linux:26.04::~~lts~~~">
+        <cpe-dict:title xml:lang="en-us">Ubuntu release 26.04 (Resolute Raccoon)</cpe-dict:title>
+        <cpe-dict:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5" href="ssg-ubuntu2604-cpe-oval.xml">oval:ssg-installed_OS_is_ubuntu2604:def:1</cpe-dict:check>
+      </cpe-dict:cpe-item>
+    </cpe-dict:cpe-list>
+  </ds:component>
+  <ds:component id="scap_org.open-scap_comp_ssg-ubuntu2604-xccdf.xml" timestamp="2026-09-01T13:38:56">
+    <xccdf-1.2:Benchmark id="xccdf_org.ssgproject.content_benchmark_UBUNTU_26-04" xsi:schemaLocation="http://checklists.nist.gov/xccdf/1.2 xccdf-1.2.xsd" style="SCAP_1.2" resolved="true" xml:lang="en-US">
+      <xccdf-1.2:status date="2026-09-01">draft</xccdf-1.2:status>
+      <xccdf-1.2:title>Guide to the Secure Configuration of Ubuntu 26.04</xccdf-1.2:title>
+      <xccdf-1.2:description>This guide presents a catalog of security-relevant
+configuration settings for Ubuntu 26.04. It is a rendering of
+content structured in the eXtensible Configuration Checklist Description Format (XCCDF)
+in order to support security automation.  The SCAP content is
+is available in the <html:code>scap-security-guide</html:code> package which is developed at
+
+    <html:a href="https://www.open-scap.org/security-policies/scap-security-guide">https://www.open-scap.org/security-policies/scap-security-guide</html:a>.
+<html:br/>
+    <html:br/>
+Providing system administrators with such guidance informs them how to securely
+configure systems under their control in a variety of network roles. Policy
+makers and baseline creators can use this catalog of settings, with its
+associated references to higher-level security control catalogs, in order to
+assist them in security baseline creation. This guide is a <html:em>catalog, not a
+checklist</html:em>, and satisfaction of every item is not likely to be possible or
+sensible in many operational scenarios. However, the XCCDF format enables
+granular selection and adjustment of settings, and their association with OVAL
+and OCIL content provides an automated checking capability. Transformations of
+this document, and its associated automated checking content, are capable of
+providing baselines that meet a diverse set of policy objectives. Some example
+XCCDF <html:em>Profiles</html:em>, which are selections of items that form checklists and
+can be used as baselines, are available with this guide. They can be
+processed, in an automated fashion, with tools that support the Security
+Content Automation Protocol (SCAP). The DISA STIG, which provides required
+settings for US Department of Defense systems, is one example of a baseline
+created from this guidance.
+</xccdf-1.2:description>
+      <xccdf-1.2:notice id="terms_of_use">Do not attempt to implement any of the settings in
+this guide without first testing them in a non-operational environment. The
+creators of this guidance assume no responsibility whatsoever for its use by
+other parties, and makes no guarantees, expressed or implied, about its
+quality, reliability, or any other characteristic.
+</xccdf-1.2:notice>
+      <xccdf-1.2:front-matter>The SCAP Security Guide Project<html:br/>
+    <html:a href="https://www.open-scap.org/security-policies/scap-security-guide">https://www.open-scap.org/security-policies/scap-security-guide</html:a>
+   </xccdf-1.2:front-matter>
+      <xccdf-1.2:rear-matter>Red Hat and Red Hat Enterprise Linux are either registered
+trademarks or trademarks of Red Hat, Inc. in the United States and other
+countries. All other names are registered trademarks or trademarks of their
+respective companies.</xccdf-1.2:rear-matter>
+      <xccdf-1.2:reference href="https://cyber.gouv.fr/sites/default/files/document/linux_configuration-en-v2.pdf">anssi</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cyber.mil/stigs/downloads/?_dl_facet_stigs=application-servers">app-srg</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cyber.mil/stigs/downloads/?_dl_facet_stigs=app-security">app-srg-ctr</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Grundschutz/International/bsi_it_gs_comp_2022.pdf">bsi</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cisecurity.org/benchmark/ubuntu_linux/">cis</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cisecurity.org/controls/">cis-csc</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.fbi.gov/file-repository/cjis-security-policy-v5_5_20160601-2-1.pdf">cjis</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.isaca.org/resources/cobit">cobit5</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-171.pdf">cui</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="not_officially_available">dcid</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cyber.mil/stigs/cci/">disa</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.gpo.gov/fdsys/pkg/CFR-2007-title45-vol1/pdf/CFR-2007-title45-vol1-chapA-subchapC.pdf">hipaa</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.isa.org/products/isa-62443-2-1-2009-security-for-industrial-automat">isa-62443-2009</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.isa.org/products/ansi-isa-62443-3-3-99-03-03-2013-security-for-indu">isa-62443-2013</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cyber.gov.au/acsc/view-all-content/ism">ism</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.iso.org/contents/data/standard/05/45/54534.html">iso27001-2013</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.nerc.com/standards/reliability-standards/cip">nerc-cip</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">nist</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.04162018.pdf">nist-csf</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">os-srg</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.niap-ccevs.org/Profile/PP.cfm">ospp</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.pcisecuritystandards.org/documents/PCI_DSS_v3-2-1.pdf">pcidss</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://docs-prv.pcisecuritystandards.org/PCI%20DSS/Standard/PCI-DSS-v4_0.pdf">pcidss4</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux">stigid</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cyber.mil/stigs/srg-stig-tools/">stigref</xccdf-1.2:reference>
+      <xccdf-1.2:reference href="https://www.cyber.mil/stigs/srg-stig-tools#vulnerability_id">stigref_vulnerability_id</xccdf-1.2:reference>
+      <cpe-lang:platform-specification>
+        <cpe-lang:platform id="package_ufw">
+          <cpe-lang:logical-test operator="AND" negate="false">
+            <cpe-lang:check-fact-ref system="http://oval.mitre.org/XMLSchema/oval-definitions-5" href="ssg-ubuntu2604-cpe-oval.xml" id-ref="oval:ssg-package_ufw:def:1"/>
+          </cpe-lang:logical-test>
+        </cpe-lang:platform>
+        <cpe-lang:platform id="system_with_kernel">
+          <cpe-lang:logical-test operator="AND" negate="false">
+            <cpe-lang:check-fact-ref system="http://oval.mitre.org/XMLSchema/oval-definitions-5" href="ssg-ubuntu2604-cpe-oval.xml" id-ref="oval:ssg-system_with_kernel:def:1"/>
+          </cpe-lang:logical-test>
+        </cpe-lang:platform>
+      </cpe-lang:platform-specification>
+      <xccdf-1.2:platform idref="cpe:/o:canonical:ubuntu_linux:26.04::~~lts~~~"/>
+      <xccdf-1.2:version update="https://github.com/ComplianceAsCode/content/releases/latest">0.1.82</xccdf-1.2:version>
+      <xccdf-1.2:metadata>
+        <dc:publisher>SCAP Security Guide Project</dc:publisher>
+        <dc:creator>SCAP Security Guide Project</dc:creator>
+        <dc:contributor>Frank J Cameron (CAM1244) &lt;cameron@ctc.com&gt;</dc:contributor>
+        <dc:contributor>0x66656c6978 &lt;0x66656c6978@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Håvard F. Aasen &lt;havard.f.aasen@pfft.no&gt;</dc:contributor>
+        <dc:contributor>Armando Acosta &lt;armando.acosta@oracle.com&gt;</dc:contributor>
+        <dc:contributor>Jack Adolph &lt;jack.adolph@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Edgar Aguilar &lt;edgar.aguilar@oracle.com&gt;</dc:contributor>
+        <dc:contributor>akuster &lt;akuster808@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Gabe Alford &lt;redhatrises@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Firas AlShafei &lt;firas.alshafei@us.abb.com&gt;</dc:contributor>
+        <dc:contributor>Rodrigo Alvares &lt;ralvares@redhat.com&gt;</dc:contributor>
+        <dc:contributor>am-tux &lt;andrew.miller11@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Christopher Anderson &lt;cba@fedoraproject.org&gt;</dc:contributor>
+        <dc:contributor>Andrejs &lt;andrejs.galzons@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Craig Andrews &lt;candrews@integralblue.com&gt;</dc:contributor>
+        <dc:contributor>angystardust &lt;angystardust@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>anivan-suse &lt;anastasija.ivanovic@suse.com&gt;</dc:contributor>
+        <dc:contributor>anixon-rh &lt;55244503+anixon-rh@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Anna-Koudelkova &lt;akoudelk@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Arden97 &lt;arden2545@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Steve Arnold &lt;sarnold@vctlabs.com&gt;</dc:contributor>
+        <dc:contributor>Ikko Ashimine &lt;eltociear@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Chuck Atkins &lt;chuck.atkins@kitware.com&gt;</dc:contributor>
+        <dc:contributor>axuan &lt;axuan@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Bharath B &lt;bhb@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Ryan Ballanger &lt;root@rballang-admin-2.fastenal.com&gt;</dc:contributor>
+        <dc:contributor>Alex Baranowski &lt;alex@euro-linux.com&gt;</dc:contributor>
+        <dc:contributor>Eduardo Barretto &lt;eduardo.barretto@canonical.com&gt;</dc:contributor>
+        <dc:contributor>Paul Bastide &lt;pbastide@us.ibm.com&gt;</dc:contributor>
+        <dc:contributor>Molly Jo Bault &lt;Molly.Jo.Bault@ballardtech.com&gt;</dc:contributor>
+        <dc:contributor>Andrew Becker &lt;A-Beck@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Gabriel Becker &lt;ggasparb@redhat.com&gt;</dc:contributor>
+        <dc:contributor>BenGui &lt;benoit.guillon1@etu.unilim.fr&gt;</dc:contributor>
+        <dc:contributor>Alexander Bergmann &lt;abergmann@suse.com&gt;</dc:contributor>
+        <dc:contributor>Eric Berry &lt;eric@approvedworkman.com&gt;</dc:contributor>
+        <dc:contributor>Dale Bewley &lt;dale@bewley.net&gt;</dc:contributor>
+        <dc:contributor>Jose Luis BG &lt;bgjoseluis@gmail.com&gt;</dc:contributor>
+        <dc:contributor>binyanling &lt;binyanling@uniontech.com&gt;</dc:contributor>
+        <dc:contributor>Joseph Bisch &lt;joseph.bisch@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Jeff Blank &lt;blank@eclipse.ncsc.mil&gt;</dc:contributor>
+        <dc:contributor>Israel Villar Boillos &lt;israel.villar@ulpgc.es&gt;</dc:contributor>
+        <dc:contributor>Olivier Bonhomme &lt;ptitoliv@ptitoliv.net&gt;</dc:contributor>
+        <dc:contributor>bontreger &lt;bontreger@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Lance Bragstad &lt;lbragstad@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Vickey Brown &lt;vibrown@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Ted Brunell &lt;tbrunell@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Marcus Burghardt &lt;maburgha@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Matthew Burket &lt;mburket@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Blake Burkhart &lt;blake.burkhart@us.af.mil&gt;</dc:contributor>
+        <dc:contributor>Alexander Bushkin &lt;abushkin@abushkin-thinkpadt14gen4.rmtit.csb&gt;</dc:contributor>
+        <dc:contributor>Patrick Callahan &lt;pmc@patrickcallahan.com&gt;</dc:contributor>
+        <dc:contributor>George Campbell &lt;gcampbell@palantir.com&gt;</dc:contributor>
+        <dc:contributor>Nick Carboni &lt;ncarboni@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Carlos &lt;64919342+carlosmmatos@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>James Cassell &lt;james.cassell@ll.mit.edu&gt;</dc:contributor>
+        <dc:contributor>Frank Caviggia &lt;fcaviggia@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Sinong Chen &lt;costinchen@tencent.com&gt;</dc:contributor>
+        <dc:contributor>Eric Christensen &lt;echriste@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Dan Clark &lt;danclark@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jayson Cofell &lt;1051437+70k10@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>David du Colombier &lt;djc@datadoghq.com&gt;</dc:contributor>
+        <dc:contributor>Commandcracker &lt;lukas.fricke.dev@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Caleb Cooper &lt;coopercd@ornl.gov&gt;</dc:contributor>
+        <dc:contributor>copilot-swe-agent[bot] &lt;198982749+Copilot@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>CoreyCook8 &lt;129206271+CoreyCook8@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>cortesana &lt;acortes@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Richard Maciel Costa &lt;richard.maciel.costa@canonical.com&gt;</dc:contributor>
+        <dc:contributor>Xavier Coulon &lt;xavier.coulon@suse.com&gt;</dc:contributor>
+        <dc:contributor>Deric Crago &lt;deric.crago@gmail.com&gt;</dc:contributor>
+        <dc:contributor>crleekwc &lt;crleekwc@gmail.com&gt;</dc:contributor>
+        <dc:contributor>cueball23 &lt;christoph.alms@westnetz.de&gt;</dc:contributor>
+        <dc:contributor>cyarbrough76 &lt;42849651+cyarbrough76@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Maura Dailey &lt;maura@eclipse.ncsc.mil&gt;</dc:contributor>
+        <dc:contributor>Harold Dean &lt;hdean3@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Benjamin Deering &lt;ben_deering@jeepingben.net&gt;</dc:contributor>
+        <dc:contributor>Shane Dell &lt;shanedell100@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Klaas Demter &lt;demter@atix.de&gt;</dc:contributor>
+        <dc:contributor>denknorr &lt;dennis.knorr@suse.com&gt;</dc:contributor>
+        <dc:contributor>dhanushkar-wso2 &lt;dhanushkar@wso2.com&gt;</dc:contributor>
+        <dc:contributor>Andrew DiPrinzio &lt;andrew.diprinzio@jhuapl.edu&gt;</dc:contributor>
+        <dc:contributor>dom &lt;dominique.blaze@devinci.fr&gt;</dc:contributor>
+        <dc:contributor>Jean-Baptiste Donnette &lt;jean-baptiste.donnette@epita.fr&gt;</dc:contributor>
+        <dc:contributor>Marco De Donno &lt;mdedonno1337@gmail.com&gt;</dc:contributor>
+        <dc:contributor>dperrone &lt;dperrone@redhat.com&gt;</dc:contributor>
+        <dc:contributor>drax &lt;applezip@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Qingmin Duanmu &lt;qduanmu@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Sebastian Dunne &lt;sdunne@redhat.com&gt;</dc:contributor>
+        <dc:contributor>François Duthilleul &lt;francoisduthilleul@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Greg Elin &lt;gregelin@gitmachines.com&gt;</dc:contributor>
+        <dc:contributor>eradot4027 &lt;jrtonmac@gmail.com&gt;</dc:contributor>
+        <dc:contributor>ericeberry &lt;ericeberry@gmail.com&gt;</dc:contributor>
+        <dc:contributor>ermeratos &lt;manuel.ermer@eviden.net&gt;</dc:contributor>
+        <dc:contributor>Evelyn &lt;evansvevelyn@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Steven Fackler &lt;sfackler@palantir.com&gt;</dc:contributor>
+        <dc:contributor>Alexis Facques &lt;alexis.facques@mythalesgroup.io&gt;</dc:contributor>
+        <dc:contributor>Jan Fader &lt;jan.fader@web.de&gt;</dc:contributor>
+        <dc:contributor>felixmarch &lt;felixmarch@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Asser Schrøder Femø &lt;asser@asser.org&gt;</dc:contributor>
+        <dc:contributor>Henry Finucane &lt;hfinucane@zscaler.com&gt;</dc:contributor>
+        <dc:contributor>Leah Fisher &lt;lfisher047@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Marco Fortina &lt;marco_fortina@hotmail.it&gt;</dc:contributor>
+        <dc:contributor>Yavor Georgiev &lt;strandjata@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Alijohn Ghassemlouei &lt;alijohn@secureagc.com&gt;</dc:contributor>
+        <dc:contributor>Swarup Ghosh &lt;swghosh@redhat.com&gt;</dc:contributor>
+        <dc:contributor>ghylock &lt;ghylock@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Andrew Gilmore &lt;agilmore2@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Joachim Gleissner &lt;jgleissner@suse.com&gt;</dc:contributor>
+        <dc:contributor>Joshua Glemza &lt;jglemza@nasa.gov&gt;</dc:contributor>
+        <dc:contributor>Nick Gompper &lt;forestgomp@yahoo.com&gt;</dc:contributor>
+        <dc:contributor>David Fernandez Gonzalez &lt;david.fernandezgonzalez@canonical.com&gt;</dc:contributor>
+        <dc:contributor>Loren Gordon &lt;lorengordon@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Gene Gotimer &lt;otherdevopsgene@portinfo.com&gt;</dc:contributor>
+        <dc:contributor>Patrik Greco &lt;sikevux@sikevux.se&gt;</dc:contributor>
+        <dc:contributor>Steve Grubb &lt;sgrubb@redhat.com&gt;</dc:contributor>
+        <dc:contributor>guangyee &lt;gyee@suse.com&gt;</dc:contributor>
+        <dc:contributor>Bhargavi Gudi &lt;bgudi@bgudi-thinkpadt14sgen2i.remote.csb&gt;</dc:contributor>
+        <dc:contributor>Christian Hagenest &lt;christian.hagenest@suse.com&gt;</dc:contributor>
+        <dc:contributor>Marek Haicman &lt;mhaicman@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Sun, Haoxiang &lt;haoxiang.sun@intel.com&gt;</dc:contributor>
+        <dc:contributor>Vern Hart &lt;vern.hart@canonical.com&gt;</dc:contributor>
+        <dc:contributor>Alex Haydock &lt;alex@alexhaydock.co.uk&gt;</dc:contributor>
+        <dc:contributor>Rebekah Hayes &lt;rhayes@corp.rivierautilities.com&gt;</dc:contributor>
+        <dc:contributor>hazerre &lt;kotadouglas2@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Trey Henefield &lt;thenefield@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Henning Henkel &lt;henning.henkel@helvetia.ch&gt;</dc:contributor>
+        <dc:contributor>hex2a &lt;hex2a@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>hipponix &lt;mirco.santori@gmail.com&gt;</dc:contributor>
+        <dc:contributor>John Hooks &lt;jhooks@starscream.pa.jhbcomputers.com&gt;</dc:contributor>
+        <dc:contributor>Jakub Hrozek &lt;jhrozek@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Donald Hunter &lt;donald.hunter@gmail.com&gt;</dc:contributor>
+        <dc:contributor>De Huo &lt;De.Huo@windriver.com&gt;</dc:contributor>
+        <dc:contributor>Robin Price II &lt;robin@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Yasir Imam &lt;yimam@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jiri Jaburek &lt;jjaburek@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Keith Jackson &lt;keithkjackson@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Marc Jadoul &lt;mgjadoul@laptomatic.auth-o-matic.corp&gt;</dc:contributor>
+        <dc:contributor>Jeremiah Jahn &lt;jeremiah@goodinassociates.com&gt;</dc:contributor>
+        <dc:contributor>jcm-123 &lt;1548614078@qq.com&gt;</dc:contributor>
+        <dc:contributor>Jakub Jelen &lt;jjelen@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jessicahfy &lt;Jessicahfy@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Stephan Joerrens &lt;Stephan.Joerrens@fiduciagad.de&gt;</dc:contributor>
+        <dc:contributor>Simon John &lt;sjohn@tuxcare.com&gt;</dc:contributor>
+        <dc:contributor>Hunter Jones &lt;hjones2199@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Jono &lt;jono@ubuntu-18.localdomain&gt;</dc:contributor>
+        <dc:contributor>julius.ish &lt;julius.ish@zetier.com&gt;</dc:contributor>
+        <dc:contributor>justchris1 &lt;justchris1@justchris1.email&gt;</dc:contributor>
+        <dc:contributor>Kacper &lt;kacper@kacper.se&gt;</dc:contributor>
+        <dc:contributor>Kai Kang &lt;kai.kang@windriver.com&gt;</dc:contributor>
+        <dc:contributor>Charles Kernstock &lt;charles.kernstock@ultra-ats.com&gt;</dc:contributor>
+        <dc:contributor>Ket_ch0p &lt;96146875+Tomatotech90@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Yuli Khodorkovskiy &lt;ykhodorkovskiy@tresys.com&gt;</dc:contributor>
+        <dc:contributor>Sherine Khoury &lt;skhoury@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Nathan Kinder &lt;nkinder@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Lee Kinser &lt;lee.kinser@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Evgeny Kolesnikov &lt;ekolesni@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Peter 'Pessoft' Kolínek &lt;github@pessoft.com&gt;</dc:contributor>
+        <dc:contributor>Luke Kordell &lt;luke.t.kordell@lmco.com&gt;</dc:contributor>
+        <dc:contributor>Malte Kraus &lt;malte.kraus@suse.com&gt;</dc:contributor>
+        <dc:contributor>Seth Kress &lt;seth.kress@dsainc.com&gt;</dc:contributor>
+        <dc:contributor>Vamshi Krishna &lt;gnansan@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Felix Krohn &lt;felix.krohn@helvetia.ch&gt;</dc:contributor>
+        <dc:contributor>kspargur &lt;kspargur@kspargur.csb&gt;</dc:contributor>
+        <dc:contributor>Amit Kumar &lt;amitkuma@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Fen Labalme &lt;fen@civicactions.com&gt;</dc:contributor>
+        <dc:contributor>Dexter Le &lt;dexter.le@sap.com&gt;</dc:contributor>
+        <dc:contributor>Kleber Leal &lt;kleber.leal@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Dimitri John Ledkov &lt;dimitri.ledkov@surgut.co.uk&gt;</dc:contributor>
+        <dc:contributor>Ade Lee &lt;alee@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Christopher Lee &lt;Crleekwc@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Ian Lee &lt;lee1001@llnl.gov&gt;</dc:contributor>
+        <dc:contributor>Jarrett Lee &lt;jarrettl@umd.edu&gt;</dc:contributor>
+        <dc:contributor>Joseph Lenox &lt;joseph.lenox@collins.com&gt;</dc:contributor>
+        <dc:contributor>Stefano Libero &lt;stefano.libero@nozominetworks.com&gt;</dc:contributor>
+        <dc:contributor>lichtblaugue &lt;guenther.lichtblau@eviden.com&gt;</dc:contributor>
+        <dc:contributor>Jan Lieskovsky &lt;jlieskov@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Markus Linnala &lt;Markus.Linnala@knowit.fi&gt;</dc:contributor>
+        <dc:contributor>Flos Lonicerae &lt;lonicerae@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Simon Lukasik &lt;slukasik@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Andrew Lukoshko &lt;andrew.lukoshko@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Milan Lysonek &lt;mlysonek@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Fredrik Lysén &lt;fredrik@pipemore.se&gt;</dc:contributor>
+        <dc:contributor>Mackemania &lt;8738793+Mackemania@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Peter Macko &lt;pmacko@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Caitlin Macleod &lt;caitelatte@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Dmitry Makovey &lt;dmakovey@yahoo.com&gt;</dc:contributor>
+        <dc:contributor>Nick Maludy &lt;nmaludy@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Lokesh Mandvekar &lt;lsm5@fedoraproject.org&gt;</dc:contributor>
+        <dc:contributor>Matus Marhefka &lt;mmarhefk@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jamie Lorwey Martin &lt;jlmartin@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Carlos Matos &lt;cmatos@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Robert McAllister &lt;rmcallis@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Karen McCarron &lt;kmccarro@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Michael McConachie &lt;michael@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Marcus Meissner &lt;meissner@suse.de&gt;</dc:contributor>
+        <dc:contributor>Khary Mendez &lt;kmendez@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Rodney Mercer &lt;rmercer@harris.com&gt;</dc:contributor>
+        <dc:contributor>Matt Micene &lt;nzwulfin@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Brian Millett &lt;bmillett@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Takuya Mishina &lt;tmishina@jp.ibm.com&gt;</dc:contributor>
+        <dc:contributor>MitchDrage &lt;25337396+MitchDrage@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Mixer9 &lt;35545791+Mixer9@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>mmosel &lt;mmosel@kde.example.com&gt;</dc:contributor>
+        <dc:contributor>Thomas Montague &lt;montague.thomas@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Alan Moore &lt;alan.moore@canonical.com&gt;</dc:contributor>
+        <dc:contributor>Zbynek Moravec &lt;zmoravec@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Kazuo Moriwaka &lt;moriwaka@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Michael Moseley &lt;michael@eclipse.ncsc.mil&gt;</dc:contributor>
+        <dc:contributor>Samir MOUHOUNE &lt;samir.mouhoune@nav-timing.safrangroup.com&gt;</dc:contributor>
+        <dc:contributor>Nathan Moyer &lt;nmoyer@spectric.com&gt;</dc:contributor>
+        <dc:contributor>Ross Murphy &lt;RossMurphy@ibm.com&gt;</dc:contributor>
+        <dc:contributor>Renaud Métrich &lt;rmetrich@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Joe Nall &lt;joe@nall.com&gt;</dc:contributor>
+        <dc:contributor>namoyer10 &lt;48189779+namoyer10@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Neiloy &lt;neiloy@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Axel Nennker &lt;axel@nennker.de&gt;</dc:contributor>
+        <dc:contributor>Michele Newman &lt;mnewman@redhat.com&gt;</dc:contributor>
+        <dc:contributor>nnerdmann &lt;128606223+nnerdmann@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Sean O'Keeffe &lt;seanokeeffe797@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Jiri Odehnal &lt;jodehnal@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Ilya Okomin &lt;ilya.okomin@oracle.com&gt;</dc:contributor>
+        <dc:contributor>Kaustubh Padegaonkar &lt;theTuxRacer@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Michael Palmiotto &lt;mpalmiotto@tresys.com&gt;</dc:contributor>
+        <dc:contributor>Eryx Paredes &lt;eryxp@lyft.com&gt;</dc:contributor>
+        <dc:contributor>Max R.D. Parmer &lt;maxp@trystero.is&gt;</dc:contributor>
+        <dc:contributor>Arnaud Patard &lt;apatard@hupstream.com&gt;</dc:contributor>
+        <dc:contributor>Jan Pazdziora &lt;jpazdziora@redhat.com&gt;</dc:contributor>
+        <dc:contributor>pcactr &lt;paul.c.arnold4.ctr@mail.mil&gt;</dc:contributor>
+        <dc:contributor>Kenneth Peeples &lt;kennethwpeeples@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Nathan Peters &lt;Nathaniel.Peters@ca.com&gt;</dc:contributor>
+        <dc:contributor>Frank Lin PIAT &lt;fpiat@klabs.be&gt;</dc:contributor>
+        <dc:contributor>Stefan Pietsch &lt;mail.ipv4v6+gh@gmail.com&gt;</dc:contributor>
+        <dc:contributor>piggyvenus &lt;piggyvenus@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Vojtech Polasek &lt;vpolasek@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Orion Poplawski &lt;orion@nwra.com&gt;</dc:contributor>
+        <dc:contributor>Jennifer Power &lt;barnabei.jennifer@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Nick Poyant &lt;npoyant@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Martin Preisler &lt;mpreisle@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Wesley Ceraso Prudencio &lt;wcerasop@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Raphael Sanchez Prudencio &lt;rsprudencio@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Miha Purg &lt;miha.purg@canonical.com&gt;</dc:contributor>
+        <dc:contributor>T.O. Radzy Radzykewycz &lt;radzy@windriver.com&gt;</dc:contributor>
+        <dc:contributor>rain-Qing &lt;yangyuqing6@qq.com&gt;</dc:contributor>
+        <dc:contributor>Kenyon Ralph &lt;kenyon@kenyonralph.com&gt;</dc:contributor>
+        <dc:contributor>Mike Ralph &lt;mralph@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Federico Ramirez &lt;federico.r.ramirez@oracle.com&gt;</dc:contributor>
+        <dc:contributor>rchikov &lt;rumen.chikov@suse.com&gt;</dc:contributor>
+        <dc:contributor>Rick Renshaw &lt;Richard_Renshaw@xtoenergy.com&gt;</dc:contributor>
+        <dc:contributor>Paul Rensing &lt;prensing@cimetrics.com&gt;</dc:contributor>
+        <dc:contributor>Chris Reynolds &lt;c.reynolds82@gmail.com&gt;</dc:contributor>
+        <dc:contributor>rhayes &lt;rhayes@rivierautilities.com&gt;</dc:contributor>
+        <dc:contributor>Pat Riehecky &lt;riehecky@fnal.gov&gt;</dc:contributor>
+        <dc:contributor>rlucente-se-jboss &lt;rlucente@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Juan Antonio Osorio Robles &lt;juan.osoriorobles@eu.equinix.com&gt;</dc:contributor>
+        <dc:contributor>Paul Roche &lt;paul.roche@menlosecurity.com&gt;</dc:contributor>
+        <dc:contributor>Jan Rodak &lt;hony.com@seznam.cz&gt;</dc:contributor>
+        <dc:contributor>Matt Rogers &lt;mrogers@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jesse Roland &lt;jesse.roland@onyxpoint.com&gt;</dc:contributor>
+        <dc:contributor>Joshua Roys &lt;roysjosh@gmail.com&gt;</dc:contributor>
+        <dc:contributor>rrenshaw &lt;bofh69@yahoo.com&gt;</dc:contributor>
+        <dc:contributor>rrskris &lt;rrskris@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Daniel Ruf &lt;daniel@daniel-ruf.de&gt;</dc:contributor>
+        <dc:contributor>Chris Ruffalo &lt;chris.ruffalo@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Benjamin Ruland &lt;benjamin.ruland@gmail.com&gt;</dc:contributor>
+        <dc:contributor>rumch-se &lt;77793453+rumch-se@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Rutvik &lt;rutksh@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Ray Shaw (Cont ARL/CISD) rvshaw &lt;rvshaw@esme.arl.army.mil&gt;</dc:contributor>
+        <dc:contributor>Nicolas SAID &lt;nicolas.said@atos.net&gt;</dc:contributor>
+        <dc:contributor>Earl Sampson &lt;ESampson@suse.com&gt;</dc:contributor>
+        <dc:contributor>sampsone &lt;esampson@suse.com&gt;</dc:contributor>
+        <dc:contributor>Mirco Santori &lt;mirco.santori@roche.com&gt;</dc:contributor>
+        <dc:contributor>Willy Santos &lt;wsantos@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Nagarjuna Sarvepalli &lt;snagarju@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Anderson Sasaki &lt;33833274+ansasaki@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Gautam Satish &lt;gautams@hpe.com&gt;</dc:contributor>
+        <dc:contributor>Watson Sato &lt;wsato@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Satoru SATOH &lt;satoru.satoh@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Alexander Scheel &lt;alexander.m.scheel@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Bryan Schneiders &lt;pschneiders@trisept.com&gt;</dc:contributor>
+        <dc:contributor>Robert Schweikert &lt;rjschwei@suse.com&gt;</dc:contributor>
+        <dc:contributor>shaneboulden &lt;shane.boulden@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Vincent Shen &lt;wenshen@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Dhriti Shikhar &lt;dhriti.shikhar.rokz@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Spencer Shimko &lt;sshimko@tresys.com&gt;</dc:contributor>
+        <dc:contributor>Mark Shoger &lt;mshoger@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Shane Siebken &lt;shane.siebken@capellaspace.com&gt;</dc:contributor>
+        <dc:contributor>THOBY Simon &lt;Simon.THOBY@viveris.fr&gt;</dc:contributor>
+        <dc:contributor>Thomas Sjögren &lt;konstruktoid@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Jindrich Skacel &lt;102800748+jskacel@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Alexandre Skrzyniarz &lt;alexandre.skrzyniarz@laposte.net&gt;</dc:contributor>
+        <dc:contributor>Francisco Slavin &lt;fslavin@tresys.com&gt;</dc:contributor>
+        <dc:contributor>sluetze &lt;13255307+sluetze@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Dave Smith &lt;dsmith@eclipse.ncsc.mil&gt;</dc:contributor>
+        <dc:contributor>David Smith &lt;dsmith@fornax.eclipse.ncsc.mil&gt;</dc:contributor>
+        <dc:contributor>Kevin Spargur &lt;kspargur@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Kenneth Stailey &lt;kstailey.lists@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Leland Steinke &lt;leland.j.steinke.ctr@mail.mil&gt;</dc:contributor>
+        <dc:contributor>Justin Stephenson &lt;jstephen@redhat.com&gt;</dc:contributor>
+        <dc:contributor>steven.y.gui &lt;steven_ygui@163.com&gt;</dc:contributor>
+        <dc:contributor>Brian Stinson &lt;brian@bstinson.com&gt;</dc:contributor>
+        <dc:contributor>Jake Stookey &lt;jakestookey@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Nathan Strahs &lt;135379779+nathanstrahs@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Jonathan Sturges &lt;jsturges@redhat.com&gt;</dc:contributor>
+        <dc:contributor>svet-se &lt;svetlin.boychev@suse.com&gt;</dc:contributor>
+        <dc:contributor>t0292887 &lt;antonin.grepilloux@thalesgroup.com&gt;</dc:contributor>
+        <dc:contributor>taimurhafeez &lt;taimurhafeez93@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Kaushik Talathi &lt;kaushik.talathi1@ibm.com&gt;</dc:contributor>
+        <dc:contributor>teacup-on-rockingchair &lt;315160+teacup-on-rockingchair@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Ian Tewksbury &lt;itewk@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Philippe Thierry &lt;phil@reseau-libre.net&gt;</dc:contributor>
+        <dc:contributor>Simon THOBY &lt;git@nightmared.fr&gt;</dc:contributor>
+        <dc:contributor>Derek Thurston &lt;thegrit@gmail.com&gt;</dc:contributor>
+        <dc:contributor>tianzhenjia &lt;jiatianzhen@cmss.chinamobile.com&gt;</dc:contributor>
+        <dc:contributor>Greg Tinsley &lt;gtinsley@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Paul Tittle &lt;ptittle@cmf.nrl.navy.mil&gt;</dc:contributor>
+        <dc:contributor>tom &lt;tom@localhost.localdomain&gt;</dc:contributor>
+        <dc:contributor>tomas.hudik &lt;tomas.hudik@embedit.cz&gt;</dc:contributor>
+        <dc:contributor>Tomatotech90 &lt;morales.jonathand@outlook.com&gt;</dc:contributor>
+        <dc:contributor>Jeb Trayer &lt;jeb.d.trayer@uscg.mil&gt;</dc:contributor>
+        <dc:contributor>TrilokGeer &lt;tgeer@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Viktors Trubovics &lt;viktors.trubovics@suse.com&gt;</dc:contributor>
+        <dc:contributor>Nico Truzzolino &lt;nico.truzzolino@gmx.de&gt;</dc:contributor>
+        <dc:contributor>Brian Turek &lt;brian.turek@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Matěj Týč &lt;matyc@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jörgen Uhr &lt;jorgen.uhr@sitevision.se&gt;</dc:contributor>
+        <dc:contributor>VadimDor &lt;29509093+VadimDor@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Trevor Vaughan &lt;tvaughan@onyxpoint.com&gt;</dc:contributor>
+        <dc:contributor>vtrubovics &lt;82443408+vtrubovics@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Sophia Wang &lt;huiwang@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Samuel Warren &lt;swarren@redhat.com&gt;</dc:contributor>
+        <dc:contributor>wcushen &lt;54533890+wcushen@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Shawn Wells &lt;shawn@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Whidix &lt;31294015+Whidix@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Daniel E. White &lt;linuxdan@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Bernhard M. Wiedemann &lt;bwiedemann@suse.de&gt;</dc:contributor>
+        <dc:contributor>Roy Williams &lt;roywilli@roywilli.redhat.com&gt;</dc:contributor>
+        <dc:contributor>Willumpie &lt;willumpie@xs4all.nl&gt;</dc:contributor>
+        <dc:contributor>Rob Wilmoth &lt;rwilmoth@redhat.com&gt;</dc:contributor>
+        <dc:contributor>win97pro &lt;win97pro@protonmail.com&gt;</dc:contributor>
+        <dc:contributor>WolfAnto &lt;73076854+WolfAnto@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Sam Wouters &lt;231222691+swoutersup@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>xcfxr &lt;xucee@qq.com&gt;</dc:contributor>
+        <dc:contributor>Lucas Yamanishi &lt;lucas.yamanishi@onyxpoint.com&gt;</dc:contributor>
+        <dc:contributor>Xirui Yang &lt;xirui.yang@oracle.com&gt;</dc:contributor>
+        <dc:contributor>Yuqing Yang &lt;yyq01323329@alibaba-inc.com&gt;</dc:contributor>
+        <dc:contributor>yarunachalam &lt;yarunachalam@suse.com&gt;</dc:contributor>
+        <dc:contributor>Guang Yee &lt;guang.yee@suse.com&gt;</dc:contributor>
+        <dc:contributor>Achilleas John Yfantis &lt;ayfantis@redhat.com&gt;</dc:contributor>
+        <dc:contributor>YiLin.Li &lt;YiLin.Li@linux.alibaba.com&gt;</dc:contributor>
+        <dc:contributor>yu410621 &lt;lihuanyu410621@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Xiaojie Yuan &lt;xiyuan@redhat.com&gt;</dc:contributor>
+        <dc:contributor>yungcero &lt;133906218+yungcero@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>yunimoo &lt;yunimoo@nekocake.cafe&gt;</dc:contributor>
+        <dc:contributor>YuQing &lt;yyq0391@163.com&gt;</dc:contributor>
+        <dc:contributor>Guy Yur &lt;guy.y@claroty.com&gt;</dc:contributor>
+        <dc:contributor>zhaoyun &lt;zhaoyun@kylinos.cn&gt;</dc:contributor>
+        <dc:contributor>Kevin Zimmerman &lt;kevin.zimmerman@kitware.com&gt;</dc:contributor>
+        <dc:contributor>Luigi Mario Zuccarelli &lt;luzuccar@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jan Černý &lt;jcerny@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Michal Šrubař &lt;msrubar@redhat.com&gt;</dc:contributor>
+        <dc:source>https://github.com/ComplianceAsCode/content/releases/latest</dc:source>
+      </xccdf-1.2:metadata>
+      <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_system">
+        <xccdf-1.2:title>System Settings</xccdf-1.2:title>
+        <xccdf-1.2:description>Contains rules that check correct system settings.</xccdf-1.2:description>
+        <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_software">
+          <xccdf-1.2:title>Installing and Maintaining Software</xccdf-1.2:title>
+          <xccdf-1.2:description>The following sections contain information on
+security-relevant choices during the initial operating system
+installation process and the setup of software
+updates.</xccdf-1.2:description>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_integrity">
+            <xccdf-1.2:title>System and Software Integrity</xccdf-1.2:title>
+            <xccdf-1.2:description>System and software integrity can be gained by installing antivirus, increasing
+system encryption strength with FIPS, verifying installed software, enabling SELinux,
+installing an Intrusion Prevention System, etc. However, installing or enabling integrity
+checking tools cannot <html:i>prevent</html:i> intrusions, but they can detect that an intrusion
+may have occurred. Requirements for integrity checking may be highly dependent on
+the environment in which the system will be used. Snapshot-based approaches such
+as AIDE may induce considerable overhead in the presence of frequent software updates.</xccdf-1.2:description>
+            <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_certified-vendor">
+              <xccdf-1.2:title>Operating System Vendor Support and Certification</xccdf-1.2:title>
+              <xccdf-1.2:description>The assurance of a vendor to provide operating system support and maintenance
+for their product is an important criterion to ensure product stability and
+security over the life of the product. A certified product that follows the
+necessary standards and government certification requirements guarantees that
+known software vulnerabilities will be remediated, and proper guidance for
+protecting and securing the operating system will be given.</xccdf-1.2:description>
+              <xccdf-1.2:Rule selected="false" id="xccdf_org.ssgproject.content_rule_installed_OS_is_vendor_supported" severity="high">
+                <xccdf-1.2:title>The Installed Operating System Is Vendor Supported</xccdf-1.2:title>
+                <xccdf-1.2:description>The installed operating system must be maintained by a vendor.
+
+Red Hat Enterprise Linux is supported by Red Hat, Inc. As the Red Hat Enterprise
+Linux vendor, Red Hat, Inc. is responsible for providing security patches.</xccdf-1.2:description>
+                <xccdf-1.2:warning category="general">There is no remediation besides switching to a different operating system.</xccdf-1.2:warning>
+                <xccdf-1.2:reference href="https://www.cisecurity.org/controls/">18</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.cisecurity.org/controls/">20</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.cisecurity.org/controls/">4</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isaca.org/resources/cobit">APO12.01</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isaca.org/resources/cobit">APO12.02</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isaca.org/resources/cobit">APO12.03</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isaca.org/resources/cobit">APO12.04</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isaca.org/resources/cobit">BAI03.10</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isaca.org/resources/cobit">DSS05.01</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isaca.org/resources/cobit">DSS05.02</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isa.org/products/isa-62443-2-1-2009-security-for-industrial-automat">4.2.3</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isa.org/products/isa-62443-2-1-2009-security-for-industrial-automat">4.2.3.12</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isa.org/products/isa-62443-2-1-2009-security-for-industrial-automat">4.2.3.7</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.isa.org/products/isa-62443-2-1-2009-security-for-industrial-automat">4.2.3.9</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.iso.org/contents/data/standard/05/45/54534.html">A.12.6.1</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.iso.org/contents/data/standard/05/45/54534.html">A.14.2.3</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.iso.org/contents/data/standard/05/45/54534.html">A.16.1.3</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.iso.org/contents/data/standard/05/45/54534.html">A.18.2.2</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.iso.org/contents/data/standard/05/45/54534.html">A.18.2.3</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-6(a)</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-6</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SA-13(a)</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.04162018.pdf">ID.RA-1</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.04162018.pdf">PR.IP-12</xccdf-1.2:reference>
+                <xccdf-1.2:reference href="https://www.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000480-GPOS-00227</xccdf-1.2:reference>
+                <xccdf-1.2:rationale>An operating system is considered "supported" if the vendor continues to
+provide security patches for the product.  With an unsupported release, it
+will not be possible to resolve any security issue discovered in the system
+software.</xccdf-1.2:rationale>
+                <xccdf-1.2:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                  <xccdf-1.2:check-content-ref href="ssg-ubuntu2604-oval.xml" name="oval:ssg-installed_OS_is_vendor_supported:def:1"/>
+                </xccdf-1.2:check>
+                <xccdf-1.2:check system="http://scap.nist.gov/schema/ocil/2">
+                  <xccdf-1.2:check-content-ref href="ssg-ubuntu2604-ocil.xml" name="ocil:ssg-installed_OS_is_vendor_supported_ocil:questionnaire:1"/>
+                </xccdf-1.2:check>
+              </xccdf-1.2:Rule>
+            </xccdf-1.2:Group>
+          </xccdf-1.2:Group>
+        </xccdf-1.2:Group>
+        <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_network">
+          <xccdf-1.2:title>Network Configuration and Firewalls</xccdf-1.2:title>
+          <xccdf-1.2:description>Most systems must be connected to a network of some
+sort, and this brings with it the substantial risk of network
+attack. This section discusses the security impact of decisions
+about networking which must be made when configuring a system.
+<html:br/>
+      <html:br/>
+This section also discusses firewalls, network access
+controls, and other network security frameworks, which allow
+system-level rules to be written that can limit an attackers' ability
+to connect to your system. These rules can specify that network
+traffic should be allowed or denied from certain IP addresses,
+hosts, and networks. The rules can also specify which of the
+system's network services are available to particular hosts or
+networks.</xccdf-1.2:description>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_network-ufw">
+            <xccdf-1.2:title>Uncomplicated Firewall (ufw)</xccdf-1.2:title>
+            <xccdf-1.2:description>The Linux kernel in Ubuntu provides a packet filtering system called
+netfilter, and the traditional interface for manipulating netfilter are
+the iptables suite of commands. iptables provide a complete firewall
+solution that is both highly configurable and highly flexible.
+
+Becoming proficient in iptables takes time, and getting started with
+netfilter firewalling using only iptables can be a daunting task. As a
+result, many frontends for iptables have been created over the years,
+each trying to achieve a different result and targeting a different
+audience.
+
+The Uncomplicated Firewall (ufw) is a frontend for iptables and is
+particularly well-suited for host-based firewalls. ufw provides a
+framework for managing netfilter, as well as a command-line interface
+for manipulating the firewall. ufw aims to provide an easy to use
+interface for people unfamiliar with firewall concepts, while at the
+same time simplifies complicated iptables commands to help an
+administrator who knows what he or she is doing. ufw is an upstream
+for other distributions and graphical frontends.</xccdf-1.2:description>
+            <xccdf-1.2:platform idref="#system_with_kernel"/>
+            <xccdf-1.2:Rule selected="false" id="xccdf_org.ssgproject.content_rule_ufw_rules_for_open_ports" severity="medium">
+              <xccdf-1.2:title>Ensure ufw Firewall Rules Exist for All Open Ports</xccdf-1.2:title>
+              <xccdf-1.2:description>Any ports that have been opened on non-loopback addresses
+need firewall rules to govern traffic.</xccdf-1.2:description>
+              <xccdf-1.2:warning category="general">Changing firewall settings while connected over network can
+result in being locked out of the system.</xccdf-1.2:warning>
+              <xccdf-1.2:rationale>Without a firewall rule configured for open ports default
+firewall policy will drop all packets to these ports.</xccdf-1.2:rationale>
+              <xccdf-1.2:platform idref="#package_ufw"/>
+              <xccdf-1.2:check system="http://open-scap.org/page/SCE">
+                <xccdf-1.2:check-import import-name="stdout"/>
+                <xccdf-1.2:check-content-ref href="ubuntu2604/checks/sce/ufw_rules_for_open_ports.sh"/>
+              </xccdf-1.2:check>
+              <xccdf-1.2:check system="http://scap.nist.gov/schema/ocil/2">
+                <xccdf-1.2:check-content-ref href="ssg-ubuntu2604-ocil.xml" name="ocil:ssg-ufw_rules_for_open_ports_ocil:questionnaire:1"/>
+              </xccdf-1.2:check>
+            </xccdf-1.2:Rule>
+          </xccdf-1.2:Group>
+        </xccdf-1.2:Group>
+      </xccdf-1.2:Group>
+    </xccdf-1.2:Benchmark>
+  </ds:component>
+  <ds:component id="scap_org.open-scap_comp_ssg-ubuntu2604-oval.xml" timestamp="2026-09-01T13:38:56">
+    <oval-def:oval_definitions xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd  http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd  http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd  http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd  http://oval.mitre.org/XMLSchema/oval-definitions-5#linux linux-definitions-schema.xsd">
+      <oval-def:generator>
+        <oval:product_name>OVALFileLinker from SCAP Security Guide</oval:product_name>
+        <oval:product_version>ssg: [0, 1, 82], python: 3.14.7</oval:product_version>
+        <oval:schema_version>5.11.2</oval:schema_version>
+        <oval:timestamp>2026-09-01T13:37:32</oval:timestamp>
+      </oval-def:generator>
+      <oval-def:definitions>
+        <oval-def:definition id="oval:ssg-installed_OS_is_vendor_supported:def:1" version="1" class="compliance">
+          <oval-def:metadata>
+            <oval-def:title>The Installed Operating System Is Vendor Supported</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="installed_OS_is_vendor_supported" source="ssg"/>
+            <oval-def:description>
+        The operating system installed on the system is supported by a vendor that provides security patches.
+      </oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria comment="Installed operating system is supported by a vendor" operator="OR">
+            <oval-def:extend_definition comment="Installed OS is ALMALINUX9" definition_ref="oval:ssg-installed_OS_is_almalinux9:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is RHEL8" definition_ref="oval:ssg-installed_OS_is_rhel8:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is RHEL9" definition_ref="oval:ssg-installed_OS_is_rhel9:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is RHEL10" definition_ref="oval:ssg-installed_OS_is_rhel10:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is Hummingbird" definition_ref="oval:ssg-installed_OS_is_hummingbird:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is OL7" definition_ref="oval:ssg-installed_OS_is_ol7:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is OL8" definition_ref="oval:ssg-installed_OS_is_ol8:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is OL9" definition_ref="oval:ssg-installed_OS_is_ol9:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is SLE12" definition_ref="oval:ssg-installed_OS_is_sle12:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is SLE15" definition_ref="oval:ssg-installed_OS_is_sle15:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is SLE16" definition_ref="oval:ssg-installed_OS_is_sle16:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is SLE Micro 5" definition_ref="oval:ssg-installed_OS_is_slmicro5:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is SLE Micro 6" definition_ref="oval:ssg-installed_OS_is_slmicro6:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is Ubuntu 22.04" definition_ref="oval:ssg-installed_OS_is_ubuntu2204:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is Ubuntu 24.04" definition_ref="oval:ssg-installed_OS_is_ubuntu2404:def:1"/>
+            <oval-def:extend_definition comment="Installed OS is Ubuntu 26.04" definition_ref="oval:ssg-installed_OS_is_ubuntu2604:def:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_almalinux9:def:1" version="3" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>AlmaLinux OS 9</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:almalinux:almalinux:9" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_almalinux9" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is AlmaLinux OS 9</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria comment="current OS is 9" operator="AND">
+            <oval-def:extend_definition comment="Installed OS is part of the Unix family" definition_ref="oval:ssg-installed_OS_is_part_of_Unix_family:def:1"/>
+            <oval-def:criterion comment="AlmaLinux OS is installed" test_ref="oval:ssg-test_almalinux:tst:1"/>
+            <oval-def:criterion comment="AlmaLinux OS 9 is installed" test_ref="oval:ssg-test_almalinux9:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_hummingbird:def:1" version="3" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Installed operating system is hummingbird</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/a:redhat:hummingbird" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_hummingbird" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is hummingbird</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:extend_definition comment="Installed OS is part of the Unix family" definition_ref="oval:ssg-installed_OS_is_part_of_Unix_family:def:1"/>
+            <oval-def:criterion comment="hummingbird-release RPM packages are installed" test_ref="oval:ssg-test_hummingbird_release_rpm:tst:1"/>
+            <oval-def:criterion comment="CPE vendor is 'redhat' and product is 'hummingbird'" test_ref="oval:ssg-test_hummingbird_vendor_product:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_ol7:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Oracle Linux 7</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:oracle:linux:7" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_ol7" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+      Oracle Linux 7</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:extend_definition comment="Installed OS is part of the Unix family" definition_ref="oval:ssg-installed_OS_is_part_of_Unix_family:def:1"/>
+            <oval-def:criteria operator="OR">
+              <oval-def:criterion comment="Oracle Linux 7 System is installed" test_ref="oval:ssg-test_ol7_system:tst:1"/>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_ol8:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Oracle Linux 8</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:oracle:linux:8" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_ol8" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+      Oracle Linux 8</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:extend_definition comment="Installed OS is part of the Unix family" definition_ref="oval:ssg-installed_OS_is_part_of_Unix_family:def:1"/>
+            <oval-def:criteria operator="OR">
+              <oval-def:criterion comment="Oracle Linux 8 System is installed" test_ref="oval:ssg-test_ol8_system:tst:1"/>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_ol9:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Oracle Linux 9</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:oracle:linux:9" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_ol9" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+      Oracle Linux 9</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:extend_definition comment="Installed OS is part of the Unix family" definition_ref="oval:ssg-installed_OS_is_part_of_Unix_family:def:1"/>
+            <oval-def:criteria operator="OR">
+              <oval-def:criterion comment="Oracle Linux 9 System is installed" test_ref="oval:ssg-test_ol9_system:tst:1"/>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_part_of_Unix_family:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Installed operating system is part of the Unix family</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="installed_OS_is_part_of_Unix_family" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is part of the Unix OS family</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_rhel10:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Red Hat Enterprise Linux 10</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:redhat:enterprise_linux:10" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_rhel10" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+      Red Hat Enterprise Linux 10</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_rhel10_unix_family:tst:1"/>
+            <oval-def:criterion comment="RHEL 10 is installed" test_ref="oval:ssg-test_rhel10:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_rhel8:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Red Hat Enterprise Linux 8</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:redhat:enterprise_linux:8" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_rhel8" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+      Red Hat Enterprise Linux 8</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_rhel8_unix_family:tst:1"/>
+            <oval-def:criteria operator="OR">
+              <oval-def:criteria comment="RHEL 8 is installed" operator="AND">
+                <oval-def:criterion comment="RHEL 8 is installed" test_ref="oval:ssg-test_rhel8:tst:1"/>
+                <oval-def:extend_definition negate="true" comment="Installed OS is not OL8" definition_ref="oval:ssg-installed_OS_is_ol8:def:1"/>
+              </oval-def:criteria>
+              <oval-def:criteria comment="Red Hat Enterprise Virtualization Host is installed" operator="AND">
+                <oval-def:criterion comment="Red Hat Virtualization Host (RHVH)" test_ref="oval:ssg-test_rhvh4_version:tst:1"/>
+                <oval-def:criterion comment="Red Hat Enterprise Virtualization Host is based on RHEL 8" test_ref="oval:ssg-test_rhevh_rhel8_version:tst:1"/>
+              </oval-def:criteria>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_rhel9:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Red Hat Enterprise Linux 9</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:redhat:enterprise_linux:9" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_rhel9" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+      Red Hat Enterprise Linux 9</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_rhel9_unix_family:tst:1"/>
+            <oval-def:criteria comment="RHEL 9 is installed" operator="AND">
+              <oval-def:criterion comment="RHEL 9 is installed" test_ref="oval:ssg-test_rhel9:tst:1"/>
+              <oval-def:extend_definition negate="true" comment="Installed OS is not OL9" definition_ref="oval:ssg-installed_OS_is_ol9:def:1"/>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_sle12:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>SUSE Linux Enterprise 12</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:suse:linux_enterprise_server:12" source="CPE"/>
+            <oval-def:reference ref_id="cpe:/o:suse:linux_enterprise_desktop:12" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_sle12" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+      SUSE Linux Enterprise 12.</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_sle12_unix_family:tst:1"/>
+            <oval-def:criteria operator="OR">
+              <oval-def:criterion comment="SLE 12 Desktop is installed" test_ref="oval:ssg-test_sle12_desktop:tst:1"/>
+              <oval-def:criterion comment="SLE 12 Server is installed" test_ref="oval:ssg-test_sle12_server:tst:1"/>
+              <oval-def:criterion comment="SLES 12 for SAP Applications is installed" test_ref="oval:ssg-test_sles_12_for_sap:tst:1"/>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_sle15:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>SUSE Linux Enterprise 15</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:suse:linux_enterprise_server:15" source="CPE"/>
+            <oval-def:reference ref_id="cpe:/o:suse:linux_enterprise_desktop:15" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_sle15" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+      SUSE Linux Enterprise 15.</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_sle15_unix_family:tst:1"/>
+            <oval-def:criteria operator="OR">
+              <oval-def:criterion comment="SLE 15 Desktop is installed" test_ref="oval:ssg-test_sle15_desktop:tst:1"/>
+              <oval-def:criterion comment="SLE 15 Server is installed" test_ref="oval:ssg-test_sle15_server:tst:1"/>
+              <oval-def:criterion comment="SLES 15 for SAP Applications is installed" test_ref="oval:ssg-test_sles_15_for_sap:tst:1"/>
+              <oval-def:criterion comment="SUSE Manager 4 is installed" test_ref="oval:ssg-test_suma_4:tst:1"/>
+              <oval-def:criterion comment="SLE HPC is installed" test_ref="oval:ssg-test_sle_hpc:tst:1"/>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_sle16:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>SUSE Linux Enterprise 16</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:suse:linux_enterprise_server:16" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_sle16" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is SUSE Linux Enterprise Server 16.</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_sle16_unix_family:tst:1"/>
+            <oval-def:criteria operator="OR">
+              <oval-def:criterion comment="SLE 16 Server is installed" test_ref="oval:ssg-test_sle16_server:tst:1"/>
+              <oval-def:criterion comment="SLES 16 for SAP Applications is installed" test_ref="oval:ssg-test_sles_16_for_sap:tst:1"/>
+              <oval-def:criterion comment="SLES 16 for High Availability Extension is installed" test_ref="oval:ssg-test_sles_16_for_ha:tst:1"/>
+              <oval-def:criterion comment="SLE 16 Immutable Server is installed" test_ref="oval:ssg-test_sle16_server_immutable:tst:1"/>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_slmicro5:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>SUSE Linux Enterprise Micro</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:suse:suse-microos:5.2" source="CPE"/>
+            <oval-def:reference ref_id="cpe:/o:suse:sle-micro:5.3" source="CPE"/>
+            <oval-def:reference ref_id="cpe:/o:suse:sle-micro:5.4" source="CPE"/>
+            <oval-def:reference ref_id="cpe:/o:suse:sle-micro:5.5" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_slmicro5" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+                SUSE Linux Enterprise Micro.</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_slmicro5_unix_family:tst:1"/>
+            <oval-def:criteria operator="OR">
+              <oval-def:criterion comment="SUSE MicroOS 5.* is installed" test_ref="oval:ssg-test_slmicroos5:tst:1"/>
+              <oval-def:criterion comment="SLE Micro 5.* is installed" test_ref="oval:ssg-test_slmicro5:tst:1"/>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_slmicro6:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>SUSE Linux Enterprise Micro</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:suse:sl-micro:6.0" source="CPE"/>
+            <oval-def:reference ref_id="cpe:/o:suse:sl-micro:6.1" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_slmicro6" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is
+                SUSE Linux Micro.</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_slmicro6_unix_family:tst:1"/>
+            <oval-def:criteria operator="OR">
+              <oval-def:criterion comment="SLE Micro 6.* is installed" test_ref="oval:ssg-test_slmicro6:tst:1"/>
+            </oval-def:criteria>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_ubuntu:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Ubuntu</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="installed_OS_is_ubuntu" source="ssg"/>
+            <oval-def:description>The operating system installed is an Ubuntu System</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria comment="System is Ubuntu" operator="AND">
+            <oval-def:extend_definition comment="Installed OS is part of the Unix family" definition_ref="oval:ssg-installed_OS_is_part_of_Unix_family:def:1"/>
+            <oval-def:criterion comment="lsb-based distrib" test_ref="oval:ssg-test_lsb:tst:1"/>
+            <oval-def:criterion comment="Ubuntu is installed" test_ref="oval:ssg-test_ubuntu:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_ubuntu2204:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Ubuntu 22.04 LTS</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:canonical:ubuntu_linux:22.04" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_ubuntu2204" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is Ubuntu 22.04 LTS</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria comment="current Ubuntu version is Jammy" operator="AND">
+            <oval-def:extend_definition comment="Ubuntu is installed" definition_ref="oval:ssg-installed_OS_is_ubuntu:def:1"/>
+            <oval-def:criterion comment="Jammy is installed" test_ref="oval:ssg-test_ubuntu_jammy:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_ubuntu2404:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Ubuntu 24.04 LTS</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:canonical:ubuntu_linux:24.04" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_ubuntu2404" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is Ubuntu 24.04 LTS</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria comment="current Ubuntu version is Noble" operator="AND">
+            <oval-def:extend_definition comment="Ubuntu is installed" definition_ref="oval:ssg-installed_OS_is_ubuntu:def:1"/>
+            <oval-def:criterion comment="Noble is installed" test_ref="oval:ssg-test_ubuntu_noble:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_ubuntu2604:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Ubuntu 26.04 LTS</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:canonical:ubuntu_linux:26.04" source="CPE"/>
+            <oval-def:reference ref_id="installed_OS_is_ubuntu2604" source="ssg"/>
+            <oval-def:description>The operating system installed on the system is Ubuntu 26.04 LTS</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria comment="current Ubuntu version is Resolute" operator="AND">
+            <oval-def:extend_definition comment="Ubuntu is installed" definition_ref="oval:ssg-installed_OS_is_ubuntu:def:1"/>
+            <oval-def:criterion comment="Resolute is installed" test_ref="oval:ssg-test_ubuntu_resolute:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+      </oval-def:definitions>
+      <oval-def:tests>
+        <unix:file_test id="oval:ssg-test_almalinux:tst:1" version="1" check="all" comment="/etc/almalinux-release exists" check_existence="all_exist" state_operator="AND">
+          <unix:object object_ref="oval:ssg-obj_almalinux:obj:1"/>
+        </unix:file_test>
+        <ind:textfilecontent54_test id="oval:ssg-test_almalinux9:tst:1" version="1" check="all" comment="Check Custom OS version" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_almalinux9:obj:1"/>
+        </ind:textfilecontent54_test>
+        <linux:rpminfo_test id="oval:ssg-test_hummingbird_release_rpm:tst:1" version="1" check="all" comment="hummingbird-release RPM packages are installed" state_operator="AND">
+          <linux:object object_ref="oval:ssg-object_hummingbird_release_rpm:obj:1"/>
+        </linux:rpminfo_test>
+        <ind:textfilecontent54_test id="oval:ssg-test_hummingbird_vendor_product:tst:1" version="1" check="all" comment="CPE vendor is 'redhat' and 'product' is hummingbird" state_operator="AND">
+          <ind:object object_ref="oval:ssg-object_hummingbird_vendor_product:obj:1"/>
+        </ind:textfilecontent54_test>
+        <linux:rpminfo_test id="oval:ssg-test_ol7_system:tst:1" version="1" check="all" comment="oraclelinux-release is version 7" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_ol7_system:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_ol7_system:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_ol8_system:tst:1" version="1" check="all" comment="oraclelinux-release is version 8" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_ol8_system:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_ol8_system:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_ol9_system:tst:1" version="1" check="all" comment="oraclelinux-release is version 9" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_ol9_system:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_ol9_system:ste:1"/>
+        </linux:rpminfo_test>
+        <ind:family_test id="oval:ssg-test_unix_family:tst:1" version="1" check="all" comment="Test installed OS is part of the unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-object_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_unix_family:ste:1"/>
+        </ind:family_test>
+        <ind:family_test id="oval:ssg-test_rhel10_unix_family:tst:1" version="1" check="all" comment="installed OS part of unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_rhel10_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_rhel10_unix_family:ste:1"/>
+        </ind:family_test>
+        <linux:rpminfo_test id="oval:ssg-test_rhel10:tst:1" version="1" check="all" comment="redhat-release is version 10" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_rhel10:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_rhel10:ste:1"/>
+        </linux:rpminfo_test>
+        <ind:family_test id="oval:ssg-test_rhel8_unix_family:tst:1" version="1" check="all" comment="installed OS part of unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_rhel8_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_rhel8_unix_family:ste:1"/>
+        </ind:family_test>
+        <linux:rpminfo_test id="oval:ssg-test_rhel8:tst:1" version="1" check="all" comment="redhat-release is version 8" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_rhel8:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_rhel8:ste:1"/>
+        </linux:rpminfo_test>
+        <ind:textfilecontent54_test id="oval:ssg-test_rhevh_rhel8_version:tst:1" version="1" check="all" comment="RHEVH base RHEL is version 8" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_rhevh_rhel8_version:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_rhevh_rhel8_version:ste:1"/>
+        </ind:textfilecontent54_test>
+        <ind:family_test id="oval:ssg-test_rhel9_unix_family:tst:1" version="1" check="all" comment="installed OS part of unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_rhel9_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_rhel9_unix_family:ste:1"/>
+        </ind:family_test>
+        <linux:rpminfo_test id="oval:ssg-test_rhel9:tst:1" version="1" check="all" comment="redhat-release is version 9" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_rhel9:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_rhel9:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_rhvh4_version:tst:1" version="1" check="all" comment="redhat-release-virtualization-host RPM package is installed" check_existence="only_one_exists" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_rhvh4_version:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_rhvh4_version:ste:1"/>
+        </linux:rpminfo_test>
+        <ind:family_test id="oval:ssg-test_sle12_unix_family:tst:1" version="1" check="all" comment="installed OS part of unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_sle12_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_sle12_unix_family:ste:1"/>
+        </ind:family_test>
+        <linux:rpminfo_test id="oval:ssg-test_sle12_desktop:tst:1" version="1" check="all" comment="sled-release is version 6" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sle12_desktop:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sle12_desktop:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_sle12_server:tst:1" version="1" check="all" comment="sles-release is version 6" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sle12_server:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sle12_server:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_sles_12_for_sap:tst:1" version="1" check="all" comment="SLES_SAP-release is version 12" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sles_12_for_sap:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sles_12_for_sap:ste:1"/>
+        </linux:rpminfo_test>
+        <ind:family_test id="oval:ssg-test_sle15_unix_family:tst:1" version="1" check="all" comment="installed OS part of unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_sle15_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_sle15_unix_family:ste:1"/>
+        </ind:family_test>
+        <linux:rpminfo_test id="oval:ssg-test_sle15_desktop:tst:1" version="1" check="all" comment="sled-release is version 15" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sle15_desktop:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sle15_desktop:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_sle15_server:tst:1" version="1" check="all" comment="sles-release is version 15" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sle15_server:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sle15_server:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_sles_15_for_sap:tst:1" version="1" check="all" comment="SLES_SAP-release is version 15" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sles_15_for_sap:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sles_15_for_sap:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_suma_4:tst:1" version="1" check="all" comment="SUMA is version 4" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_suma_4:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_suma_4:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_sle_hpc:tst:1" version="1" check="all" comment="SLE HPC release is version 15" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sle_hpc:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sle_hpc:ste:1"/>
+        </linux:rpminfo_test>
+        <ind:family_test id="oval:ssg-test_sle16_unix_family:tst:1" version="1" check="all" comment="installed OS part of unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_sle16_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_sle16_unix_family:ste:1"/>
+        </ind:family_test>
+        <linux:rpminfo_test id="oval:ssg-test_sle16_server:tst:1" version="1" check="all" comment="SLES-release is version 16" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sle16_server:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sle16_server:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_sle16_server_immutable:tst:1" version="1" check="all" comment="SLES_immutable-release is version 16" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sle16_server_immutable:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sle16_server_immutable:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_sles_16_for_sap:tst:1" version="1" check="all" comment="SLES_SAP-release is version 16" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sles_16_for_sap:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sles_16_for_sap:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_sles_16_for_ha:tst:1" version="1" check="all" comment="sle-ha-release is version 16" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_sles_16_for_ha:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_sles_16_for_ha:ste:1"/>
+        </linux:rpminfo_test>
+        <ind:family_test id="oval:ssg-test_slmicro5_unix_family:tst:1" version="1" check="all" comment="installed OS part of unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_slmicro5_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_slmicro5_unix_family:ste:1"/>
+        </ind:family_test>
+        <linux:rpminfo_test id="oval:ssg-test_slmicroos5:tst:1" version="1" check="all" comment="sle-micro-release is version 5" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_slmicroos5:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_slmicroos5:ste:1"/>
+        </linux:rpminfo_test>
+        <linux:rpminfo_test id="oval:ssg-test_slmicro5:tst:1" version="1" check="all" comment="sle-micro-release is version 5" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_slmicro5:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_slmicro5:ste:1"/>
+        </linux:rpminfo_test>
+        <ind:family_test id="oval:ssg-test_slmicro6_unix_family:tst:1" version="1" check="all" comment="installed OS part of unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_slmicro6_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_slmicro6_unix_family:ste:1"/>
+        </ind:family_test>
+        <linux:rpminfo_test id="oval:ssg-test_slmicro6:tst:1" version="1" check="all" comment="sle-micro-release is version 6" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_slmicro6:obj:1"/>
+          <linux:state state_ref="oval:ssg-state_slmicro6:ste:1"/>
+        </linux:rpminfo_test>
+        <unix:file_test id="oval:ssg-test_lsb:tst:1" version="1" check="all" comment="/etc/lsb-release exists" check_existence="all_exist" state_operator="AND">
+          <unix:object object_ref="oval:ssg-obj_lsb:obj:1"/>
+        </unix:file_test>
+        <ind:textfilecontent54_test id="oval:ssg-test_ubuntu:tst:1" version="1" check="all" comment="Check Ubuntu" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_ubuntu:obj:1"/>
+        </ind:textfilecontent54_test>
+        <ind:textfilecontent54_test id="oval:ssg-test_ubuntu_jammy:tst:1" version="1" check="all" comment="Check Ubuntu version" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_ubuntu_jammy:obj:1"/>
+        </ind:textfilecontent54_test>
+        <ind:textfilecontent54_test id="oval:ssg-test_ubuntu_noble:tst:1" version="1" check="all" comment="Check Ubuntu version" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_ubuntu_noble:obj:1"/>
+        </ind:textfilecontent54_test>
+        <ind:textfilecontent54_test id="oval:ssg-test_ubuntu_resolute:tst:1" version="1" check="all" comment="Check Ubuntu version" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_ubuntu_resolute:obj:1"/>
+        </ind:textfilecontent54_test>
+      </oval-def:tests>
+      <oval-def:objects>
+        <unix:file_object id="oval:ssg-obj_almalinux:obj:1" version="1" comment="check /etc/almalinux file">
+          <unix:filepath>/etc/almalinux-release</unix:filepath>
+        </unix:file_object>
+        <ind:textfilecontent54_object id="oval:ssg-obj_almalinux9:obj:1" version="1" comment="Check AlmaLinux OS version">
+          <ind:filepath>/etc/almalinux-release</ind:filepath>
+          <ind:pattern operation="pattern match">^AlmaLinux release 9.[0-9]+ .*$</ind:pattern>
+          <ind:instance datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+        <linux:rpminfo_object id="oval:ssg-object_hummingbird_release_rpm:obj:1" version="1">
+          <linux:name operation="pattern match">hummingbird-release.*</linux:name>
+        </linux:rpminfo_object>
+        <ind:textfilecontent54_object id="oval:ssg-object_hummingbird_vendor_product:obj:1" version="1">
+          <ind:filepath>/etc/system-release-cpe</ind:filepath>
+          <ind:pattern operation="pattern match">^cpe:\/a:redhat:hummingbird:[\d]+$</ind:pattern>
+          <ind:instance datatype="int" operation="equals">1</ind:instance>
+        </ind:textfilecontent54_object>
+        <linux:rpminfo_object id="oval:ssg-obj_ol7_system:obj:1" version="1">
+          <linux:name>oraclelinux-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_ol8_system:obj:1" version="1">
+          <linux:name>oraclelinux-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_ol9_system:obj:1" version="1">
+          <linux:name>oraclelinux-release</linux:name>
+        </linux:rpminfo_object>
+        <ind:family_object id="oval:ssg-object_unix_family:obj:1" version="1"/>
+        <ind:family_object id="oval:ssg-obj_rhel10_unix_family:obj:1" version="1"/>
+        <linux:rpminfo_object id="oval:ssg-obj_rhel10:obj:1" version="1">
+          <linux:name>redhat-release</linux:name>
+        </linux:rpminfo_object>
+        <ind:family_object id="oval:ssg-obj_rhel8_unix_family:obj:1" version="1"/>
+        <linux:rpminfo_object id="oval:ssg-obj_rhel8:obj:1" version="1">
+          <linux:name>redhat-release</linux:name>
+        </linux:rpminfo_object>
+        <ind:textfilecontent54_object id="oval:ssg-obj_rhevh_rhel8_version:obj:1" version="1">
+          <ind:filepath>/etc/redhat-release</ind:filepath>
+          <ind:pattern operation="pattern match">^Red Hat Enterprise Linux release (\d)\.\d+$</ind:pattern>
+          <ind:instance operation="greater than or equal" datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+        <ind:family_object id="oval:ssg-obj_rhel9_unix_family:obj:1" version="1"/>
+        <linux:rpminfo_object id="oval:ssg-obj_rhel9:obj:1" version="1">
+          <linux:name>redhat-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_rhvh4_version:obj:1" version="1">
+          <linux:name>redhat-release-virtualization-host</linux:name>
+        </linux:rpminfo_object>
+        <ind:family_object id="oval:ssg-obj_sle12_unix_family:obj:1" version="1"/>
+        <linux:rpminfo_object id="oval:ssg-obj_sle12_desktop:obj:1" version="1">
+          <linux:name>sled-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_sle12_server:obj:1" version="1">
+          <linux:name>sles-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_sles_12_for_sap:obj:1" version="1">
+          <linux:name>SLES_SAP-release</linux:name>
+        </linux:rpminfo_object>
+        <ind:family_object id="oval:ssg-obj_sle15_unix_family:obj:1" version="1"/>
+        <linux:rpminfo_object id="oval:ssg-obj_sle15_desktop:obj:1" version="1">
+          <linux:name>sled-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_sle15_server:obj:1" version="1">
+          <linux:name>sles-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_sles_15_for_sap:obj:1" version="1">
+          <linux:name>SLES_SAP-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_suma_4:obj:1" version="1">
+          <linux:name>SUSE-Manager-Server-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_sle_hpc:obj:1" version="1">
+          <linux:name>SLE_HPC-release</linux:name>
+        </linux:rpminfo_object>
+        <ind:family_object id="oval:ssg-obj_sle16_unix_family:obj:1" version="1"/>
+        <linux:rpminfo_object id="oval:ssg-obj_sle16_server:obj:1" version="1">
+          <linux:name>SLES-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_sle16_server_immutable:obj:1" version="1">
+          <linux:name>SLES_immutable-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_sles_16_for_sap:obj:1" version="1">
+          <linux:name>SLES_SAP-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_sles_16_for_ha:obj:1" version="1">
+          <linux:name>sle-ha-release</linux:name>
+        </linux:rpminfo_object>
+        <ind:family_object id="oval:ssg-obj_slmicro5_unix_family:obj:1" version="1"/>
+        <linux:rpminfo_object id="oval:ssg-obj_slmicroos5:obj:1" version="1">
+          <linux:name>SUSE-MicroOS-release</linux:name>
+        </linux:rpminfo_object>
+        <linux:rpminfo_object id="oval:ssg-obj_slmicro5:obj:1" version="1">
+          <linux:name>SLE-Micro-release</linux:name>
+        </linux:rpminfo_object>
+        <ind:family_object id="oval:ssg-obj_slmicro6_unix_family:obj:1" version="1"/>
+        <linux:rpminfo_object id="oval:ssg-obj_slmicro6:obj:1" version="1">
+          <linux:name>SL-Micro-release</linux:name>
+        </linux:rpminfo_object>
+        <unix:file_object id="oval:ssg-obj_lsb:obj:1" version="1" comment="check /etc/lsb-release file">
+          <unix:filepath>/etc/lsb-release</unix:filepath>
+        </unix:file_object>
+        <ind:textfilecontent54_object id="oval:ssg-obj_ubuntu:obj:1" version="1" comment="Check Ubuntu">
+          <ind:filepath>/etc/lsb-release</ind:filepath>
+          <ind:pattern operation="pattern match">^DISTRIB_ID=Ubuntu$</ind:pattern>
+          <ind:instance datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+        <ind:textfilecontent54_object id="oval:ssg-obj_ubuntu_jammy:obj:1" version="1" comment="Check Ubuntu version">
+          <ind:filepath>/etc/lsb-release</ind:filepath>
+          <ind:pattern operation="pattern match">^DISTRIB_CODENAME=jammy$</ind:pattern>
+          <ind:instance datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+        <ind:textfilecontent54_object id="oval:ssg-obj_ubuntu_noble:obj:1" version="1" comment="Check Ubuntu version">
+          <ind:filepath>/etc/lsb-release</ind:filepath>
+          <ind:pattern operation="pattern match">^DISTRIB_CODENAME=noble$</ind:pattern>
+          <ind:instance datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+        <ind:textfilecontent54_object id="oval:ssg-obj_ubuntu_resolute:obj:1" version="1" comment="Check Ubuntu version">
+          <ind:filepath>/etc/lsb-release</ind:filepath>
+          <ind:pattern operation="pattern match">^DISTRIB_CODENAME=resolute$</ind:pattern>
+          <ind:instance datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+      </oval-def:objects>
+      <oval-def:states>
+        <linux:rpminfo_state id="oval:ssg-state_ol7_system:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^7.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_ol8_system:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^8.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_ol9_system:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^9.*$</linux:version>
+        </linux:rpminfo_state>
+        <ind:family_state id="oval:ssg-state_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+        <ind:family_state id="oval:ssg-state_rhel10_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+        <linux:rpminfo_state id="oval:ssg-state_rhel10:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^10.*$</linux:version>
+        </linux:rpminfo_state>
+        <ind:family_state id="oval:ssg-state_rhel8_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+        <linux:rpminfo_state id="oval:ssg-state_rhel8:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^8\.\d{1,2}$</linux:version>
+        </linux:rpminfo_state>
+        <ind:textfilecontent54_state id="oval:ssg-state_rhevh_rhel8_version:ste:1" version="1" operator="AND">
+          <ind:subexpression operation="pattern match">8</ind:subexpression>
+        </ind:textfilecontent54_state>
+        <ind:family_state id="oval:ssg-state_rhel9_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+        <linux:rpminfo_state id="oval:ssg-state_rhel9:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^9.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_rhvh4_version:ste:1" version="1" operator="AND">
+          <linux:evr datatype="evr_string" operation="greater than or equal">0:4.4</linux:evr>
+        </linux:rpminfo_state>
+        <ind:family_state id="oval:ssg-state_sle12_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+        <linux:rpminfo_state id="oval:ssg-state_sle12_desktop:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^12.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_sle12_server:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^12.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_sles_12_for_sap:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^12.*$</linux:version>
+        </linux:rpminfo_state>
+        <ind:family_state id="oval:ssg-state_sle15_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+        <linux:rpminfo_state id="oval:ssg-state_sle15_desktop:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^15.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_sle15_server:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^15.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_sles_15_for_sap:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^15.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_suma_4:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^4.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_sle_hpc:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^15.*$</linux:version>
+        </linux:rpminfo_state>
+        <ind:family_state id="oval:ssg-state_sle16_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+        <linux:rpminfo_state id="oval:ssg-state_sle16_server:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^16.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_sle16_server_immutable:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^16.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_sles_16_for_sap:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^16.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_sles_16_for_ha:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^16.*$</linux:version>
+        </linux:rpminfo_state>
+        <ind:family_state id="oval:ssg-state_slmicro5_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+        <linux:rpminfo_state id="oval:ssg-state_slmicroos5:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^5.*$</linux:version>
+        </linux:rpminfo_state>
+        <linux:rpminfo_state id="oval:ssg-state_slmicro5:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^5.*$</linux:version>
+        </linux:rpminfo_state>
+        <ind:family_state id="oval:ssg-state_slmicro6_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+        <linux:rpminfo_state id="oval:ssg-state_slmicro6:ste:1" version="1" operator="AND">
+          <linux:version operation="pattern match">^6.*$</linux:version>
+        </linux:rpminfo_state>
+      </oval-def:states>
+    </oval-def:oval_definitions>
+  </ds:component>
+  <ds:component id="scap_org.open-scap_comp_ssg-ubuntu2604-ocil.xml" timestamp="2026-09-01T13:38:56">
+    <ocil:ocil>
+      <ocil:generator>
+        <ocil:product_name>build_shorthand.py from SCAP Security Guide</ocil:product_name>
+        <ocil:product_version>ssg: 0.1.82</ocil:product_version>
+        <ocil:schema_version>2.0</ocil:schema_version>
+        <ocil:timestamp>2026-09-01T13:37:32</ocil:timestamp>
+      </ocil:generator>
+      <ocil:questionnaires>
+        <ocil:questionnaire id="ocil:ssg-installed_OS_is_vendor_supported_ocil:questionnaire:1">
+          <ocil:title>The Installed Operating System Is Vendor Supported</ocil:title>
+          <ocil:actions>
+            <ocil:test_action_ref>ocil:ssg-installed_OS_is_vendor_supported_action:testaction:1</ocil:test_action_ref>
+          </ocil:actions>
+        </ocil:questionnaire>
+        <ocil:questionnaire id="ocil:ssg-ufw_rules_for_open_ports_ocil:questionnaire:1">
+          <ocil:title>Ensure ufw Firewall Rules Exist for All Open Ports</ocil:title>
+          <ocil:actions>
+            <ocil:test_action_ref>ocil:ssg-ufw_rules_for_open_ports_action:testaction:1</ocil:test_action_ref>
+          </ocil:actions>
+        </ocil:questionnaire>
+      </ocil:questionnaires>
+      <ocil:test_actions>
+        <ocil:boolean_question_test_action id="ocil:ssg-installed_OS_is_vendor_supported_action:testaction:1" question_ref="ocil:ssg-installed_OS_is_vendor_supported_question:question:1">
+          <ocil:when_true>
+            <ocil:result>PASS</ocil:result>
+          </ocil:when_true>
+          <ocil:when_false>
+            <ocil:result>FAIL</ocil:result>
+          </ocil:when_false>
+        </ocil:boolean_question_test_action>
+        <ocil:boolean_question_test_action id="ocil:ssg-ufw_rules_for_open_ports_action:testaction:1" question_ref="ocil:ssg-ufw_rules_for_open_ports_question:question:1">
+          <ocil:when_true>
+            <ocil:result>PASS</ocil:result>
+          </ocil:when_true>
+          <ocil:when_false>
+            <ocil:result>FAIL</ocil:result>
+          </ocil:when_false>
+        </ocil:boolean_question_test_action>
+      </ocil:test_actions>
+      <ocil:questions>
+        <ocil:boolean_question id="ocil:ssg-installed_OS_is_vendor_supported_question:question:1">
+          <ocil:question_text>To verify that the installed operating system is supported, run
+the following command:
+
+$ grep DISTRIB_DESCRIPTION /etc/lsb-release
+
+Ubuntu 26.04
+      Is it the case that the installed operating system is not supported?
+      </ocil:question_text>
+        </ocil:boolean_question>
+        <ocil:boolean_question id="ocil:ssg-ufw_rules_for_open_ports_question:question:1">
+          <ocil:question_text>Run the following command to determine open ports:
+# ss -tuln
+Run the following command to determine firewall rules:
+# ufw status verbose
+For each port identified in the audit which does not have a firewall
+rule, add rule for accepting or denying inbound connections
+# ufw allow in /
+      Is it the case that open ports are denied connection?
+      </ocil:question_text>
+        </ocil:boolean_question>
+      </ocil:questions>
+    </ocil:ocil>
+  </ds:component>
+  <ds:component id="scap_org.open-scap_comp_ssg-ubuntu2604-cpe-oval.xml" timestamp="2026-09-01T13:38:56">
+    <oval-def:oval_definitions xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd  http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd  http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd  http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd  http://oval.mitre.org/XMLSchema/oval-definitions-5#linux linux-definitions-schema.xsd">
+      <oval-def:generator>
+        <oval:product_name>build_cpe.py from SCAP Security Guide</oval:product_name>
+        <oval:product_version>ssg: [0, 1, 82], python: 3.14.7</oval:product_version>
+        <oval:schema_version>5.11.2</oval:schema_version>
+        <oval:timestamp>2026-09-01T13:38:36</oval:timestamp>
+      </oval-def:generator>
+      <oval-def:definitions>
+        <oval-def:definition id="oval:ssg-system_with_kernel:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title/>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:description>The kernel is installed</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="OR">
+            <oval-def:criterion comment="kernel is installed" test_ref="oval:ssg-inventory_test_kernel_installed:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_part_of_Unix_family:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Installed operating system is part of the Unix family</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:description>The operating system installed on the system is part of the Unix OS family</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_ubuntu:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Ubuntu</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:description>The operating system installed is an Ubuntu System</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria comment="System is Ubuntu" operator="AND">
+            <oval-def:extend_definition comment="Installed OS is part of the Unix family" definition_ref="oval:ssg-installed_OS_is_part_of_Unix_family:def:1"/>
+            <oval-def:criterion comment="lsb-based distrib" test_ref="oval:ssg-test_lsb:tst:1"/>
+            <oval-def:criterion comment="Ubuntu is installed" test_ref="oval:ssg-test_ubuntu:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-installed_OS_is_ubuntu2604:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Ubuntu 26.04 LTS</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:canonical:ubuntu_linux:26.04" source="CPE"/>
+            <oval-def:description>The operating system installed on the system is Ubuntu 26.04 LTS</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria comment="current Ubuntu version is Resolute" operator="AND">
+            <oval-def:extend_definition comment="Ubuntu is installed" definition_ref="oval:ssg-installed_OS_is_ubuntu:def:1"/>
+            <oval-def:criterion comment="Resolute is installed" test_ref="oval:ssg-test_ubuntu_resolute:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition id="oval:ssg-package_ufw:def:1" version="1" class="inventory">
+          <oval-def:metadata>
+            <oval-def:title>Package ufw is installed</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Ubuntu 26.04</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:description>The DPKG package ufw should be installed.</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria operator="AND">
+            <oval-def:criterion comment="Platform package ufw is installed" test_ref="oval:ssg-inventory_test_package_ufw_installed:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+      </oval-def:definitions>
+      <oval-def:tests>
+        <linux:dpkginfo_test id="oval:ssg-inventory_test_kernel_installed:tst:1" version="1" check="all" comment="package linux-base is installed" check_existence="all_exist" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_inventory_test_kernel_installed:obj:1"/>
+        </linux:dpkginfo_test>
+        <ind:family_test id="oval:ssg-test_unix_family:tst:1" version="1" check="all" comment="Test installed OS is part of the unix family" state_operator="AND">
+          <ind:object object_ref="oval:ssg-object_unix_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_unix_family:ste:1"/>
+        </ind:family_test>
+        <unix:file_test id="oval:ssg-test_lsb:tst:1" version="1" check="all" comment="/etc/lsb-release exists" check_existence="all_exist" state_operator="AND">
+          <unix:object object_ref="oval:ssg-obj_lsb:obj:1"/>
+        </unix:file_test>
+        <ind:textfilecontent54_test id="oval:ssg-test_ubuntu:tst:1" version="1" check="all" comment="Check Ubuntu" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_ubuntu:obj:1"/>
+        </ind:textfilecontent54_test>
+        <ind:textfilecontent54_test id="oval:ssg-test_ubuntu_resolute:tst:1" version="1" check="all" comment="Check Ubuntu version" state_operator="AND">
+          <ind:object object_ref="oval:ssg-obj_ubuntu_resolute:obj:1"/>
+        </ind:textfilecontent54_test>
+        <linux:dpkginfo_test id="oval:ssg-inventory_test_package_ufw_installed:tst:1" version="1" check="all" comment="package ufw is installed" check_existence="all_exist" state_operator="AND">
+          <linux:object object_ref="oval:ssg-obj_inventory_test_package_ufw_installed:obj:1"/>
+        </linux:dpkginfo_test>
+      </oval-def:tests>
+      <oval-def:objects>
+        <linux:dpkginfo_object id="oval:ssg-obj_inventory_test_kernel_installed:obj:1" version="1">
+          <linux:name>linux-base</linux:name>
+        </linux:dpkginfo_object>
+        <ind:family_object id="oval:ssg-object_unix_family:obj:1" version="1"/>
+        <unix:file_object id="oval:ssg-obj_lsb:obj:1" version="1" comment="check /etc/lsb-release file">
+          <unix:filepath>/etc/lsb-release</unix:filepath>
+        </unix:file_object>
+        <ind:textfilecontent54_object id="oval:ssg-obj_ubuntu:obj:1" version="1" comment="Check Ubuntu">
+          <ind:filepath>/etc/lsb-release</ind:filepath>
+          <ind:pattern operation="pattern match">^DISTRIB_ID=Ubuntu$</ind:pattern>
+          <ind:instance datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+        <ind:textfilecontent54_object id="oval:ssg-obj_ubuntu_resolute:obj:1" version="1" comment="Check Ubuntu version">
+          <ind:filepath>/etc/lsb-release</ind:filepath>
+          <ind:pattern operation="pattern match">^DISTRIB_CODENAME=resolute$</ind:pattern>
+          <ind:instance datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+        <linux:dpkginfo_object id="oval:ssg-obj_inventory_test_package_ufw_installed:obj:1" version="1">
+          <linux:name>ufw</linux:name>
+        </linux:dpkginfo_object>
+      </oval-def:objects>
+      <oval-def:states>
+        <ind:family_state id="oval:ssg-state_unix_family:ste:1" version="1" operator="AND">
+          <ind:family>unix</ind:family>
+        </ind:family_state>
+      </oval-def:states>
+    </oval-def:oval_definitions>
+  </ds:component>
+  <ds:extended-component id="scap_org.open-scap_ecomp_ubuntu2604-checks-sce-ufw_rules_for_open_ports.sh" timestamp="2026-09-01T13:38:56">
+    <sce:script>#!/bin/bash
+
+result=$XCCDF_RESULT_PASS
+ufw_status="$(ufw status verbose)"
+
+while read -r lpn;
+do
+    if ! grep -Pq "^\h*$lpn\b" &lt;&lt;&lt; "$ufw_status"; then
+        result=$XCCDF_RESULT_FAIL
+        break
+    fi;
+done &lt; &lt;(ss -tuln | awk '($5!~/%lo:/ &amp;&amp; $5!~/127.0.0.1:/ &amp;&amp; $5!~/::1/) {split($5, a, ":"); print a[2]}i' | sort | uniq)
+
+exit "$result"
+</sce:script>
+  </ds:extended-component>
+</ds:data-stream-collection>

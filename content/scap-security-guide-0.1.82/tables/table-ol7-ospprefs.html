@@ -1,0 +1,3414 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Rules with OSPP Reference in Guide to the Secure Configuration of Oracle Linux 7</title>
+</head>
+<body>
+	<br><br><div style="text-align: center; font-size: x-large; font-weight:bold">Rules with OSPP Reference in Guide to the Secure Configuration of Oracle Linux 7</div>
+<br><br><style type="text/css">
+		table
+		{
+			border-collapse:collapse;
+		}
+		table, th, td
+		{
+			border: 2px solid #dcdcdc;
+			border-left: none;
+			border-right: none;
+			vertical-align: top;
+			padding: 2px;
+			font-family: verdana,arial,sans-serif;
+			font-size:11px;
+		}
+		pre { 
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap !important;
+			word-wrap:break-word; 
+		}
+		table tr:nth-child(2n+2) { background-color: #f4f4f4; }
+		thead
+		{
+			display: table-header-group;
+			font-weight: bold;
+			background-color: #dedede;
+		}
+	</style>
+
+<table>
+  <thead>
+    <th>Mapping</th>
+    <th>Rule Title</th>
+    <th>Description</th>
+    <th>Rationale</th>
+  </thead>
+  <tbody>
+  <tr>
+      <td>AGD_PRE.1<br/>AGD_OPE.1</td>
+      <td>Install scap-security-guide Package</td>
+      <td xml:lang="en-US">
+        The <code>scap-security-guide</code> package can be installed with the following command:
+<pre>
+$ sudo yum install scap-security-guide</pre>
+      </td>
+      <td xml:lang="en-US">
+        The <tt>scap-security-guide</tt> package provides a guide for configuration of the system
+from the final system's security point of view. The guidance is specified in the Security
+Content Automation Protocol (SCAP) format and constitutes a catalog of practical hardening
+advice, linked to government requirements where applicable. The SCAP Security Guide project
+bridges the gap between generalized policy requirements and specific implementation guidelines.
+A system administrator can use the <tt>oscap</tt> CLI tool from the <tt>openscap-scanner</tt>
+package, or the SCAP Workbench GUI tool from the <tt>scap-workbench</tt> package, to verify
+that the system conforms to provided guidelines. Refer to the scap-security-guide(8) manual
+page for further information.
+      </td>
+    </tr>
+    <tr>
+      <td>AGD_PRE.1<br/>AGD_OPE.1</td>
+      <td>Install openscap-scanner Package</td>
+      <td xml:lang="en-US">
+        The <code>openscap-scanner</code> package can be installed with the following command:
+<pre>
+$ sudo yum install openscap-scanner</pre>
+      </td>
+      <td xml:lang="en-US">
+        <tt>openscap-scanner</tt> contains the <tt>oscap</tt> command line tool. This tool is a
+configuration and vulnerability scanner, capable of performing compliance checking using
+SCAP content.
+      </td>
+    </tr>
+    <tr>
+      <td>AVA_VAN.1</td>
+      <td>Enable randomization of the page allocator in zIPL</td>
+      <td xml:lang="en-US">
+        To enable the randomization of the page allocator in the kernel, check that
+all boot entries in <tt>/boot/loader/entries/*.conf</tt> have
+<tt>page_alloc.shuffle=1</tt> included in its options.<br />
+
+To enable randomization of the page allocator also for  newly installed
+kernels, add <tt>page_alloc.shuffle=1</tt> to <tt>/etc/kernel/cmdline</tt>.
+      </td>
+      <td xml:lang="en-US">
+        The <tt>CONFIG_SHUFFLE_PAGE_ALLOCATOR</tt> config option is primarily
+focused on improving the average utilization of a direct-mapped
+memory-side-cache. Aside of this performance effect, it also reduces
+predictability of page allocations in situations when the bad actor can
+crash the system and somehow leverage knowledge of (page) allocation order
+right after a fresh reboot, or can control the timing between a
+hot-pluggable memory node (as in NUMA node) and applications allocating
+memory ouf of that node. The <tt>page_alloc.shuffle=1</tt> kernel command
+line parameter then forces this functionality irrespectively of memory cache
+architecture.
+      </td>
+    </tr>
+    <tr>
+      <td>AVA_VAN.1</td>
+      <td>Enable randomization of the page allocator</td>
+      <td xml:lang="en-US">
+        To enable randomization of the page allocator in the kernel, add the
+<tt>page_alloc.shuffle=1</tt> argument to the default GRUB 2 command line.
+To ensure that <tt>page_alloc.shuffle=1</tt> is added as a kernel command line
+argument to newly installed kernels, add <tt>page_alloc.shuffle=1</tt> to the
+default Grub2 command line for Linux operating systems. Modify the line within
+<tt>/etc/default/grub</tt> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... page_alloc.shuffle=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="page_alloc.shuffle=1"</pre>
+      </td>
+      <td xml:lang="en-US">
+        The <tt>CONFIG_SHUFFLE_PAGE_ALLOCATOR</tt> config option is primarily
+focused on improving the average utilization of a direct-mapped
+memory-side-cache. Aside of this performance effect, it also reduces
+predictability of page allocations in situations when the bad actor can
+crash the system and somehow leverage knowledge of (page) allocation order
+right after a fresh reboot, or can control the timing between a
+hot-pluggable memory node (as in NUMA node) and applications allocating
+memory ouf of that node. The <tt>page_alloc.shuffle=1</tt> kernel command
+line parameter then forces this functionality irrespectively of memory cache
+architecture.
+      </td>
+    </tr>
+    <tr>
+      <td>AVA_VAN.1</td>
+      <td>Configure kernel to zero out memory before allocation in zIPL</td>
+      <td xml:lang="en-US">
+        To ensure that the kernel is configured to zero out memory before
+allocation, check that all boot entries in
+<tt>/boot/loader/entries/*.conf</tt> have <tt>init_on_alloc=1</tt>
+included in its options.<br />
+
+To ensure that new kernels and boot entries continue to zero out memory
+before allocation, add <tt>init_on_alloc=1</tt> to <tt>/etc/kernel/cmdline</tt>.
+      </td>
+      <td xml:lang="en-US">
+        When the kernel configuration option <tt>init_on_alloc</tt> is enabled,
+all page allocator and slab allocator memory will be zeroed when allocated,
+eliminating many kinds of "uninitialized heap memory" flaws, effectively
+preventing data leaks.
+      </td>
+    </tr>
+    <tr>
+      <td>AVA_VAN.1</td>
+      <td>Configure kernel to zero out memory before allocation</td>
+      <td xml:lang="en-US">
+        To configure the kernel to zero out memory before allocating it, add the
+<tt>init_on_alloc=1</tt> argument to the default GRUB 2 command line.
+To ensure that <tt>init_on_alloc=1</tt> is added as a kernel command line
+argument to newly installed kernels, add <tt>init_on_alloc=1</tt> to the
+default Grub2 command line for Linux operating systems. Modify the line within
+<tt>/etc/default/grub</tt> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... init_on_alloc=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="init_on_alloc=1"</pre>
+      </td>
+      <td xml:lang="en-US">
+        When the kernel configuration option <tt>init_on_alloc</tt> is enabled,
+all page allocator and slab allocator memory will be zeroed when allocated,
+eliminating many kinds of "uninitialized heap memory" flaws, effectively
+preventing data leaks.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1</td>
+      <td>Set number of records to cause an explicit flush to audit logs</td>
+      <td xml:lang="en-US">
+        To configure Audit daemon to issue an explicit flush to disk command
+after writing <abbr title="$var_auditd_freq"><tt>50</tt></abbr> records, set <tt>freq</tt> to <tt><abbr title="$var_auditd_freq"><tt>50</tt></abbr></tt>
+in <tt>/etc/audit/auditd.conf</tt>.
+      </td>
+      <td xml:lang="en-US">
+        If option <tt>freq</tt> isn't set to <tt><sub idref="var_auditd_freq" /></tt>, the flush to disk
+may happen after higher number of records, increasing the danger
+of audit loss.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1</td>
+      <td>Disable SSH Root Login</td>
+      <td xml:lang="en-US">
+        The root user should never be allowed to login to a
+system directly over a network.
+To disable root login via SSH, add or correct the following line in
+
+
+
+
+<tt>/etc/ssh/sshd_config</tt>:
+
+<pre>PermitRootLogin no</pre>
+      </td>
+      <td xml:lang="en-US">
+        Even though the communications channel may be encrypted, an additional layer of
+security is gained by extending the policy of not logging directly on as root.
+In addition, logging in with a user-specific account provides individual
+accountability of actions performed on the system and also helps to minimize
+direct attack attempts on root's password.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1</td>
+      <td>Configure auditd flush priority</td>
+      <td xml:lang="en-US">
+        The <tt>auditd</tt> service can be configured to
+synchronously write audit event data to disk. Add or correct the following
+line in <tt>/etc/audit/auditd.conf</tt> to ensure that audit event data is
+fully synchronized with the log files on the disk:
+<pre>flush = <abbr title="$var_auditd_flush"><tt>data</tt></abbr></pre>
+      </td>
+      <td xml:lang="en-US">
+        Audit data should be synchronously written to disk to ensure
+log integrity. These parameters assure that all audit event data is fully
+synchronized with the log files on the disk.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1</td>
+      <td>Ensure the audit Subsystem is Installed</td>
+      <td xml:lang="en-US">
+        The audit package should be installed.
+      </td>
+      <td xml:lang="en-US">
+        The auditd service is an access monitoring and accounting daemon, watching system calls to audit any access, in comparison with potential local access control policy such as SELinux policy.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1</td>
+      <td>Enable auditd Service</td>
+      <td xml:lang="en-US">
+        The <tt>auditd</tt> service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The <code>auditd</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable auditd.service</pre>
+      </td>
+      <td xml:lang="en-US">
+        Without establishing what type of events occurred, it would be difficult
+to establish, correlate, and investigate the events leading up to an outage or attack.
+Ensuring the <tt>auditd</tt> service is active ensures audit records
+generated by the kernel are appropriately recorded.
+<br /><br />
+Additionally, a properly configured audit subsystem ensures that actions of
+individual system users can be uniquely traced to those users so they
+can be held accountable for their actions.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1</td>
+      <td>Enable Auditing to Start Prior to the Audit Daemon in zIPL</td>
+      <td xml:lang="en-US">
+        To ensure all processes can be audited, even those which start prior to the audit daemon,
+check that all boot entries in <tt>/boot/loader/entries/*.conf</tt> have <tt>audit=1</tt>
+included in its options.<br />
+
+To ensure that new kernels and boot entries continue to enable audit,
+add <tt>audit=1</tt> to <tt>/etc/kernel/cmdline</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Each process on the system carries an "auditable" flag which indicates whether
+its activities can be audited. Although <tt>auditd</tt> takes care of enabling
+this for all processes which launch after it does, adding the kernel argument
+ensures it is set for every process during boot.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1</td>
+      <td>Enable Auditing for Processes Which Start Prior to the Audit Daemon</td>
+      <td xml:lang="en-US">
+        To ensure all processes can be audited, even those which start
+prior to the audit daemon, add the argument <tt>audit=1</tt> to the default
+GRUB 2 command line for the Linux operating system.
+To ensure that <tt>audit=1</tt> is added as a kernel command line
+argument to newly installed kernels, add <tt>audit=1</tt> to the
+default Grub2 command line for Linux operating systems. Modify the line within
+<tt>/etc/default/grub</tt> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit=1"</pre>
+      </td>
+      <td xml:lang="en-US">
+        Each process on the system carries an "auditable" flag which indicates whether
+its activities can be audited. Although <tt>auditd</tt> takes care of enabling
+this for all processes which launch after it does, adding the kernel argument
+ensures it is set for every process during boot.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1</td>
+      <td>Configure basic parameters of Audit system</td>
+      <td xml:lang="en-US">
+        Perform basic configuration of Audit system.
+Make sure that any previously defined rules are cleared, the auditing system is configured to handle sudden bursts of events, and in cases of failure, messages are configured to be directed to system log.
+
+The following rules configure audit as described above:
+<pre>## First rule - delete all
+-D
+
+## Increase the buffers to survive stress events.
+## Make this bigger for busy systems
+-b 8192
+
+## This determine how long to wait in burst of events
+--backlog_wait_time 60000
+
+## Set failure mode to syslog
+-f 1    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+      </td>
+      <td xml:lang="en-US">
+        Without basic configurations, audit may not perform as expected. It may not be able to correctly handle events under stressful conditions, or log events in case of failure.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file creations (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to create a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file creation (open with O_CREAT)
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;0100 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b32 -S open -F a1&amp;0100 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b32 -S creat -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-create    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to create a file helps in investigation of actions which happened on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file accesses</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to access a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file access (any other opens) This has to go last.
+## These next two are likely to result in a whole lot of events
+-a always,exit -F arch=b32 -S open,openat,openat2,open_by_handle_at -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-access
+-a always,exit -F arch=b64 -S open,openat,openat2,open_by_handle_at -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-access    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to access a file helps in investigation of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file deletions (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to delete a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file delete
+-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-delete
+-a always,exit -F arch=b64 -S unlinkat,renameat -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-delete    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to delete a file may help in monitoring and investigation of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file modifications (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to modify a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file modifications (open for write or truncate)
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b64 -S open -F a1&amp;01003 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b64 -S truncate,ftruncate -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-modification    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to modify a file helps in investigation of actions which happened on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file creations</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to create a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file creation (open with O_CREAT)
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S open -F a1&amp;0100 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S open -F a1&amp;0100 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S creat -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S creat -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S open -F a1&amp;0100 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S open -F a1&amp;0100 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S creat -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S creat -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-create    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful file creations might be a sign of a malicious action being performed on the system. Keeping log of such events helps in monitoring and investigation of such actions.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file accesses (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to access a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file access (any other opens) This has to go last.
+-a always,exit -F arch=b64 -S open,openat,openat2,open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-access
+-a always,exit -F arch=b64 -S open,openat,openat2,open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-access    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to access a file might be signs of malicious activity happening within the system. Auditing of such activities helps in their monitoring and investigation.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of loading and unloading of kernel modules (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that loading and unloading of kernel modules is audited.
+
+The following rules configure audit as described above:
+<pre>## These rules watch for kernel module insertion. By monitoring
+## the syscall, we do not need any watches on programs.
+-a always,exit -F arch=b64 -S init_module,finit_module -F key=module-load
+-a always,exit -F arch=b64 -S delete_module -F key=module-unload    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+      </td>
+      <td xml:lang="en-US">
+        Loading of a malicious kernel module introduces a risk to the system, as the module has access to sensitive data and perform actions at the operating system kernel level. Having such events audited helps in monitoring and investigating of malicious activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful permission changes (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to modify permissions of files or directories are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful permission change
+-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-perm-change
+-a always,exit -F arch=b64 -S fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-perm-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing successful file or directory permission changes helps in monitoring and investigating of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file accesses (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to access a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file access (any other opens) This has to go last.
+## These next two are likely to result in a whole lot of events
+-a always,exit -F arch=b32 -S open,openat,openat2,open_by_handle_at -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-access
+-a always,exit -F arch=b64 -S openat,openat2,open_by_handle_at -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-access    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to access a file helps in investigation of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful permission changes (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to change file or directory permissions are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful permission change
+-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-perm-change
+-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-perm-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to change permissions of files or directories might be signs of malicious activity. Having such events audited helps in monitoring and investigation of such activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Perform general configuration of Audit for OSPP (AArch64)</td>
+      <td xml:lang="en-US">
+        Configure some basic <tt>Audit</tt> parameters specific for OSPP profile.
+In particular, configure <tt>Audit</tt> to watch for direct modification of files storing system user and group information, and usage of applications with special rights which can change system configuration.
+Further audited events include access to audit log it self, attempts to Alter Process and Session Initiation Information, and attempts to modify MAC controls.
+
+The following rules configure audit as described above:
+<pre>## The purpose of these rules is to meet the requirements for Operating
+## System Protection Profile (OSPP)v4.2. These rules depends on having
+## the following rule files copied to /etc/audit/rules.d:
+##
+## 10-base-config.rules, 11-loginuid.rules,
+## 30-ospp-v42-1-create-failed.rules, 30-ospp-v42-1-create-success.rules,
+## 30-ospp-v42-2-modify-failed.rules, 30-ospp-v42-2-modify-success.rules,
+## 30-ospp-v42-3-access-failed.rules, 30-ospp-v42-3-access-success.rules,
+## 30-ospp-v42-4-delete-failed.rules, 30-ospp-v42-4-delete-success.rules,
+## 30-ospp-v42-5-perm-change-failed.rules,
+## 30-ospp-v42-5-perm-change-success.rules,
+## 30-ospp-v42-6-owner-change-failed.rules,
+## 30-ospp-v42-6-owner-change-success.rules
+##
+## original copies may be found in /usr/share/audit/sample-rules/
+
+
+## User add delete modify. This is covered by pam. However, someone could
+## open a file and directly create or modify a user, so we'll watch passwd and
+## shadow for writes
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/passwd -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/passwd -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -S open -F a1&amp;03 -F path=/etc/passwd -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/shadow -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/shadow -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -S open -F a1&amp;03 -F path=/etc/shadow -F auid>=1000 -F auid!=unset -F key=user-modify
+
+## User enable and disable. This is entirely handled by pam.
+
+## Group add delete modify. This is covered by pam. However, someone could
+## open a file and directly create or modify a user, so we'll watch group and
+## gshadow for writes
+-a always,exit -F arch=b32 -F path=/etc/passwd -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -F path=/etc/passwd -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -F path=/etc/shadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -F path=/etc/shadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -F path=/etc/group -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+-a always,exit -F arch=b64 -F path=/etc/group -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+-a always,exit -F arch=b32 -F path=/etc/gshadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+-a always,exit -F arch=b64 -F path=/etc/gshadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+
+
+## Use of special rights for config changes. This would be use of setuid
+## programs that relate to user accts. This is not all setuid apps because
+## requirements are only for ones that affect system configuration.
+-a always,exit -F arch=b32 -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/sbin/userhelper -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/userhelper -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/sbin/seunshare -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/seunshare -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/newuidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/newuidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/newgidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/newgidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/at -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/at -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/sbin/grub2-set-bootflag -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/grub2-set-bootflag -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+
+## Privilege escalation via su or sudo. This is entirely handled by pam.
+## Special case for systemd-run. It is not audit aware, specifically watch it
+-a always,exit -F arch=b32 -F path=/usr/bin/systemd-run -F perm=x -F auid!=unset -F key=maybe-escalation
+-a always,exit -F arch=b64 -F path=/usr/bin/systemd-run -F perm=x -F auid!=unset -F key=maybe-escalation
+## Special case for pkexec. It is not audit aware, specifically watch it
+-a always,exit -F arch=b32 -F path=/usr/bin/pkexec -F perm=x -F key=maybe-escalation
+-a always,exit -F arch=b64 -F path=/usr/bin/pkexec -F perm=x -F key=maybe-escalation
+
+
+## Watch for configuration changes to privilege escalation.
+-a always,exit -F arch=b32 -F path=/etc/sudoers -F perm=wa -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/etc/sudoers -F perm=wa -F key=special-config-changes
+-a always,exit -F arch=b32 -F dir=/etc/sudoers.d/ -F perm=wa -F key=special-config-changes
+-a always,exit -F arch=b64 -F dir=/etc/sudoers.d/ -F perm=wa -F key=special-config-changes
+
+## Audit log access
+-a always,exit -F arch=b32 -F dir=/var/log/audit/ -F perm=r -F auid>=1000 -F auid!=unset -F key=access-audit-trail
+-a always,exit -F arch=b64 -F dir=/var/log/audit/ -F perm=r -F auid>=1000 -F auid!=unset -F key=access-audit-trail
+## Attempts to Alter Process and Session Initiation Information
+-a always,exit -F arch=b32 -F path=/var/run/utmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b64 -F path=/var/run/utmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b32 -F path=/var/log/btmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b64 -F path=/var/log/btmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b32 -F path=/var/log/wtmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b64 -F path=/var/log/wtmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+
+## Attempts to modify MAC controls
+-a always,exit -F arch=b32 -F dir=/etc/selinux/ -F perm=wa -F auid>=1000 -F auid!=unset -F key=MAC-policy
+-a always,exit -F arch=b64 -F dir=/etc/selinux/ -F perm=wa -F auid>=1000 -F auid!=unset -F key=MAC-policy
+
+## Software updates. This is entirely handled by rpm.
+
+## System start and shutdown. This is entirely handled by systemd
+
+## Kernel Module loading. This is handled in 43-module-load.rules
+
+## Application invocation. The requirements list an optional requirement
+## FPT_SRP_EXT.1 Software Restriction Policies. This event is intended to
+## state results from that policy. This would be handled entirely by
+## that daemon.    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of events listed in the description provides data for monitoring and investigation of potentially malicious events e.g. tampering with <tt>Audit</tt> logs, malicious access to files storing information about system users and groups etc.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file modifications (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to modify a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file modifications (open for write or truncate)
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;01003 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b32 -S open -F a1&amp;01003 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b32 -S truncate,ftruncate -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b64 -S truncate,ftruncate -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-modification    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to modify a file helps in investigation of actions which happened on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful permission changes</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to change file or directory permissions are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful permission change
+-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-perm-change
+-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-perm-change
+-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-perm-change
+-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-perm-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to change permissions of files or directories might be signs of malicious activity. Having such events audited helps in monitoring and investigation of such activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file accesses</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to access a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file access (any other opens) This has to go last.
+-a always,exit -F arch=b32 -S open,openat,openat2,open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-access
+-a always,exit -F arch=b64 -S open,openat,openat2,open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-access
+-a always,exit -F arch=b32 -S open,openat,openat2,open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-access
+-a always,exit -F arch=b64 -S open,openat,openat2,open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-access    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to access a file might be signs of malicious activity happening within the system. Auditing of such activities helps in their monitoring and investigation.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file deletions</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to delete a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file delete
+-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-delete
+-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-delete
+-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-delete
+-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-delete    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to delete a file might be signs of malicious activities. Auditing of such events help in monitoring and investigating of such activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Perform general configuration of Audit for OSPP (ppc64le)</td>
+      <td xml:lang="en-US">
+        Configure some basic <tt>Audit</tt> parameters specific for OSPP profile.
+In particular, configure <tt>Audit</tt> to watch for direct modification of files storing system user and group information, and usage of applications with special rights which can change system configuration.
+Further audited events include access to audit log it self, attempts to Alter Process and Session Initiation Information, and attempts to modify MAC controls.
+
+The following rules configure audit as described above:
+<pre>## The purpose of these rules is to meet the requirements for Operating
+## System Protection Profile (OSPP)v4.2. These rules depends on having
+## the following rule files copied to /etc/audit/rules.d:
+##
+## 10-base-config.rules, 11-loginuid.rules,
+## 30-ospp-v42-1-create-failed.rules, 30-ospp-v42-1-create-success.rules,
+## 30-ospp-v42-2-modify-failed.rules, 30-ospp-v42-2-modify-success.rules,
+## 30-ospp-v42-3-access-failed.rules, 30-ospp-v42-3-access-success.rules,
+## 30-ospp-v42-4-delete-failed.rules, 30-ospp-v42-4-delete-success.rules,
+## 30-ospp-v42-5-perm-change-failed.rules,
+## 30-ospp-v42-5-perm-change-success.rules,
+## 30-ospp-v42-6-owner-change-failed.rules,
+## 30-ospp-v42-6-owner-change-success.rules
+##
+## original copies may be found in /usr/share/audit/sample-rules/
+
+
+## User add delete modify. This is covered by pam. However, someone could
+## open a file and directly create or modify a user, so we'll watch passwd and
+## shadow for writes
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/passwd -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -S open -F a1&amp;03 -F path=/etc/passwd -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/shadow -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -S open -F a1&amp;03 -F path=/etc/shadow -F auid>=1000 -F auid!=unset -F key=user-modify
+
+## User enable and disable. This is entirely handled by pam.
+
+## Group add delete modify. This is covered by pam. However, someone could
+## open a file and directly create or modify a user, so we'll watch group and
+## gshadow for writes
+-a always,exit -F arch=b64 -F path=/etc/passwd -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -F path=/etc/shadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -F path=/etc/group -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+-a always,exit -F arch=b64 -F path=/etc/gshadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+
+
+## Use of special rights for config changes. This would be use of setuid
+## programs that relate to user accts. This is not all setuid apps because
+## requirements are only for ones that affect system configuration.
+-a always,exit -F arch=b64 -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/userhelper -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/seunshare -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/newuidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/newgidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/at -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/grub2-set-bootflag -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+
+## Privilege escalation via su or sudo. This is entirely handled by pam.
+## Special case for systemd-run. It is not audit aware, specifically watch it
+-a always,exit -F arch=b64 -F path=/usr/bin/systemd-run -F perm=x -F auid!=unset -F key=maybe-escalation
+## Special case for pkexec. It is not audit aware, specifically watch it
+-a always,exit -F arch=b64 -F path=/usr/bin/pkexec -F perm=x -F key=maybe-escalation
+
+
+## Watch for configuration changes to privilege escalation.
+-a always,exit -F arch=b64 -F path=/etc/sudoers -F perm=wa -F key=special-config-changes
+-a always,exit -F arch=b64 -F dir=/etc/sudoers.d/ -F perm=wa -F key=special-config-changes
+
+## Audit log access
+-a always,exit -F arch=b64 -F dir=/var/log/audit/ -F perm=r -F auid>=1000 -F auid!=unset -F key=access-audit-trail
+## Attempts to Alter Process and Session Initiation Information
+-a always,exit -F arch=b64 -F path=/var/run/utmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b64 -F path=/var/log/btmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b64 -F path=/var/log/wtmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+
+## Attempts to modify MAC controls
+-a always,exit -F arch=b64 -F dir=/etc/selinux/ -F perm=wa -F auid>=1000 -F auid!=unset -F key=MAC-policy
+
+## Software updates. This is entirely handled by rpm.
+
+## System start and shutdown. This is entirely handled by systemd
+
+## Kernel Module loading. This is handled in 43-module-load.rules
+
+## Application invocation. The requirements list an optional requirement
+## FPT_SRP_EXT.1 Software Restriction Policies. This event is intended to
+## state results from that policy. This would be handled entirely by
+## that daemon.    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of events listed in the description provides data for monitoring and investigation of potentially malicious events e.g. tampering with <tt>Audit</tt> logs, malicious access to files storing information about system users and groups etc.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful permission changes (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to modify permissions of files or directories are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful permission change
+-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-perm-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing successful file or directory permission changes helps in monitoring and investigating of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file deletions (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to delete a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file delete
+-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-delete
+-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-delete    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to delete a file might be signs of malicious activities. Auditing of such events help in monitoring and investigating of such activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful ownership changes</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to change an ownership of files or directories are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful ownership change
+-a always,exit -F arch=b32 -S lchown,fchown,chown,fchownat -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-owner-change
+-a always,exit -F arch=b64 -S lchown,fchown,chown,fchownat -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-owner-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful ownership changes of files or directories helps in monitoring or investigating of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of loading and unloading of kernel modules</td>
+      <td xml:lang="en-US">
+        Ensure that loading and unloading of kernel modules is audited.
+
+The following rules configure audit as described above:
+<pre>## These rules watch for kernel module insertion. By monitoring
+## the syscall, we do not need any watches on programs.
+-a always,exit -F arch=b32 -S init_module,finit_module -F key=module-load
+-a always,exit -F arch=b64 -S init_module,finit_module -F key=module-load
+-a always,exit -F arch=b32 -S delete_module -F key=module-unload
+-a always,exit -F arch=b64 -S delete_module -F key=module-unload    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+      </td>
+      <td xml:lang="en-US">
+        Loading of a malicious kernel module introduces a risk to the system, as the module has access to sensitive data and perform actions at the operating system kernel level. Having such events audited helps in monitoring and investigating of malicious activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file modifications (AARch64)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to modify a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file modifications (open for write or truncate)
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S open -F a1&amp;01003 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S open -F a1&amp;01003 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful file modifications might be a sign of a malicious action being performed on the system. Auditing of such events helps in detection and investigation of such actions.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Perform general configuration of Audit for OSPP</td>
+      <td xml:lang="en-US">
+        Configure some basic <tt>Audit</tt> parameters specific for OSPP profile.
+In particular, configure <tt>Audit</tt> to watch for direct modification of files storing system user and group information, and usage of applications with special rights which can change system configuration.
+Further audited events include access to audit log it self, attempts to Alter Process and Session Initiation Information, and attempts to modify MAC controls.
+
+The following rules configure audit as described above:
+<pre>## The purpose of these rules is to meet the requirements for Operating
+## System Protection Profile (OSPP)v4.2. These rules depends on having
+## the following rule files copied to /etc/audit/rules.d:
+##
+## 10-base-config.rules, 11-loginuid.rules,
+## 30-ospp-v42-1-create-failed.rules, 30-ospp-v42-1-create-success.rules,
+## 30-ospp-v42-2-modify-failed.rules, 30-ospp-v42-2-modify-success.rules,
+## 30-ospp-v42-3-access-failed.rules, 30-ospp-v42-3-access-success.rules,
+## 30-ospp-v42-4-delete-failed.rules, 30-ospp-v42-4-delete-success.rules,
+## 30-ospp-v42-5-perm-change-failed.rules,
+## 30-ospp-v42-5-perm-change-success.rules,
+## 30-ospp-v42-6-owner-change-failed.rules,
+## 30-ospp-v42-6-owner-change-success.rules
+##
+## original copies may be found in /usr/share/audit/sample-rules/
+
+
+## User add delete modify. This is covered by pam. However, someone could
+## open a file and directly create or modify a user, so we'll watch passwd and
+## shadow for writes
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/passwd -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/passwd -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -S open -F a1&amp;03 -F path=/etc/passwd -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -S open -F a1&amp;03 -F path=/etc/passwd -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/shadow -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;03 -F path=/etc/shadow -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -S open -F a1&amp;03 -F path=/etc/shadow -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -S open -F a1&amp;03 -F path=/etc/shadow -F auid>=1000 -F auid!=unset -F key=user-modify
+
+## User enable and disable. This is entirely handled by pam.
+
+## Group add delete modify. This is covered by pam. However, someone could
+## open a file and directly create or modify a user, so we'll watch group and
+## gshadow for writes
+-a always,exit -F arch=b32 -F path=/etc/passwd -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -F path=/etc/passwd -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -F path=/etc/shadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b64 -F path=/etc/shadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=user-modify
+-a always,exit -F arch=b32 -F path=/etc/group -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+-a always,exit -F arch=b64 -F path=/etc/group -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+-a always,exit -F arch=b32 -F path=/etc/gshadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+-a always,exit -F arch=b64 -F path=/etc/gshadow -F perm=wa -F auid>=1000 -F auid!=unset -F key=group-modify
+
+
+## Use of special rights for config changes. This would be use of setuid
+## programs that relate to user accts. This is not all setuid apps because
+## requirements are only for ones that affect system configuration.
+-a always,exit -F arch=b32 -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/unix_chkpwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/usernetctl -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/sbin/userhelper -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/userhelper -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/sbin/seunshare -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/seunshare -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/newgrp -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/newuidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/newuidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/gpasswd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/newgidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/newgidmap -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/umount -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/passwd -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/crontab -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/bin/at -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/bin/at -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b32 -F path=/usr/sbin/grub2-set-bootflag -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/usr/sbin/grub2-set-bootflag -F perm=x -F auid>=1000 -F auid!=unset -F key=special-config-changes
+
+## Privilege escalation via su or sudo. This is entirely handled by pam.
+## Special case for systemd-run. It is not audit aware, specifically watch it
+-a always,exit -F arch=b32 -F path=/usr/bin/systemd-run -F perm=x -F auid!=unset -F key=maybe-escalation
+-a always,exit -F arch=b64 -F path=/usr/bin/systemd-run -F perm=x -F auid!=unset -F key=maybe-escalation
+## Special case for pkexec. It is not audit aware, specifically watch it
+-a always,exit -F arch=b32 -F path=/usr/bin/pkexec -F perm=x -F key=maybe-escalation
+-a always,exit -F arch=b64 -F path=/usr/bin/pkexec -F perm=x -F key=maybe-escalation
+
+
+## Watch for configuration changes to privilege escalation.
+-a always,exit -F arch=b32 -F path=/etc/sudoers -F perm=wa -F key=special-config-changes
+-a always,exit -F arch=b64 -F path=/etc/sudoers -F perm=wa -F key=special-config-changes
+-a always,exit -F arch=b32 -F dir=/etc/sudoers.d/ -F perm=wa -F key=special-config-changes
+-a always,exit -F arch=b64 -F dir=/etc/sudoers.d/ -F perm=wa -F key=special-config-changes
+
+## Audit log access
+-a always,exit -F arch=b32 -F dir=/var/log/audit/ -F perm=r -F auid>=1000 -F auid!=unset -F key=access-audit-trail
+-a always,exit -F arch=b64 -F dir=/var/log/audit/ -F perm=r -F auid>=1000 -F auid!=unset -F key=access-audit-trail
+## Attempts to Alter Process and Session Initiation Information
+-a always,exit -F arch=b32 -F path=/var/run/utmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b64 -F path=/var/run/utmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b32 -F path=/var/log/btmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b64 -F path=/var/log/btmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b32 -F path=/var/log/wtmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+-a always,exit -F arch=b64 -F path=/var/log/wtmp -F perm=wa -F auid>=1000 -F auid!=unset -F key=session
+
+## Attempts to modify MAC controls
+-a always,exit -F arch=b32 -F dir=/etc/selinux/ -F perm=wa -F auid>=1000 -F auid!=unset -F key=MAC-policy
+-a always,exit -F arch=b64 -F dir=/etc/selinux/ -F perm=wa -F auid>=1000 -F auid!=unset -F key=MAC-policy
+
+## Software updates. This is entirely handled by rpm.
+
+## System start and shutdown. This is entirely handled by systemd
+
+## Kernel Module loading. This is handled in 43-module-load.rules
+
+## Application invocation. The requirements list an optional requirement
+## FPT_SRP_EXT.1 Software Restriction Policies. This event is intended to
+## state results from that policy. This would be handled entirely by
+## that daemon.    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of events listed in the description provides data for monitoring and investigation of potentially malicious events e.g. tampering with <tt>Audit</tt> logs, malicious access to files storing information about system users and groups etc.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful permission changes (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to change file or directory permissions are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful permission change
+-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-perm-change
+-a always,exit -F arch=b64 -S fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-perm-change
+-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-perm-change
+-a always,exit -F arch=b64 -S fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-perm-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to change permissions of files or directories might be signs of malicious activity. Having such events audited helps in monitoring and investigation of such activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful ownership changes (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to change an ownership of files or directories are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful ownership change
+-a always,exit -F arch=b64 -S lchown,fchown,chown,fchownat -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-owner-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful ownership changes of files or directories helps in monitoring or investigating of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file modifications (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to modify a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file modifications (open for write or truncate)
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S open -F a1&amp;01003 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S truncate,ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S open -F a1&amp;01003 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S truncate,ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-modification    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful file modifications might be a sign of a malicious action being performed on the system. Auditing of such events helps in detection and investigation of such actions.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful ownership changes (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to change an ownership of files or directories are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful ownership change
+-a always,exit -F arch=b32 -S lchown,fchown,chown,fchownat -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-owner-change
+-a always,exit -F arch=b64 -S fchown,fchownat -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-owner-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful ownership changes of files or directories helps in monitoring or investigating of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file deletions (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to delete a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file delete
+-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-delete
+-a always,exit -F arch=b64 -S unlinkat,renameat -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-delete
+-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-delete
+-a always,exit -F arch=b64 -S unlinkat,renameat -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-delete    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to delete a file might be signs of malicious activities. Auditing of such events help in monitoring and investigating of such activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file deletions (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to delete a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file delete
+-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-delete    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to delete a file may help in monitoring and investigation of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file creations (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to create a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file creation (open with O_CREAT)
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S open -F a1&amp;0100 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S open -F a1&amp;0100 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-create    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful file creations might be a sign of a malicious action being performed on the system. Keeping log of such events helps in monitoring and investigation of such actions.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file creations (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to create a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file creation (open with O_CREAT)
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S open -F a1&amp;0100 -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S creat -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S open -F a1&amp;0100 -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-create
+-a always,exit -F arch=b32 -S creat -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-create    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful file creations might be a sign of a malicious action being performed on the system. Keeping log of such events helps in monitoring and investigation of such actions.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file modifications</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to modify a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file modifications (open for write or truncate)
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S open -F a1&amp;01003 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S open -F a1&amp;01003 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S truncate,ftruncate -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S truncate,ftruncate -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S open -F a1&amp;01003 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S open -F a1&amp;01003 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b32 -S truncate,ftruncate -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification
+-a always,exit -F arch=b64 -S truncate,ftruncate -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-modification    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful file modifications might be a sign of a malicious action being performed on the system. Auditing of such events helps in detection and investigation of such actions.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file modifications</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to modify a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file modifications (open for write or truncate)
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;01003 -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b32 -S open -F a1&amp;01003 -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b64 -S open -F a1&amp;01003 -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b32 -S truncate,ftruncate -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-modification
+-a always,exit -F arch=b64 -S truncate,ftruncate -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-modification    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to modify a file helps in investigation of actions which happened on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful permission changes</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to modify permissions of files or directories are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful permission change
+-a always,exit -F arch=b32 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-perm-change
+-a always,exit -F arch=b64 -S chmod,fchmod,fchmodat,setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-perm-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing successful file or directory permission changes helps in monitoring and investigating of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful ownership changes (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to change an ownership of files or directories are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful ownership change
+-a always,exit -F arch=b32 -S lchown,fchown,chown,fchownat -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-owner-change
+-a always,exit -F arch=b64 -S fchown,fchownat -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-owner-change
+-a always,exit -F arch=b32 -S lchown,fchown,chown,fchownat -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-owner-change
+-a always,exit -F arch=b64 -S fchown,fchownat -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-owner-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to change an ownership of files or directories might be signs of a malicious activity. Having such events audited helps in monitoring and investigation of such activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file deletions</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to delete a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file delete
+-a always,exit -F arch=b32 -S unlink,unlinkat,rename,renameat -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-delete
+-a always,exit -F arch=b64 -S unlink,unlinkat,rename,renameat -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-delete    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to delete a file may help in monitoring and investigation of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file accesses (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to access a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file access (any other opens) This has to go last.
+## These next two are likely to result in a whole lot of events
+-a always,exit -F arch=b64 -S open,openat,openat2,open_by_handle_at -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-access    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to access a file helps in investigation of activities performed on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful file accesses (AArch64)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to access a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful file access (any other opens) This has to go last.
+-a always,exit -F arch=b32 -S open,openat,openat2,open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-access
+-a always,exit -F arch=b64 -S openat,openat2,open_by_handle_at -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-access
+-a always,exit -F arch=b32 -S open,openat,openat2,open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-access
+-a always,exit -F arch=b64 -S openat,openat2,open_by_handle_at -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-access    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to access a file might be signs of malicious activity happening within the system. Auditing of such activities helps in their monitoring and investigation.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file creations (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to create a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file creation (open with O_CREAT)
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b64 -S open -F a1&amp;0100 -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b64 -S creat -F success=1 -F auid>=1000 -F auid!=unset -F key=successful-create    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to create a file helps in investigation of actions which happened on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful ownership changes (ppc64le)</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to change an ownership of files or directories are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful ownership change
+-a always,exit -F arch=b64 -S lchown,fchown,chown,fchownat -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=unsuccessful-owner-change
+-a always,exit -F arch=b64 -S lchown,fchown,chown,fchownat -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=unsuccessful-owner-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to change an ownership of files or directories might be signs of a malicious activity. Having such events audited helps in monitoring and investigation of such activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of successful file creations</td>
+      <td xml:lang="en-US">
+        Ensure that successful attempts to create a file are audited.
+
+The following rules configure audit as described above:
+<pre>## Successful file creation (open with O_CREAT)
+-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;0100 -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b32 -S open -F a1&amp;0100 -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b64 -S open -F a1&amp;0100 -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b32 -S creat -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-create
+-a always,exit -F arch=b64 -S creat -F success=1 -F auid&gt;=1000 -F auid!=unset -F key=successful-create    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Auditing of successful attempts to create a file helps in investigation of actions which happened on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.1.c</td>
+      <td>Configure auditing of unsuccessful ownership changes</td>
+      <td xml:lang="en-US">
+        Ensure that unsuccessful attempts to change an ownership of files or directories are audited.
+
+The following rules configure audit as described above:
+<pre>## Unsuccessful ownership change
+-a always,exit -F arch=b32 -S lchown,fchown,chown,fchownat -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-owner-change
+-a always,exit -F arch=b64 -S lchown,fchown,chown,fchownat -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-owner-change
+-a always,exit -F arch=b32 -S lchown,fchown,chown,fchownat -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-owner-change
+-a always,exit -F arch=b64 -S lchown,fchown,chown,fchownat -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccessful-owner-change    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+
+Note: This rule uses a special set of Audit rules to comply with OSPP 4.2.1. You may reuse this rule in different profiles. If you decide to do so, it is recommended that you inspect contents of the file closely and make sure that they are aligned with your needs.
+      </td>
+      <td xml:lang="en-US">
+        Unsuccessful attempts to change an ownership of files or directories might be signs of a malicious activity. Having such events audited helps in monitoring and investigation of such activities.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.2</td>
+      <td>Set type of computer node name logging in audit logs</td>
+      <td xml:lang="en-US">
+        To configure Audit daemon to use a unique identifier
+as computer node name in the audit events,
+set <tt>name_format</tt> to <tt><abbr title="$var_auditd_name_format"><tt>hostname</tt></abbr></tt>
+in <tt>/etc/audit/auditd.conf</tt>.
+      </td>
+      <td xml:lang="en-US">
+        If option <tt>name_format</tt> is left at its default value of
+<tt>none</tt>, audit events from different computers may be hard
+to distinguish.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.2</td>
+      <td>Disable Ctrl-Alt-Del Burst Action</td>
+      <td xml:lang="en-US">
+        By default, <tt>SystemD</tt> will reboot the system if the <tt>Ctrl-Alt-Del</tt>
+key sequence is pressed Ctrl-Alt-Delete more than 7 times in 2 seconds.
+<br /><br />
+To configure the system to ignore the <tt>CtrlAltDelBurstAction</tt>
+
+setting, add or modify the following to <tt>/etc/systemd/system.conf</tt>:
+<pre>CtrlAltDelBurstAction=none</pre>
+      </td>
+      <td xml:lang="en-US">
+        A locally logged-in user who presses Ctrl-Alt-Del, when at the console,
+can reboot the system. If accidentally pressed, as could happen in
+the case of mixed OS environment, this can create the risk of short-term
+loss of availability of systems due to unintentional reboot.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.2</td>
+      <td>Resolve information before writing to audit logs</td>
+      <td xml:lang="en-US">
+        To configure Audit daemon to resolve all uid, gid, syscall,
+architecture, and socket address information before writing the
+events to disk, set <tt>log_format</tt> to <tt>ENRICHED</tt>
+in <tt>/etc/audit/auditd.conf</tt>.
+      </td>
+      <td xml:lang="en-US">
+        If option <tt>log_format</tt> isn't set to <tt>ENRICHED</tt>, the
+audit records will be stored in a format exactly as the kernel sends them.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.2</td>
+      <td>Configure immutable Audit login UIDs</td>
+      <td xml:lang="en-US">
+        Configure kernel to prevent modification of login UIDs once they are set.
+Changing login UIDs while this configuration is enforced requires special capabilities which
+are not available to unprivileged users.
+
+The following rules configure audit as described above:
+<pre>## Make the loginuid immutable. This prevents tampering with the auid.
+--loginuid-immutable    </pre>
+
+Load new Audit rules into kernel by running:
+<pre>augenrules --load</pre>
+      </td>
+      <td xml:lang="en-US">
+        If modification of login UIDs is not prevented, they can be changed by unprivileged users and
+make auditing complicated or impossible.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_GEN.1.2</td>
+      <td>Disable Ctrl-Alt-Del Reboot Activation</td>
+      <td xml:lang="en-US">
+        By default, <tt>SystemD</tt> will reboot the system if the <tt>Ctrl-Alt-Del</tt>
+key sequence is pressed.
+<br /><br />
+To configure the system to ignore the <tt>Ctrl-Alt-Del</tt> key sequence from the
+
+command line instead of rebooting the system, do either of the following:
+<pre>ln -sf /dev/null /etc/systemd/system/ctrl-alt-del.target</pre>
+or
+<pre>systemctl mask ctrl-alt-del.target</pre>
+<br /><br />
+Do not simply delete the <tt>/usr/lib/systemd/system/ctrl-alt-del.service</tt> file,
+as this file may be restored during future system updates.
+      </td>
+      <td xml:lang="en-US">
+        A locally logged-in user who presses Ctrl-Alt-Del, when at the console,
+can reboot the system. If accidentally pressed, as could happen in
+the case of mixed OS environment, this can create the risk of short-term
+loss of availability of systems due to unintentional reboot.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_STG.1<br/>FAU_STG.3</td>
+      <td>Extend Audit Backlog Limit for the Audit Daemon</td>
+      <td xml:lang="en-US">
+        To improve the kernel capacity to queue all log events, even those which occurred
+prior to the audit daemon, add the argument <tt>audit_backlog_limit=<abbr title="$var_audit_backlog_limit"><tt>8192</tt></abbr></tt> to the default
+GRUB 2 command line for the Linux operating system.
+To ensure that <tt>audit_backlog_limit=<abbr title="$var_audit_backlog_limit"><tt>8192</tt></abbr></tt> is added as a kernel command line
+argument to newly installed kernels, add <tt>audit_backlog_limit=<abbr title="$var_audit_backlog_limit"><tt>8192</tt></abbr></tt> to the
+default Grub2 command line for Linux operating systems. Modify the line within
+<tt>/etc/default/grub</tt> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit_backlog_limit=<abbr title="$var_audit_backlog_limit"><tt>8192</tt></abbr> ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit_backlog_limit=<abbr title="$var_audit_backlog_limit"><tt>8192</tt></abbr>"</pre>
+      </td>
+      <td xml:lang="en-US">
+        audit_backlog_limit sets the queue length for audit events awaiting transfer
+to the audit daemon. Until the audit daemon is up and running, all log messages
+are stored in this queue.  If the queue is overrun during boot process, the action
+defined by audit failure flag is taken.
+      </td>
+    </tr>
+    <tr>
+      <td>FAU_STG.1<br/>FAU_STG.3</td>
+      <td>Extend Audit Backlog Limit for the Audit Daemon in zIPL</td>
+      <td xml:lang="en-US">
+        To improve the kernel capacity to queue all log events, even those which start prior to the audit daemon,
+check that all boot entries in <tt>/boot/loader/entries/*.conf</tt> have <tt>audit_backlog_limit=8192</tt>
+included in its options.<br />
+To ensure that new kernels and boot entries continue to extend the audit log events queue,
+add <tt>audit_backlog_limit=8192</tt> to <tt>/etc/kernel/cmdline</tt>.
+      </td>
+      <td xml:lang="en-US">
+        audit_backlog_limit sets the queue length for audit events awaiting transfer
+to the audit daemon. Until the audit daemon is up and running, all log messages
+are stored in this queue.  If the queue is overrun during boot process, the action
+defined by audit failure flag is taken.
+      </td>
+    </tr>
+    <tr>
+      <td>FCS_CKM.1<br/>FCS_CKM.1.1<br/>FCS_CKM.2<br/>FCS_COP.1/ENCRYPT<br/>FCS_COP.1/HASH<br/>FCS_COP.1/SIGN<br/>FCS_COP.1/KEYHMAC<br/>FCS_TLSC_EXT.1<br/>FCS_TLSC_EXT.1.1</td>
+      <td>Configure OpenSSL library to use System Crypto Policy</td>
+      <td xml:lang="en-US">
+        Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+OpenSSL is supported by crypto policy, but the OpenSSL configuration may be
+set up to ignore it.
+To check that Crypto Policies settings are configured correctly, you have to examine the OpenSSL config file
+available under <tt>/etc/pki/tls/openssl.cnf</tt>.
+This file has the <tt>ini</tt> format, and it enables crypto policy support
+if there is a <tt>[ crypto_policy ]</tt> section that contains the <tt>.include /etc/crypto-policies/back-ends/opensslcnf.config</tt> directive.
+      </td>
+      <td xml:lang="en-US">
+        Overriding the system crypto policy makes the behavior of the Java runtime violates expectations,
+and makes system configuration more fragmented.
+      </td>
+    </tr>
+    <tr>
+      <td>FCS_COP.1(1)<br/>FCS_COP.1(2)<br/>FCS_COP.1(3)<br/>FCS_COP.1(4)<br/>FCS_CKM.1<br/>FCS_CKM.2<br/>FCS_TLSC_EXT.1</td>
+      <td>Configure System Cryptography Policy</td>
+      <td xml:lang="en-US">
+        To configure the system cryptography policy to use ciphers only from the <tt><abbr title="$var_system_crypto_policy"><tt>DEFAULT</tt></abbr></tt>
+policy, run the following command:
+<pre>$ sudo update-crypto-policies --set <abbr title="$var_system_crypto_policy"><tt>DEFAULT</tt></abbr></pre>
+The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the <tt>/etc/crypto-policies/back-ends</tt> are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.
+Crypto policies may be customized by crypto policy modules, in which case it is delimited from the base policy using a colon.
+      </td>
+      <td xml:lang="en-US">
+        Centralized cryptographic policies simplify applying secure ciphers across an operating system and
+the applications that run on that operating system. Use of weak or untested encryption algorithms
+undermines the purposes of utilizing encryption to protect data.
+      </td>
+    </tr>
+    <tr>
+      <td>FCS_COP.1(1)<br/>FCS_COP.1(2)<br/>FCS_COP.1(3)<br/>FCS_COP.1(4)<br/>FCS_CKM.1<br/>FCS_CKM.2<br/>FCS_TLSC_EXT.1</td>
+      <td>Install crypto-policies package</td>
+      <td xml:lang="en-US">
+        The <code>crypto-policies</code> package can be installed with the following command:
+<pre>
+$ sudo yum install crypto-policies</pre>
+      </td>
+      <td xml:lang="en-US">
+        Centralized cryptographic policies simplify applying secure ciphers across an operating system and
+the applications that run on that operating system. Use of weak or untested encryption algorithms
+undermines the purposes of utilizing encryption to protect data.
+      </td>
+    </tr>
+    <tr>
+      <td>FCS_COP.1(1)<br/>FCS_COP.1(2)<br/>FCS_COP.1(3)<br/>FCS_COP.1(4)<br/>FCS_CKM.1<br/>FCS_CKM.2<br/>FCS_TLSC_EXT.1<br/>FCS_RBG_EXT.1</td>
+      <td>Enable FIPS Mode</td>
+      <td xml:lang="en-US">
+        
+To enable FIPS mode, run the following command:
+<pre>fips-mode-setup --enable</pre>
+<br />
+The <tt>fips-mode-setup</tt> command will configure the system in
+FIPS mode by automatically configuring the following:
+<ul>
+<li>Setting the kernel FIPS mode flag (<tt>/proc/sys/crypto/fips_enabled</tt>) to <tt>1</tt></li>
+<li>Creating <tt>/etc/system-fips</tt></li>
+<li>Setting the system crypto policy in <tt>/etc/crypto-policies/config</tt> to <tt><abbr title="$var_system_crypto_policy"><tt>DEFAULT</tt></abbr></tt></li>
+<li>Loading the Dracut <tt>fips</tt> module</li>
+</ul>
+      </td>
+      <td xml:lang="en-US">
+        Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to
+protect data. The operating system must implement cryptographic modules adhering to the higher
+standards approved by the federal government since this provides assurance they have been tested
+and validated.
+      </td>
+    </tr>
+    <tr>
+      <td>FCS_RBG_EXT.1</td>
+      <td>Enable Dracut FIPS Module</td>
+      <td xml:lang="en-US">
+        
+To enable FIPS mode, run the following command:
+<pre>fips-mode-setup --enable</pre>
+
+To enable FIPS, the system requires that the <tt>fips</tt> module is added in <tt>dracut</tt> configuration.
+Check if <tt>/etc/dracut.conf.d/40-fips.conf</tt> contain <tt>add_dracutmodules+=" fips "</tt>
+      </td>
+      <td xml:lang="en-US">
+        Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to
+protect data. The operating system must implement cryptographic modules adhering to the higher
+standards approved by the federal government since this provides assurance they have been tested
+and validated.
+      </td>
+    </tr>
+    <tr>
+      <td>FCS_SSH_EXT.1<br/>FCS_SSHS_EXT.1<br/>FCS_SSHC_EXT.1</td>
+      <td>Configure SSH to use System Crypto Policy</td>
+      <td xml:lang="en-US">
+        Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+SSH is supported by crypto policy, but the SSH configuration may be
+set up to ignore it.
+To check that Crypto Policies settings are configured correctly, ensure that
+the <tt>CRYPTO_POLICY</tt> variable is either commented or not set at all
+in the <tt>/etc/sysconfig/sshd</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Overriding the system crypto policy makes the behavior of the SSH service violate expectations,
+and makes system configuration more fragmented.
+      </td>
+    </tr>
+    <tr>
+      <td>FCS_SSH_EXT.1</td>
+      <td>Distribute the SSH Server configuration to multiple files in a config directory.</td>
+      <td xml:lang="en-US">
+        Make sure to have the <tt>Include /etc/ssh/sshd_config.d/*.conf</tt> line in the <tt>/etc/ssh/sshd_config</tt> file.
+Ideally, don't have any active configuration directives in that file, and distribute the service configuration
+to several files in the <tt>/etc/ssh/sshd_config.d</tt> directory.
+      </td>
+      <td xml:lang="en-US">
+        This form of distributed configuration is considered as a good practice, and as other sshd rules assume that directives in files in the <tt>/etc/ssh/sshd_config.d</tt> config directory are effective, there has to be a rule that ensures this.
+Aside from that, having multiple configuration files makes the SSH Server configuration changes easier to partition according to the reason that they were introduced, and therefore it should help to perform merges of hardening updates.
+      </td>
+    </tr>
+    <tr>
+      <td>FCS_SSH_EXT.1.8</td>
+      <td>Configure session renegotiation for SSH client</td>
+      <td xml:lang="en-US">
+        The <tt>RekeyLimit</tt> parameter specifies how often
+the session key is renegotiated, both in terms of
+amount of data that may be transmitted and the time
+elapsed. To decrease the default limits, put line
+<tt>RekeyLimit <abbr title="$var_ssh_client_rekey_limit_size"><tt>512M</tt></abbr> <abbr title="$var_ssh_client_rekey_limit_time"><tt>1h</tt></abbr></tt> to file <tt>/etc/ssh/ssh_config.d/02-rekey-limit.conf</tt>.
+Make sure that there is no other <tt>RekeyLimit</tt> configuration preceding
+the <tt>include</tt> directive in the main config file
+<tt>/etc/ssh/ssh_config</tt>. Check also other files in
+<tt>/etc/ssh/ssh_config.d</tt> directory. Files are processed according to
+lexicographical order of file names. Make sure that there is no file
+processed before <tt>02-rekey-limit.conf</tt> containing definition of
+<tt>RekeyLimit</tt>.
+      </td>
+      <td xml:lang="en-US">
+        By decreasing the limit based on the amount of data and enabling
+time-based limit, effects of potential attacks against
+encryption keys are limited.
+      </td>
+    </tr>
+    <tr>
+      <td>FCS_SSH_EXT.1.8</td>
+      <td>Force frequent session key renegotiation</td>
+      <td xml:lang="en-US">
+        The <tt>RekeyLimit</tt> parameter specifies how often
+the session key of the is renegotiated, both in terms of
+amount of data that may be transmitted and the time
+elapsed.<br/>
+To decrease the default limits, add or correct the following line in
+
+
+
+
+<tt>/etc/ssh/sshd_config</tt>:
+
+<pre>RekeyLimit <abbr title="$var_rekey_limit_size"><tt>512M</tt></abbr> <abbr title="$var_rekey_limit_time"><tt>1h</tt></abbr></pre>
+      </td>
+      <td xml:lang="en-US">
+        By decreasing the limit based on the amount of data and enabling
+time-based limit, effects of potential attacks against
+encryption keys are limited.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_AFL.1</td>
+      <td>Set Interval For Counting Failed Password Attempts</td>
+      <td xml:lang="en-US">
+        Utilizing <tt>pam_faillock.so</tt>, the <tt>fail_interval</tt> directive configures the system
+to lock out an account after a number of incorrect login attempts within a specified time
+period.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>fail_interval = &lt;interval-in-seconds&gt;</tt> where <tt>interval-in-seconds</tt> is <tt><abbr title="$var_accounts_passwords_pam_faillock_fail_interval"><tt>900</tt></abbr></tt> or greater.
+
+
+In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
+depending on the OS version.
+      </td>
+      <td xml:lang="en-US">
+        By limiting the number of failed logon attempts the risk of unauthorized system
+access via user password guessing, otherwise known as brute-forcing, is reduced.
+Limits are imposed by locking the account.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_AFL.1</td>
+      <td>Set Lockout Time for Failed Password Attempts</td>
+      <td xml:lang="en-US">
+        This rule configures the system to lock out accounts during a specified time period after a
+number of incorrect login attempts using <tt>pam_faillock.so</tt>.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>unlock_time=&lt;interval-in-seconds&gt;</tt> where
+<tt>interval-in-seconds</tt> is <tt><abbr title="$var_accounts_passwords_pam_faillock_unlock_time"><tt>0</tt></abbr></tt> or greater.
+
+pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
+defined to work as expected. In order to avoid any errors when manually editing these files,
+it is recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
+depending on the OS version.
+
+If <tt>unlock_time</tt> is set to <tt>0</tt>, manual intervention by an administrator is required
+to unlock a user. This should be done using the <tt>faillock</tt> tool.
+      </td>
+      <td xml:lang="en-US">
+        By limiting the number of failed logon attempts the risk of unauthorized system
+access via user password guessing, otherwise known as brute-forcing, is reduced.
+Limits are imposed by locking the account.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_AFL.1</td>
+      <td>Lock Accounts After Failed Password Attempts</td>
+      <td xml:lang="en-US">
+        This rule configures the system to lock out accounts after a number of incorrect login attempts
+using <tt>pam_faillock.so</tt>.
+pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
+defined to work as expected.
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>deny = &lt;count&gt;</tt>
+Where count should be less than or equal to
+<abbr title="$var_accounts_passwords_pam_faillock_deny"><tt>3</tt></abbr> and greater than 0.
+
+In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
+depending on the OS version.
+      </td>
+      <td xml:lang="en-US">
+        By limiting the number of failed logon attempts, the risk of unauthorized system access via
+user password guessing, also known as brute-forcing, is reduced. Limits are imposed by locking
+the account.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Ensure debug-shell service is not enabled in zIPL</td>
+      <td xml:lang="en-US">
+        systemd's <tt>debug-shell</tt> service is intended to
+diagnose systemd related boot issues with various <tt>systemctl</tt>
+commands. Once enabled and following a system reboot, the root shell
+will be available on <tt>tty9</tt> which is access by pressing
+<tt>CTRL-ALT-F9</tt>. The <tt>debug-shell</tt> service should only be used
+for systemd related issues and should otherwise be disabled.
+<br /><br />
+By default, the <tt>debug-shell</tt> systemd service is already disabled.
+
+Ensure the debug-shell is not enabled by the <tt>systemd.debug-shel=1</tt>
+boot parameter option.
+
+Check that not boot entries in <tt>/boot/loader/entries/*.conf</tt> have
+<tt>systemd.debug-shell=1</tt> included in its options.<br />
+To ensure that new kernels and boot entries don't enable the debug-shell, check
+that <tt>systemd.debug-shell=1</tt> is not present in <tt>/etc/kernel/cmdline</tt>.
+      </td>
+      <td xml:lang="en-US">
+        This prevents attackers with physical access from trivially bypassing security
+on the machine through valid troubleshooting configurations and gaining root
+access when the system is rebooted.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Disable SSH Access via Empty Passwords</td>
+      <td xml:lang="en-US">
+        Disallow SSH login with empty passwords.
+The default SSH configuration disables logins with empty passwords. The appropriate
+configuration is used if no value is set for <tt>PermitEmptyPasswords</tt>.
+<br />
+To explicitly disallow SSH login from accounts with empty passwords,
+add or correct the following line in
+
+
+
+
+<tt>/etc/ssh/sshd_config</tt>:
+
+<br />
+<pre>PermitEmptyPasswords no</pre>
+Any accounts with empty passwords should be disabled immediately, and PAM configuration
+should prevent users from being able to assign themselves empty passwords.
+      </td>
+      <td xml:lang="en-US">
+        Configuring this setting for the SSH daemon provides additional assurance
+that remote login via SSH will require a password, even in the event of
+misconfiguration elsewhere.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Disable Recovery Booting</td>
+      <td xml:lang="en-US">
+        Oracle Linux 7 systems support an "recovery boot" option that can be used
+to prevent services from being started. The <tt>GRUB_DISABLE_RECOVERY</tt>
+configuration option in <tt>/etc/default/grub</tt> should be set to
+<tt>true</tt> to disable the generation of recovery mode menu entries. It is
+also required to change the runtime configuration, run:
+<pre>$ sudo grubby --update-kernel=ALL</pre>
+      </td>
+      <td xml:lang="en-US">
+        Using recovery boot, the console user could disable auditing, firewalls,
+or other services, weakening system security.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Disable debug-shell SystemD Service</td>
+      <td xml:lang="en-US">
+        SystemD's <tt>debug-shell</tt> service is intended to
+diagnose SystemD related boot issues with various <tt>systemctl</tt>
+commands. Once enabled and following a system reboot, the root shell
+will be available on <tt>tty9</tt> which is access by pressing
+<tt>CTRL-ALT-F9</tt>. The <tt>debug-shell</tt> service should only be used
+for SystemD related issues and should otherwise be disabled.
+<br /><br />
+By default, the <tt>debug-shell</tt> SystemD service is already disabled.
+
+The <code>debug-shell</code> service can be disabled with the following command:
+<pre>$ sudo systemctl mask --now debug-shell.service</pre>
+      </td>
+      <td xml:lang="en-US">
+        This prevents attackers with physical access from trivially bypassing security
+on the machine through valid troubleshooting configurations and gaining root
+access when the system is rebooted.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Require Authentication for Single User Mode</td>
+      <td xml:lang="en-US">
+        Single-user mode is intended as a system recovery
+method, providing a single user root access to the system by
+providing a boot option at startup.
+<br /><br />
+By default, single-user mode is protected by requiring a password and is set
+in <tt>/usr/lib/systemd/system/rescue.service</tt>.
+      </td>
+      <td xml:lang="en-US">
+        This prevents attackers with physical access from trivially bypassing security
+on the machine and gaining root access. Such accesses are further prevented
+by configuring the bootloader password.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Set Boot Loader Password in grub2</td>
+      <td xml:lang="en-US">
+        The grub2 boot loader should have a superuser account and password
+protection enabled to protect boot-time settings.
+<br /><br />
+Since plaintext passwords are a security risk, generate a hash for the password
+by running the following command:
+
+<pre># grub2-setpassword</pre>
+
+When prompted, enter the password that was selected.
+<br /><br />
+      </td>
+      <td xml:lang="en-US">
+        Password protection on the boot loader configuration ensures
+users with physical access cannot trivially alter
+important bootloader settings. These include which kernel to use,
+and whether to enter single-user mode.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Prevent Login to Accounts With Empty Password</td>
+      <td xml:lang="en-US">
+        If an account is configured for password authentication
+but does not have an assigned password, it may be possible to log
+into the account without authentication. Remove any instances of the
+<tt>nullok</tt> in
+
+<tt>/etc/pam.d/system-auth</tt> and
+<tt>/etc/pam.d/password-auth</tt>
+
+to prevent logins with empty passwords.
+      </td>
+      <td xml:lang="en-US">
+        If an account has an empty password, anyone could log in and
+run commands with the privileges of that account. Accounts with
+empty passwords should never be used in operational environments.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Disable Host-Based Authentication</td>
+      <td xml:lang="en-US">
+        SSH's cryptographic host-based authentication is
+more secure than <tt>.rhosts</tt> authentication. However, it is
+not recommended that hosts unilaterally trust one another, even
+within an organization.
+<br />
+The default SSH configuration disables host-based authentication. The appropriate
+configuration is used if no value is set for <tt>HostbasedAuthentication</tt>.
+<br />
+To explicitly disable host-based authentication, add or correct the
+following line in
+
+
+
+
+<tt>/etc/ssh/sshd_config</tt>:
+
+<pre>HostbasedAuthentication no</pre>
+      </td>
+      <td xml:lang="en-US">
+        SSH trust relationships mean a compromise on one host
+can allow an attacker to move trivially to other hosts.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1<br/>FIA_AFL.1</td>
+      <td>Enable authselect</td>
+      <td xml:lang="en-US">
+        Configure user authentication setup to use the <tt>authselect</tt> tool.
+If authselect profile is selected, the rule will enable the <abbr title="$var_authselect_profile"><tt>minimal</tt></abbr> profile.
+      </td>
+      <td xml:lang="en-US">
+        Authselect is a successor to authconfig.
+It is a tool to select system authentication and identity sources from a list of supported
+profiles instead of letting the administrator manually build the PAM stack.
+
+That way, it avoids potential breakage of configuration, as it ships several tested profiles
+that are well tested and supported to solve different use-cases.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Ensure debug-shell service is not enabled during boot</td>
+      <td xml:lang="en-US">
+        systemd's <tt>debug-shell</tt> service is intended to
+diagnose systemd related boot issues with various <tt>systemctl</tt>
+commands. Once enabled and following a system reboot, the root shell
+will be available on <tt>tty9</tt> which is access by pressing
+<tt>CTRL-ALT-F9</tt>. The <tt>debug-shell</tt> service should only be used
+for systemd related issues and should otherwise be disabled.
+<br /><br />
+By default, the <tt>debug-shell</tt> systemd service is already disabled.
+
+Ensure the debug-shell is not enabled by the <tt>systemd.debug-shel=1</tt>
+boot parameter option.
+
+Check that the line <pre>GRUB_CMDLINE_LINUX="..."</pre> within <tt>/etc/default/grub</tt>
+doesn't contain the argument <tt>systemd.debug-shell</tt>.
+Run the following command to update command line for already installed kernels:
+<pre># grubby --update-kernel=ALL --remove-args="systemd.debug-shell"</pre>
+      </td>
+      <td xml:lang="en-US">
+        This prevents attackers with physical access from trivially bypassing security
+on the machine through valid troubleshooting configurations and gaining root
+access when the system is rebooted.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.1</td>
+      <td>Set the UEFI Boot Loader Password</td>
+      <td xml:lang="en-US">
+        The grub2 boot loader should have a superuser account and password
+protection enabled to protect boot-time settings.
+<br /><br />
+Since plaintext passwords are a security risk, generate a hash for the password
+by running the following command:
+
+<pre># grub2-setpassword</pre>
+
+When prompted, enter the password that was selected.
+<br /><br />
+      </td>
+      <td xml:lang="en-US">
+        Password protection on the boot loader configuration ensures
+users with physical access cannot trivially alter
+important bootloader settings. These include which kernel to use,
+and whether to enter single-user mode.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.5<br/>FTP_ITC_EXT.1<br/>FCS_SSH_EXT.1<br/>FCS_SSHC_EXT.1</td>
+      <td>Install OpenSSH client software</td>
+      <td xml:lang="en-US">
+        The <code>openssh-clients</code> package can be installed with the following command:
+<pre>
+$ sudo yum install openssh-clients</pre>
+      </td>
+      <td xml:lang="en-US">
+        This package includes utilities to make encrypted connections and transfer
+files securely to SSH servers.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_UAU.5<br/>FTP_ITC_EXT.1<br/>FCS_SSH_EXT.1<br/>FCS_SSHS_EXT.1</td>
+      <td>Install the OpenSSH Server Package</td>
+      <td xml:lang="en-US">
+        The <tt>openssh-server</tt> package should be installed.
+The <code>openssh-server</code> package can be installed with the following command:
+<pre>
+$ sudo yum install openssh-server</pre>
+      </td>
+      <td xml:lang="en-US">
+        Without protection of the transmitted information, confidentiality, and
+integrity may be compromised because unprotected communications can be
+intercepted and either read or altered.
+      </td>
+    </tr>
+    <tr>
+      <td>FIA_X509_EXT.1<br/>FIA_X509_EXT.1.1<br/>FIA_X509_EXT.2</td>
+      <td>Ensure gnutls-utils is installed</td>
+      <td xml:lang="en-US">
+        The <code>gnutls-utils</code> package can be installed with the following command:
+<pre>
+$ sudo yum install gnutls-utils</pre>
+      </td>
+      <td xml:lang="en-US">
+        GnuTLS is a secure communications library implementing the SSL, TLS and DTLS
+protocols and technologies around them. It provides a simple C language
+application programming interface (API) to access the secure communications
+protocols as well as APIs to parse and write X.509, PKCS #12, OpenPGP and
+other required structures.
+This package contains command line TLS client and server and certificate
+manipulation tools.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_MOF_EXT.1</td>
+      <td>Ensure Software Patches Installed</td>
+      <td xml:lang="en-US">
+        
+If the system is joined to the ULN
+or a yum server, run the following command to install updates:
+<pre>$ sudo yum update</pre>
+If the system is not configured to use one of these sources, updates (in the form of RPM packages)
+can be manually downloaded from the ULN and installed using <tt>rpm</tt>.
+
+<br /><br />
+NOTE: U.S. Defense systems are required to be patched within 30 days or sooner as local policy
+dictates.
+      </td>
+      <td xml:lang="en-US">
+        Installing software updates is a fundamental mitigation against
+the exploitation of publicly-known vulnerabilities. If the most
+recent security patches and updates are not installed, unauthorized
+users may take advantage of weaknesses in the unpatched software. The
+lack of prompt attention to patching could result in a system compromise.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_MOF_EXT.1</td>
+      <td>Install sudo Package</td>
+      <td xml:lang="en-US">
+        The <code>sudo</code> package can be installed with the following command:
+<pre>
+$ sudo yum install sudo</pre>
+      </td>
+      <td xml:lang="en-US">
+        <tt>sudo</tt> is a program designed to allow a system administrator to give
+limited root privileges to users and log root activity. The basic philosophy
+is to give as few privileges as possible but still allow system users to
+get their work done.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_MOF_EXT.1</td>
+      <td>Configure SELinux Policy</td>
+      <td xml:lang="en-US">
+        The SELinux <tt>targeted</tt> policy is appropriate for
+general-purpose desktops and servers, as well as systems in many other roles.
+To configure the system to use this policy, add or correct the following line
+in <tt>/etc/selinux/config</tt>:
+<pre>SELINUXTYPE=<abbr title="$var_selinux_policy_name"><tt>targeted</tt></abbr></pre>
+Other policies, such as <tt>mls</tt>, provide additional security labeling
+and greater confinement but are not compatible with many general-purpose
+use cases.
+      </td>
+      <td xml:lang="en-US">
+        Setting the SELinux policy to <tt>targeted</tt> or a more specialized policy
+ensures the system will confine processes that are likely to be
+targeted for exploitation, such as network or system services.
+<br /><br />
+Note: During the development or debugging of SELinux modules, it is common to
+temporarily place non-production systems in <tt>permissive</tt> mode. In such
+temporary cases, SELinux policies should be developed, and once work
+is completed, the system should be reconfigured to
+<tt><sub idref="var_selinux_policy_name" /></tt>.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_MOF_EXT.1</td>
+      <td>Ensure SELinux State is Enforcing</td>
+      <td xml:lang="en-US">
+        The SELinux state should be set to <tt><abbr title="$var_selinux_state"><tt>enforcing</tt></abbr></tt> at
+system boot time.  In the file <tt>/etc/selinux/config</tt>, add or correct the
+following line to configure the system to boot into enforcing mode:
+<pre>SELINUX=<abbr title="$var_selinux_state"><tt>enforcing</tt></abbr></pre>
+Ensure that all files have correct SELinux labels by running:
+<pre>fixfiles onboot</pre>
+Then reboot the system.
+      </td>
+      <td xml:lang="en-US">
+        Setting the SELinux state to enforcing ensures SELinux is able to confine
+potentially compromised processes to the security policy, which is designed to
+prevent them from causing damage to the system or further elevating their
+privileges.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_MOF_EXT.1</td>
+      <td>Install the screen Package</td>
+      <td xml:lang="en-US">
+        To enable console screen locking, install the <tt>screen</tt> package.
+The <code>screen</code> package can be installed with the following command:
+<pre>
+$ sudo yum install screen</pre>
+Instruct users to begin new terminal sessions with the following command:
+<pre>$ screen</pre>
+The console can now be locked with the following key combination:
+<pre>ctrl+a x</pre>
+      </td>
+      <td xml:lang="en-US">
+        A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate
+physical vicinity of the information system but does not logout because of the temporary nature of the absence.
+Rather than relying on the user to manually lock their operation system session prior to vacating the vicinity,
+operating systems need to be able to identify when a user's session has idled and take action to initiate the
+session lock.
+<br /><br />
+The <tt>screen</tt> package allows for a session lock to be implemented and configured.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable Kernel Image Loading</td>
+      <td xml:lang="en-US">
+        To set the runtime status of the <code>kernel.kexec_load_disabled</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.kexec_load_disabled=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <tt>/etc/sysctl.d</tt>: <pre>kernel.kexec_load_disabled = 1</pre>
+      </td>
+      <td xml:lang="en-US">
+        Disabling kexec_load allows greater control of the kernel memory.
+It makes it impossible to load another kernel image after it has been disabled.
+
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable CAN Support</td>
+      <td xml:lang="en-US">
+        The Controller Area Network (CAN) is a serial communications
+protocol which was initially developed for automotive and
+is now also used in marine, industrial, and medical applications.
+
+To configure the system to prevent the <code>can</code>
+kernel module from being loaded, add the following line to the file <code>/etc/modprobe.d/can.conf</code>:
+<pre>install can /bin/false</pre>
+This entry will cause a non-zero return value during a <code>can</code> module installation
+and additionally convey the meaning of the entry to the user in form of an error message.
+If you would like to omit a non-zero return value and an error message, you may want to add a different line instead
+(both <code>/bin/true</code> and <code>/bin/false</code> are allowed by OVAL and will be accepted by the scan):
+<pre>install can /bin/true</pre>
+
+To configure the system to prevent the <code>can</code> from being used,
+add the following line to file <code>/etc/modprobe.d/can.conf</code>:
+<pre>blacklist can</pre>
+      </td>
+      <td xml:lang="en-US">
+        Disabling CAN protects the system against exploitation of any
+flaws in its implementation.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1<br/>FMT_MOF_EXT.1<br/>FTA_SSL.1</td>
+      <td>Configure the tmux Lock Command</td>
+      <td xml:lang="en-US">
+        To enable console screen locking in <tt>tmux</tt> terminal multiplexer,
+the <tt>vlock</tt> command must be configured to be used as a locking
+mechanism.
+Add the following line to <tt>/etc/tmux.conf</tt>:
+<pre>set -g lock-command vlock</pre>.
+The console can now be locked with the following key combination:
+<pre>ctrl+b :lock-session</pre>
+      </td>
+      <td xml:lang="en-US">
+        The <tt>tmux</tt> package allows for a session lock to be implemented and configured.
+However, the session lock is implemented by an external command. The <tt>tmux</tt>
+default configuration does not contain an effective session lock.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Restrict Exposed Kernel Pointer Addresses Access</td>
+      <td xml:lang="en-US">
+        To set the runtime status of the <code>kernel.kptr_restrict</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.kptr_restrict=<abbr title="$sysctl_kernel_kptr_restrict_value"><tt>1</tt></abbr></pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <tt>/etc/sysctl.d</tt>: <pre>kernel.kptr_restrict = <abbr title="$sysctl_kernel_kptr_restrict_value"><tt>1</tt></abbr></pre>
+      </td>
+      <td xml:lang="en-US">
+        Exposing kernel pointers (through procfs or <tt>seq_printf()</tt>) exposes kernel
+writeable structures which may contain functions pointers. If a write vulnerability
+occurs in the kernel, allowing write access to any of this structure, the kernel can
+be compromised. This option disallow any program without the CAP_SYSLOG capability
+to get the addresses of kernel pointers by replacing them with 0.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Install usbguard Package</td>
+      <td xml:lang="en-US">
+        
+The <code>usbguard</code> package can be installed with the following command:
+<pre>
+$ sudo yum install usbguard</pre>
+      </td>
+      <td xml:lang="en-US">
+        <tt>usbguard</tt> is a software framework that helps to protect
+against rogue USB devices by implementing basic whitelisting/blacklisting
+capabilities based on USB device attributes.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Enable dnf-automatic Timer</td>
+      <td xml:lang="en-US">
+        
+The <code>dnf-automatic</code> timer can be enabled with the following command:
+<pre>$ sudo systemctl enable dnf-automatic.timer</pre>
+      </td>
+      <td xml:lang="en-US">
+        The <tt>dnf-automatic</tt> is an alternative command line interface (CLI) to <tt>dnf upgrade</tt> with specific facilities to make it suitable to be executed automatically and regularly from systemd timers, cron jobs and similar.
+The tool is controlled by <tt>dnf-automatic.timer</tt> SystemD timer.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Install firewalld Package</td>
+      <td xml:lang="en-US">
+        The <code>firewalld</code> package can be installed with the following command:
+<pre>
+$ sudo yum install firewalld</pre>
+      </td>
+      <td xml:lang="en-US">
+        "Firewalld" provides an easy and effective way to block/limit remote access to the system via ports, services, and protocols.
+
+Remote access services, such as those providing remote access to network devices and information systems, which lack automated control capabilities, increase risk and make remote user access management difficult at best.
+
+Remote access is access to nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
+
+Oracle Linux 7 functionality (e.g., SSH) must be capable of taking enforcement action if the audit reveals unauthorized activity.
+Automated control of remote access sessions allows organizations to ensure ongoing compliance with remote access policies by enforcing connection rules of remote access applications on a variety of information system components (e.g., servers, workstations, notebook computers, smartphones, and tablets)."
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>The Chrony package is installed</td>
+      <td xml:lang="en-US">
+        System time should be synchronized between all systems in an environment. This is
+typically done by establishing an authoritative time server or set of servers and having all
+systems synchronize their clocks to them.
+The <code>chrony</code> package can be installed with the following command:
+<pre>
+$ sudo yum install chrony</pre>
+      </td>
+      <td xml:lang="en-US">
+        Time synchronization is important to support time sensitive security mechanisms like
+Kerberos and also ensures log files have consistent time records across the enterprise,
+which aids in forensic investigations.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1<br/>FMT_MOF_EXT.1<br/>FTA_SSL.1</td>
+      <td>Configure tmux to lock session after inactivity</td>
+      <td xml:lang="en-US">
+        To enable console screen locking in <tt>tmux</tt> terminal multiplexer
+after a period of inactivity,
+the <tt>lock-after-time</tt> option has to be set to a value greater than 0 and less than
+or equal to 900 in <tt>/etc/tmux.conf</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Locking the session after a period of inactivity limits the
+potential exposure if the session is left unattended.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Install fapolicyd Package</td>
+      <td xml:lang="en-US">
+        The <code>fapolicyd</code> package can be installed with the following command:
+<pre>
+$ sudo yum install fapolicyd</pre>
+      </td>
+      <td xml:lang="en-US">
+        <tt>fapolicyd</tt> (File Access Policy Daemon)
+implements application whitelisting to decide file access rights.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1<br/>FMT_MOF_EXT.1<br/>FTA_SSL.1</td>
+      <td>Support session locking with tmux</td>
+      <td xml:lang="en-US">
+        The <tt>tmux</tt> terminal multiplexer is used to implement
+automatic session locking. It should be started from
+<tt>/etc/bashrc</tt> or drop-in files within <tt>/etc/profile.d/</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Unlike <tt>bash</tt> itself, the <tt>tmux</tt> terminal multiplexer
+provides a mechanism to lock sessions after period of inactivity.
+A session lock is a temporary action taken when a user stops work and moves away from the
+immediate physical vicinity of the information system but does not want to
+log out because of the temporary nature of the absence.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Ensure PAM Enforces Password Requirements - Minimum Length</td>
+      <td xml:lang="en-US">
+        The pam_pwquality module's <tt>minlen</tt> parameter controls requirements for
+minimum characters required in a password. Add <tt>minlen=<abbr title="$var_password_pam_minlen"><tt>15</tt></abbr></tt>
+after pam_pwquality to set minimum password length requirements.
+      </td>
+      <td xml:lang="en-US">
+        The shorter the password, the lower the number of possible combinations
+that need to be tested before the password is compromised.
+<br />
+Password complexity, or strength, is a measure of the effectiveness of a
+password in resisting attempts at guessing and brute-force attacks.
+Password length is one factor of several that helps to determine strength
+and how long it takes to crack a password. Use of more characters in a password
+helps to exponentially increase the time and/or resources required to
+compromise the password.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Ensure /var/log/audit Located On Separate Partition</td>
+      <td xml:lang="en-US">
+        Audit logs are stored in the <tt>/var/log/audit</tt> directory.
+
+Ensure that <code>/var/log/audit</code> has its own partition or logical
+volume at installation time, or migrate it using LVM.
+Make absolutely certain that it is large enough to store all
+audit logs that will be created by the auditing daemon.
+      </td>
+      <td xml:lang="en-US">
+        Placing <tt>/var/log/audit</tt> in its own partition
+enables better separation between audit files
+and other files, and helps ensure that
+auditing cannot be halted due to the partition running out
+of space.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disallow kernel profiling by unprivileged users</td>
+      <td xml:lang="en-US">
+        To set the runtime status of the <code>kernel.perf_event_paranoid</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.perf_event_paranoid=2</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <tt>/etc/sysctl.d</tt>: <pre>kernel.perf_event_paranoid = 2</pre>
+      </td>
+      <td xml:lang="en-US">
+        Kernel profiling can reveal sensitive information about kernel behaviour.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable the use of user namespaces</td>
+      <td xml:lang="en-US">
+        To set the runtime status of the <code>user.max_user_namespaces</code> kernel parameter,
+run the following command:
+<pre>$ sudo sysctl -w user.max_user_namespaces=0</pre>
+
+To make sure that the setting is persistent,
+add the following line to a file in the directory <tt>/etc/sysctl.d</tt>:
+<pre>user.max_user_namespaces = 0</pre>
+When containers are deployed on the machine, the value should be set
+to large non-zero value.
+      </td>
+      <td xml:lang="en-US">
+        It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or system objectives.
+These unnecessary capabilities or services are often overlooked and therefore may remain unsecured.
+They increase the risk to the platform by providing additional attack vectors.
+User namespaces are used primarily for Linux containers. The value 0
+disallows the use of user namespaces.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Add noexec Option to /var/log/audit</td>
+      <td xml:lang="en-US">
+        The <tt>noexec</tt> mount option can be used to prevent binaries
+from being executed out of <tt>/var/log/audit</tt>.
+Add the <code>noexec</code> option to the fourth column of
+<tt>/etc/fstab</tt> for the line which controls mounting of
+<code>/var/log/audit</code>.
+      </td>
+      <td xml:lang="en-US">
+        Allowing users to execute binaries from directories containing audit log files
+such as <tt>/var/log/audit</tt> should never be necessary in normal operation and
+can expose the system to potential compromise.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Ensure nss-tools is installed</td>
+      <td xml:lang="en-US">
+        The <code>nss-tools</code> package can be installed with the following command:
+<pre>
+$ sudo yum install nss-tools</pre>
+      </td>
+      <td xml:lang="en-US">
+        Network Security Services (NSS) is a set of libraries designed to
+support cross-platform development of security-enabled client and
+server applications. Install the <tt>nss-tools</tt> package
+to install command-line tools to manipulate the NSS certificate
+and key database.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Enable the USBGuard Service</td>
+      <td xml:lang="en-US">
+        The USBGuard service should be enabled.
+
+The <code>usbguard</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable usbguard.service</pre>
+      </td>
+      <td xml:lang="en-US">
+        The <tt>usbguard</tt> service must be running in order to
+enforce the USB device authorization policy for all USB devices.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Configure dnf-automatic to Install Available Updates Automatically</td>
+      <td xml:lang="en-US">
+        To ensure that the packages comprising the available updates will be automatically installed by <tt>dnf-automatic</tt>, set <tt>apply_updates</tt> to <tt>yes</tt> under <tt>[commands]</tt> section in <tt>/etc/dnf/automatic.conf</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Installing software updates is a fundamental mitigation against
+the exploitation of publicly-known vulnerabilities. If the most
+recent security patches and updates are not installed, unauthorized
+users may take advantage of weaknesses in the unpatched software. The
+lack of prompt attention to patching could result in a system compromise.
+The automated installation of updates ensures that recent security patches
+are applied in a timely manner.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1<br/>FMT_MOF_EXT.1<br/>FTA_SSL.1</td>
+      <td>Install the tmux Package</td>
+      <td xml:lang="en-US">
+        To enable console screen locking, install the <tt>tmux</tt> package.
+The <code>tmux</code> package can be installed with the following command:
+<pre>
+$ sudo yum install tmux</pre>
+A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not want to log out because of the temporary nature of the absence.
+The session lock is implemented at the point where session activity can be determined.
+Rather than be forced to wait for a period of time to expire before the user session can be locked, Oracle Linux 7 needs to provide users with the ability to manually invoke a session lock so users can secure their session if it is necessary to temporarily vacate the immediate physical vicinity.
+Instruct users to begin new terminal sessions with the following command:
+<pre>$ tmux</pre>
+The console can now be locked with the following key combination:
+<pre>ctrl+b :lock-session</pre>
+      </td>
+      <td xml:lang="en-US">
+        A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate
+physical vicinity of the information system but does not logout because of the temporary nature of the absence.
+Rather than relying on the user to manually lock their operation system session prior to vacating the vicinity,
+operating systems need to be able to identify when a user's session has idled and take action to initiate the
+session lock.
+<br /><br />
+The <tt>tmux</tt> package allows for a session lock to be implemented and configured.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Ensure PAM Enforces Password Requirements - Minimum Uppercase Characters</td>
+      <td xml:lang="en-US">
+        The pam_pwquality module's <tt>ucredit=</tt> parameter controls requirements for
+usage of uppercase letters in a password. When set to a negative number, any password will be required to
+contain that many uppercase characters. When set to a positive number, pam_pwquality will grant +1 additional
+length credit for each uppercase character. Modify the <tt>ucredit</tt> setting in
+<tt>/etc/security/pwquality.conf</tt> to require the use of an uppercase character in passwords.
+      </td>
+      <td xml:lang="en-US">
+        Use of a complex password helps to increase the time and resources required to compromise the password.
+Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts
+at guessing and brute-force attacks.
+<br /><br />
+Password complexity is one factor of several that determines how long it takes to crack a password. The more
+complex the password, the greater the number of possible combinations that need to be tested before
+the password is compromised.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable Bluetooth Kernel Module</td>
+      <td xml:lang="en-US">
+        The kernel's module loading system can be configured to prevent
+loading of the Bluetooth module. Add the following to
+the appropriate <tt>/etc/modprobe.d</tt> configuration file
+to prevent the loading of the Bluetooth module:
+<pre>install bluetooth /bin/true</pre>
+      </td>
+      <td xml:lang="en-US">
+        If Bluetooth functionality must be disabled, preventing the kernel
+from loading the kernel module provides an additional safeguard against its
+activation.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Restrict usage of ptrace to descendant processes</td>
+      <td xml:lang="en-US">
+        To set the runtime status of the <code>kernel.yama.ptrace_scope</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.yama.ptrace_scope=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <tt>/etc/sysctl.d</tt>: <pre>kernel.yama.ptrace_scope = 1</pre>
+      </td>
+      <td xml:lang="en-US">
+        Unrestricted usage of ptrace allows compromised binaries to run ptrace
+on another processes of the user. Like this, the attacker can steal
+sensitive information from the target processes (e.g. SSH sessions, web browser, ...)
+without any additional assistance from the user (i.e. without resorting to phishing).
+
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Ensure PAM Enforces Password Requirements - Minimum Lowercase Characters</td>
+      <td xml:lang="en-US">
+        The pam_pwquality module's <tt>lcredit</tt> parameter controls requirements for
+usage of lowercase letters in a password. When set to a negative number, any password will be required to
+contain that many lowercase characters. When set to a positive number, pam_pwquality will grant +1 additional
+length credit for each lowercase character. Modify the <tt>lcredit</tt> setting in
+<tt>/etc/security/pwquality.conf</tt> to require the use of a lowercase character in passwords.
+      </td>
+      <td xml:lang="en-US">
+        Use of a complex password helps to increase the time and resources required
+to compromise the password. Password complexity, or strength, is a measure of
+the effectiveness of a password in resisting attempts at guessing and brute-force
+attacks.
+<br />
+Password complexity is one factor of several that determines how long it takes
+to crack a password. The more complex the password, the greater the number of
+possible combinations that need to be tested before the password is compromised.
+Requiring a minimum number of lowercase characters makes password guessing attacks
+more difficult by ensuring a larger search space.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Configure file name of core dumps</td>
+      <td xml:lang="en-US">
+        To set the runtime status of the <code>kernel.core_uses_pid</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.core_uses_pid=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <tt>/etc/sysctl.d</tt>: <pre>kernel.core_uses_pid = 0</pre>
+      </td>
+      <td xml:lang="en-US">
+        The default coredump filename is <tt>core</tt>. By setting
+<tt>core_uses_pid</tt> to <tt>1</tt>, the coredump filename becomes
+<tt>core.PID</tt>. If <tt>core_pattern</tt> does not include
+<tt>%p</tt> (default does not) and <tt>core_uses_pid</tt> is set, then
+<tt>.PID</tt> will be appended to the filename.
+When combined with <tt>kernel.core_pattern = ""</tt> configuration, it
+is ensured that no core dumps are generated and also no confusing error
+messages are printed by a shell.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable storing core dumps</td>
+      <td xml:lang="en-US">
+        The <tt>kernel.core_pattern</tt> option specifies the core dumpfile pattern
+name. It can be set to an empty string. In this case, the kernel
+behaves differently based on another related option. If
+<tt>kernel.core_uses_pid</tt> is set to <tt>1</tt>, then a file named as
+<tt>.PID</tt> (where <tt>PID</tt> is process ID of the crashed process) is
+created in the working directory. If <tt>kernel.core_uses_pid</tt> is set to
+<tt>0</tt>, no coredump is saved.
+To set the runtime status of the <code>kernel.core_pattern</code> kernel parameter,
+run the following command:
+<pre>$ sudo sysctl -w kernel.core_pattern=</pre>
+
+To make sure that the setting is persistent,
+add the following line to a file in the directory <tt>/etc/sysctl.d</tt>:
+<pre>kernel.core_pattern = </pre>
+      </td>
+      <td xml:lang="en-US">
+        A core dump includes a memory image taken at the time the operating system
+terminates an application. The memory image could contain sensitive data and is generally useful
+only for developers trying to debug problems.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable Access to Network bpf() Syscall From Unprivileged Processes</td>
+      <td xml:lang="en-US">
+        To prevent unprivileged processes from using the <code>bpf()</code> syscall
+the <code>kernel.unprivileged_bpf_disabled</code> kernel parameter must
+be set to <code>1</code> or <code>2</code>.
+
+Writing <code>1</code> to this entry will disable unprivileged calls to <code>bpf()</code>; once
+disabled, calling <code>bpf()</code> without <code>CAP_SYS_ADMIN</code> or <code>CAP_BPF</code> will return <code>-EPERM</code>.
+Once set to <code>1</code>, this can't be cleared from the running kernel anymore.
+
+To set the runtime status of the <code>kernel.unprivileged_bpf_disabled</code> kernel parameter,
+run the following command:
+<pre>$ sudo sysctl -w kernel.unprivileged_bpf_disabled=1</pre>
+
+To make sure that the setting is persistent,
+add the following line to a file in the directory <tt>/etc/sysctl.d</tt>:
+<pre>kernel.unprivileged_bpf_disabled = 1</pre>
+
+Writing <code>2</code> to this entry will also disable unprivileged calls to <code>bpf()</code>,
+however, an admin can still change this setting later on, if needed, by
+writing <code>0</code> or <code>1</code> to this entry.
+
+To set the runtime status of the <code>kernel.unprivileged_bpf_disabled</code> kernel parameter,
+run the following command:
+<pre>$ sudo sysctl -w kernel.unprivileged_bpf_disabled=2</pre>
+
+To make sure that the setting is persistent,
+add the following line to a file in the directory <tt>/etc/sysctl.d</tt>:
+<pre>kernel.unprivileged_bpf_disabled = 2</pre>
+      </td>
+      <td xml:lang="en-US">
+        Loading and accessing the packet filters programs and maps using the bpf()
+syscall has the potential of revealing sensitive information about the kernel state.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable acquiring, saving, and processing core dumps</td>
+      <td xml:lang="en-US">
+        The <tt>systemd-coredump.socket</tt> unit is a socket activation of
+the <tt>systemd-coredump@.service</tt> which processes core dumps.
+By masking the unit, core dump processing is disabled.
+      </td>
+      <td xml:lang="en-US">
+        A core dump includes a memory image taken at the time the operating system
+terminates an application. The memory image could contain sensitive data
+and is generally useful only for developers trying to debug problems.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable SCTP Support</td>
+      <td xml:lang="en-US">
+        The Stream Control Transmission Protocol (SCTP) is a
+transport layer protocol, designed to support the idea of
+message-oriented communication, with several streams of messages
+within one connection.
+
+To configure the system to prevent the <code>sctp</code>
+kernel module from being loaded, add the following line to the file <code>/etc/modprobe.d/sctp.conf</code>:
+<pre>install sctp /bin/false</pre>
+This entry will cause a non-zero return value during a <code>sctp</code> module installation
+and additionally convey the meaning of the entry to the user in form of an error message.
+If you would like to omit a non-zero return value and an error message, you may want to add a different line instead
+(both <code>/bin/true</code> and <code>/bin/false</code> are allowed by OVAL and will be accepted by the scan):
+<pre>install sctp /bin/true</pre>
+
+To configure the system to prevent the <code>sctp</code> from being used,
+add the following line to file <code>/etc/modprobe.d/sctp.conf</code>:
+<pre>blacklist sctp</pre>
+      </td>
+      <td xml:lang="en-US">
+        Disabling SCTP protects
+the system against exploitation of any flaws in its implementation.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Log USBGuard daemon audit events using Linux Audit</td>
+      <td xml:lang="en-US">
+        To configure USBGuard daemon to log via Linux Audit
+(as opposed directly to a file),
+<tt>AuditBackend</tt> option in <tt>/etc/usbguard/usbguard-daemon.conf</tt>
+needs to be set to <tt>LinuxAudit</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Using the Linux Audit logging allows for centralized trace
+of events.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Enable the File Access Policy Service</td>
+      <td xml:lang="en-US">
+        The File Access Policy service should be enabled.
+
+The <code>fapolicyd</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable fapolicyd.service</pre>
+      </td>
+      <td xml:lang="en-US">
+        The <tt>fapolicyd</tt> service (File Access Policy Daemon)
+implements application whitelisting to decide file access rights.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Ensure PAM Enforces Password Requirements - Minimum Digit Characters</td>
+      <td xml:lang="en-US">
+        The pam_pwquality module's <tt>dcredit</tt> parameter controls requirements for
+usage of digits in a password. When set to a negative number, any password will be required to
+contain that many digits. When set to a positive number, pam_pwquality will grant +1 additional
+length credit for each digit. Modify the <tt>dcredit</tt> setting in
+<tt>/etc/security/pwquality.conf</tt> to require the use of a digit in passwords.
+      </td>
+      <td xml:lang="en-US">
+        Use of a complex password helps to increase the time and resources required
+to compromise the password. Password complexity, or strength, is a measure of
+the effectiveness of a password in resisting attempts at guessing and brute-force
+attacks.
+<br /><br />
+Password complexity is one factor of several that determines how long it takes
+to crack a password. The more complex the password, the greater the number of
+possible combinations that need to be tested before the password is compromised.
+Requiring digits makes password guessing attacks more difficult by ensuring a larger
+search space.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Add nosuid Option to /var/log/audit</td>
+      <td xml:lang="en-US">
+        The <tt>nosuid</tt> mount option can be used to prevent
+execution of setuid programs in <tt>/var/log/audit</tt>. The SUID and SGID permissions
+should not be required in directories containing audit log files.
+Add the <code>nosuid</code> option to the fourth column of
+<tt>/etc/fstab</tt> for the line which controls mounting of
+<code>/var/log/audit</code>.
+      </td>
+      <td xml:lang="en-US">
+        The presence of SUID and SGID executables should be tightly controlled. Users
+should not be able to execute SUID or SGID binaries from partitions
+designated for audit log files.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Verify firewalld Enabled</td>
+      <td xml:lang="en-US">
+        
+The <code>firewalld</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable firewalld.service</pre>
+      </td>
+      <td xml:lang="en-US">
+        Access control methods provide the ability to enhance system security posture
+by restricting services and known good IP addresses and address ranges. This
+prevents connections from unknown hosts and protocols.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Authorize Human Interface Devices and USB hubs in USBGuard daemon</td>
+      <td xml:lang="en-US">
+        To allow authorization of USB devices combining human interface device and hub capabilities
+by USBGuard daemon,
+add the line
+<tt>allow with-interface match-all { 03:*:* 09:00:* }</tt>
+to <tt>/etc/usbguard/rules.conf</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Without allowing Human Interface Devices, it might not be possible
+to interact with the system. Without allowing hubs, it might not be possible to use any
+USB devices on the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable TIPC Support</td>
+      <td xml:lang="en-US">
+        The Transparent Inter-Process Communication (TIPC) protocol
+is designed to provide communications between nodes in a
+cluster.
+
+To configure the system to prevent the <code>tipc</code>
+kernel module from being loaded, add the following line to the file <code>/etc/modprobe.d/tipc.conf</code>:
+<pre>install tipc /bin/false</pre>
+This entry will cause a non-zero return value during a <code>tipc</code> module installation
+and additionally convey the meaning of the entry to the user in form of an error message.
+If you would like to omit a non-zero return value and an error message, you may want to add a different line instead
+(both <code>/bin/true</code> and <code>/bin/false</code> are allowed by OVAL and will be accepted by the scan):
+<pre>install tipc /bin/true</pre>
+
+To configure the system to prevent the <code>tipc</code> from being used,
+add the following line to file <code>/etc/modprobe.d/tipc.conf</code>:
+<pre>blacklist tipc</pre>
+      </td>
+      <td xml:lang="en-US">
+        Disabling TIPC protects
+the system against exploitation of any flaws in its implementation.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Ensure PAM Enforces Password Requirements - Minimum Special Characters</td>
+      <td xml:lang="en-US">
+        The pam_pwquality module's <tt>ocredit=</tt> parameter controls requirements for
+usage of special (or "other") characters in a password. When set to a negative number,
+any password will be required to contain that many special characters.
+When set to a positive number, pam_pwquality will grant +1
+additional length credit for each special character. Modify the <tt>ocredit</tt> setting
+in <tt>/etc/security/pwquality.conf</tt> to equal <abbr title="$var_password_pam_ocredit"><tt>-1</tt></abbr>
+to require use of a special character in passwords.
+      </td>
+      <td xml:lang="en-US">
+        Use of a complex password helps to increase the time and resources required
+to compromise the password. Password complexity, or strength, is a measure of
+the effectiveness of a password in resisting attempts at guessing and brute-force
+attacks.
+<br /><br />
+Password complexity is one factor of several that determines how long it takes
+to crack a password. The more complex the password, the greater the number of
+possible combinations that need to be tested before the password is compromised.
+Requiring a minimum number of special characters makes password guessing attacks
+more difficult by ensuring a larger search space.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Add nodev Option to /var/log/audit</td>
+      <td xml:lang="en-US">
+        The <tt>nodev</tt> mount option can be used to prevent device files from
+being created in <tt>/var/log/audit</tt>.
+Legitimate character and block devices should exist only in
+the <tt>/dev</tt> directory on the root partition or within chroot
+jails built for system services.
+Add the <code>nodev</code> option to the fourth column of
+<tt>/etc/fstab</tt> for the line which controls mounting of
+<code>/var/log/audit</code>.
+      </td>
+      <td xml:lang="en-US">
+        The only legitimate location for device files is the <tt>/dev</tt> directory
+located on the root partition. The only exception to this is chroot jails.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Disable chrony daemon from acting as server</td>
+      <td xml:lang="en-US">
+        The <tt>port</tt> option in <tt>/etc/chrony.conf</tt> can be set to
+<tt>0</tt> to make chrony daemon to never open any listening port
+for server operation and to operate strictly in a client-only mode.
+      </td>
+      <td xml:lang="en-US">
+        In order to prevent unauthorized connection of devices, unauthorized transfer of information, or unauthorized tunneling (i.e., embedding of data types within data types), organizations must disable or restrict unused or unnecessary physical and logical ports/protocols on information systems.
+Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services provided by default may not be necessary to support essential organizational operations. Additionally, it is sometimes convenient to provide multiple services from a single component (e.g., VPN and IPS); however, doing so increases risk over limiting the services provided by any one component.
+To support the requirements and principles of least functionality, the operating system must support the organizational requirements, providing only essential capabilities and limiting the use of ports, protocols, and/or services to only those required, authorized, and approved to conduct official business or to address authorized quality of life issues.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1</td>
+      <td>Restrict Access to Kernel Message Buffer</td>
+      <td xml:lang="en-US">
+        To set the runtime status of the <code>kernel.dmesg_restrict</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.dmesg_restrict=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <tt>/etc/sysctl.d</tt>: <pre>kernel.dmesg_restrict = 1</pre>
+      </td>
+      <td xml:lang="en-US">
+        Unprivileged access to the kernel syslog can expose sensitive kernel
+address information.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1<br/>FMT_MOF_EXT.1<br/>FTA_SSL.1</td>
+      <td>Prevent user from disabling the screen lock</td>
+      <td xml:lang="en-US">
+        The <tt>tmux</tt> terminal multiplexer is used to implement
+automatic session locking. It should not be listed in
+<tt>/etc/shells</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Not listing <tt>tmux</tt> among permitted shells
+prevents malicious program running as user
+from lowering security by disabling the screen lock.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1.1</td>
+      <td>Disable KDump Kernel Crash Analyzer (kdump)</td>
+      <td xml:lang="en-US">
+        The <tt>kdump</tt> service provides a kernel crash dump analyzer. It uses the <tt>kexec</tt>
+system call to boot a secondary kernel ("capture" kernel) following a system
+crash, which can load information from the crashed kernel for analysis.
+
+The <code>kdump</code> service can be disabled with the following command:
+<pre>$ sudo systemctl mask --now kdump.service</pre>
+      </td>
+      <td xml:lang="en-US">
+        Kernel core dumps may contain the full contents of system memory at the
+time of the crash. Kernel core dumps consume a considerable amount of disk
+space and may result in denial of service by exhausting the available space
+on the target file system partition. Unless the system is used for kernel
+development or testing, there is little need to run the kdump service.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1.1</td>
+      <td>Configure Logind to terminate idle sessions after certain time of inactivity</td>
+      <td xml:lang="en-US">
+        To configure <tt>logind</tt> service to terminate inactive user sessions
+after <abbr title="$var_logind_session_timeout"><tt>300</tt></abbr> seconds, edit the file
+<tt>/etc/systemd/logind.conf</tt>. Ensure that there is a section
+<pre>[Login]</pre> which contains the configuration
+<pre>StopIdleSessionSec=<abbr title="$var_logind_session_timeout"><tt>300</tt></abbr></pre>.
+      </td>
+      <td xml:lang="en-US">
+        Terminating an idle session within a short time period reduces the window of
+opportunity for unauthorized personnel to take control of a management
+session enabled on the console or console port that has been let unattended.
+      </td>
+    </tr>
+    <tr>
+      <td>FMT_SMF_EXT.1.1</td>
+      <td>Enforce usage of pam_wheel for su authentication</td>
+      <td xml:lang="en-US">
+        To ensure that only users who are members of the <tt>wheel</tt> group can
+run commands with altered privileges through the <tt>su</tt> command, make
+sure that the following line exists in the file <tt>/etc/pam.d/su</tt>:
+<pre>auth required pam_wheel.so use_uid</pre>
+      </td>
+      <td xml:lang="en-US">
+        The <tt>su</tt> program allows to run commands with a substitute user and
+group ID. It is commonly used to run commands as the root user. Limiting
+access to such command is considered a good security practice.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_ASLR_EXT.1</td>
+      <td>Disable vsyscalls</td>
+      <td xml:lang="en-US">
+        To disable use of virtual syscalls,
+add the argument <tt>vsyscall=none</tt> to the default
+GRUB 2 command line for the Linux operating system.
+To ensure that <tt>vsyscall=none</tt> is added as a kernel command line
+argument to newly installed kernels, add <tt>vsyscall=none</tt> to the
+default Grub2 command line for Linux operating systems. Modify the line within
+<tt>/etc/default/grub</tt> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... vsyscall=none ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="vsyscall=none"</pre>
+      </td>
+      <td xml:lang="en-US">
+        Virtual Syscalls provide an opportunity of attack for a user who has control
+of the return instruction pointer.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_ASLR_EXT.1</td>
+      <td>Disable vsyscalls in zIPL</td>
+      <td xml:lang="en-US">
+        To disable use of virtual syscalls,
+check that all boot entries in <tt>/boot/loader/entries/*.conf</tt> have <tt>vsyscall=none</tt>
+included in its options.<br />
+To ensure that new kernels and boot entries continue to disable virtual syscalls,
+add <tt>vsyscall=none</tt> to <tt>/etc/kernel/cmdline</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Virtual Syscalls provide an opportunity of attack for a user who has control
+of the return instruction pointer.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TST_EXT.1</td>
+      <td>Ensure zIPL bootmap is up to date</td>
+      <td xml:lang="en-US">
+        Make sure that <tt>/boot/bootmap</tt> is up to date.<br />
+Every time a boot entry or zIPL configuration is changed <tt>/boot/bootmap</tt> needs to
+be updated to reflect the changes.<br />
+Run <tt>zipl</tt> command to generate an updated <tt>/boot/bootmap</tt>.
+      </td>
+      <td xml:lang="en-US">
+        The file <tt>/boot/bootmap</tt> contains all boot data, keeping it up to date is crucial to
+boot correct kernel and options.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TST_EXT.1</td>
+      <td>Ensure all zIPL boot entries are BLS compliant</td>
+      <td xml:lang="en-US">
+        Ensure that zIPL boot entries fully adheres to Boot Loader Specification (BLS)
+by checking that <tt>/etc/zipl.conf</tt> doesn't contain <tt>image = </tt>.
+      </td>
+      <td xml:lang="en-US">
+        Oracle Linux 7 adheres to Boot Loader Specification (BLS) and is the preferred method of
+configuration.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Install libdnf-plugin-subscription-manager Package</td>
+      <td xml:lang="en-US">
+        The <code>libdnf-plugin-subscription-manager</code> package can be installed with the following command:
+<pre>
+$ sudo yum install libdnf-plugin-subscription-manager</pre>
+      </td>
+      <td xml:lang="en-US">
+        This package provides plugins to interact with repositories and subscriptions
+from the Red Hat entitlement platform; contains subscription-manager and
+product-id plugins.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Ensure Red Hat GPG Key Installed</td>
+      <td xml:lang="en-US">
+        To ensure the system can cryptographically verify base software packages
+come from Red Hat (and to connect to the Red Hat Network to receive them),
+the Red Hat GPG key must properly be installed.
+
+
+To install the Red Hat GPG key, run:
+<pre>$ sudo subscription-manager register</pre>
+
+If the system is not connected to the Internet or an RHN Satellite, then
+install the Red Hat GPG key from trusted media such as the Red Hat
+installation CD-ROM or DVD. Assuming the disc is mounted in
+<tt>/media/cdrom</tt>, use the following command as the root user to import
+it into the keyring:
+<pre>$ sudo rpm --import /media/cdrom/RPM-GPG-KEY</pre>
+
+Alternatively, the key may be pre-loaded during the RHEL installation. In
+such cases, the key can be installed by running the following command:
+<pre>sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release</pre>
+      </td>
+      <td xml:lang="en-US">
+        Changes to software components can have significant effects on the overall
+security of the operating system. This requirement ensures the software has
+not been tampered with and that it has been provided by a trusted vendor.
+The Red Hat GPG key is necessary to cryptographically verify packages are
+from Red Hat.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Ensure gpgcheck Enabled for Local Packages</td>
+      <td xml:lang="en-US">
+        <tt>yum</tt> should be configured to verify the signature(s) of local packages
+prior to installation. To configure <tt>yum</tt> to verify signatures of local
+packages, set the <tt>localpkg_gpgcheck</tt> to <tt>1</tt>, <tt>True</tt>, or <tt>yes</tt> in
+<tt>/etc/yum.conf</tt>.
+      </td>
+      <td xml:lang="en-US">
+        Changes to any software components can have significant effects to the overall security
+of the operating system. This requirement ensures the software has not been tampered and
+has been provided by a trusted vendor.
+<br /><br />
+Accordingly, patches, service packs, device drivers, or operating system components must
+be signed with a certificate recognized and approved by the organization.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Install dnf-automatic Package</td>
+      <td xml:lang="en-US">
+        The <code>dnf-automatic</code> package can be installed with the following command:
+<pre>
+$ sudo yum install dnf-automatic</pre>
+      </td>
+      <td xml:lang="en-US">
+        <tt>dnf-automatic</tt> is an alternative command line interface (CLI)
+to <tt>dnf upgrade</tt> suitable for automatic, regular execution.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Install sequoia-sq Package</td>
+      <td xml:lang="en-US">
+        The <code>sequoia-sq</code> package can be installed with the following command:
+<pre>
+$ sudo yum install sequoia-sq</pre>
+      </td>
+      <td xml:lang="en-US">
+        The <tt>sequoia-sq</tt> package provides the <tt>sq</tt> command-line tool,
+which is used for OpenPGP operations including verification of GPG signatures.
+This tool is required for cryptographic verification of software packages and
+GPG keys using modern OpenPGP implementations.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Ensure gpgcheck Enabled for All yum Package Repositories</td>
+      <td xml:lang="en-US">
+        To ensure signature checking is not disabled for
+any repos, remove any lines from files in <tt>/etc/yum.repos.d</tt> of the form:
+<pre>gpgcheck=0</pre>
+      </td>
+      <td xml:lang="en-US">
+        Verifying the authenticity of the software prior to installation validates
+the integrity of the patch or upgrade received from a vendor. This ensures
+the software has not been tampered with and that it has been provided by a
+trusted vendor. Self-signed certificates are disallowed by this
+requirement. Certificates used to verify the software must be from an
+approved Certificate Authority (CA)."
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Ensure Amazon GPG Key Installed</td>
+      <td xml:lang="en-US">
+        To ensure the system can cryptographically verify base software packages
+come from Amazon (and to connect to the Amazon Network to receive them),
+the Amazon GPG key must properly be installed. To install the Amazon GPG
+key, run:
+<pre>$ sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-linux-2023</pre>
+      </td>
+      <td xml:lang="en-US">
+        Changes to software components can have significant effects on the overall
+security of the operating system. This requirement ensures the software has
+not been tampered with and that it has been provided by a trusted vendor.
+The Amazon GPG key is necessary to cryptographically verify packages are
+from Amazon.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Ensure gpgcheck Enabled In Main yum Configuration</td>
+      <td xml:lang="en-US">
+        The <tt>gpgcheck</tt> option controls whether
+RPM packages' signatures are always checked prior to installation.
+To configure yum to check package signatures before installing
+them, ensure the following line appears in <tt>/etc/yum.conf</tt> in
+the <tt>[main]</tt> section:
+<pre>gpgcheck=1</pre>
+      </td>
+      <td xml:lang="en-US">
+        Changes to any software components can have significant effects on the
+overall security of the operating system. This requirement ensures the
+software has not been tampered with and that it has been provided by a
+trusted vendor.
+<br />
+Accordingly, patches, service packs, device drivers, or operating system
+components must be signed with a certificate recognized and approved by the
+organization.
+<br />Verifying the authenticity of the software prior to installation
+validates the integrity of the patch or upgrade received from a vendor.
+This ensures the software has not been tampered with and that it has been
+provided by a trusted vendor. Self-signed certificates are disallowed by
+this requirement. Certificates used to verify the software must be from an
+approved Certificate Authority (CA).
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Ensure AlmaLinux GPG Key Installed</td>
+      <td xml:lang="en-US">
+        To ensure the system can cryptographically verify base software packages
+come from AlmaLinux (and to connect to the AlmaLinux repositories to 
+receive them), the AlmaLinux GPG key must be properly installed. To install 
+the AlmaLinux GPG key, run:
+<pre>$ sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux-9</pre>
+      </td>
+      <td xml:lang="en-US">
+        Changes to software components can have significant effects on the overall
+security of the operating system. This requirement ensures the software has
+not been tampered with and that it has been provided by a trusted vendor.
+The AlmaLinux GPG key is necessary to cryptographically verify packages are
+from AlmaLinux.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Install dnf-plugin-subscription-manager Package</td>
+      <td xml:lang="en-US">
+        The <code>dnf-plugin-subscription-manager</code> package can be installed with the following command:
+<pre>
+$ sudo yum install dnf-plugin-subscription-manager</pre>
+      </td>
+      <td xml:lang="en-US">
+        This package provides plugins to interact with repositories and subscriptions
+from the Red Hat entitlement platform; contains subscription-manager and
+product-id plugins.
+      </td>
+    </tr>
+    <tr>
+      <td>FPT_TUD_EXT.1<br/>FPT_TUD_EXT.2</td>
+      <td>Install subscription-manager Package</td>
+      <td xml:lang="en-US">
+        The <code>subscription-manager</code> package can be installed with the following command:
+<pre>
+$ sudo yum install subscription-manager</pre>
+      </td>
+      <td xml:lang="en-US">
+        Red Hat Subscription Manager is a local service which tracks installed products
+and subscriptions on a local system to help manage subscription assignments.
+It communicates with the backend subscription service (the Customer Portal
+or an on-premise server such as Subscription Asset Manager) and works with
+content management tools such as .
+      </td>
+    </tr>
+    <tr>
+      <td>FTA_TAB.1</td>
+      <td>Enable SSH Warning Banner</td>
+      <td xml:lang="en-US">
+        To enable the warning banner and ensure it is consistent
+across the system, add or correct the following line in
+
+
+
+
+<tt>/etc/ssh/sshd_config</tt>:
+
+<pre>Banner /etc/issue</pre>
+Another section contains information on how to create an
+appropriate system-wide warning banner.
+      </td>
+      <td xml:lang="en-US">
+        The warning message reinforces policy awareness during the logon process and
+facilitates possible legal action against attackers. Alternatively, systems
+whose ownership should not be obvious should ensure usage of a banner that does
+not provide easy attribution.
+      </td>
+    </tr>
+    <tr>
+      <td>FTP_ITC_EXT.1<br/>FCS_SSH_EXT.1.2</td>
+      <td>Disable GSSAPI Authentication</td>
+      <td xml:lang="en-US">
+        Unless needed, SSH should not permit extraneous or unnecessary
+authentication mechanisms like GSSAPI.
+<br/>
+The default SSH configuration disallows authentications based on GSSAPI. The appropriate
+configuration is used if no value is set for <tt>GSSAPIAuthentication</tt>.
+<br/>
+To explicitly disable GSSAPI authentication, add or correct the following line in
+
+
+
+
+<tt>/etc/ssh/sshd_config</tt>:
+
+<pre>GSSAPIAuthentication no</pre>
+      </td>
+      <td xml:lang="en-US">
+        GSSAPI authentication is used to provide additional authentication mechanisms to
+applications. Allowing GSSAPI authentication through SSH exposes the system's
+GSSAPI to remote hosts, increasing the attack surface of the system.
+      </td>
+    </tr>
+    <tr>
+      <td>FTP_ITC_EXT.1<br/>FCS_SSH_EXT.1.2</td>
+      <td>Disable Kerberos Authentication</td>
+      <td xml:lang="en-US">
+        Unless needed, SSH should not permit extraneous or unnecessary
+authentication mechanisms like Kerberos.
+<br/>
+The default SSH configuration disallows authentication validation through Kerberos.
+The appropriate configuration is used if no value is set for <tt>KerberosAuthentication</tt>.
+<br/>
+To explicitly disable Kerberos authentication, add or correct the following line in
+
+
+
+
+<tt>/etc/ssh/sshd_config</tt>:
+
+<pre>KerberosAuthentication no</pre>
+      </td>
+      <td xml:lang="en-US">
+        Kerberos authentication for SSH is often implemented using GSSAPI. If Kerberos
+is enabled through SSH, the SSH daemon provides a means of access to the
+system's Kerberos implementation.
+Configuring these settings for the SSH daemon provides additional assurance that remote logon via SSH will not use unused methods of authentication, even in the event of misconfiguration elsewhere.
+      </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
