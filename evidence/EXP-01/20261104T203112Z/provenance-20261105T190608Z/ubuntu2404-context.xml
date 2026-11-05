@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enrichment xmlns="urn:openscap:report-enrichment:1" schema-version="1">
+  <benchmark id="xccdf_org.ssgproject.content_benchmark_UBUNTU_24-04"
+             version="0.1.82">
+    <rule id="xccdf_org.ssgproject.content_rule_sshd_disable_root_login"
+          review-status="draft; project-authored; independent review pending">
+      <explanation>This control requires disabling direct SSH login as root. PermitRootLogin without-password prohibits root password and keyboard-interactive authentication but can still permit public-key authentication. PermitRootLogin no disables direct root SSH login. Administrative access through another account and authorized privilege elevation must be assessed separately.</explanation>
+      <attack technique="T1078.003"
+              relationship="Conditional restriction of one local-account access path">
+        <justification>An adversary possessing usable credentials for the local root account could abuse direct root SSH access when that access is permitted. Disabling it restricts this particular route; it does not prevent abuse of other local accounts or other routes to root.</justification>
+        <conditions>SSH must be reachable, the applicable SSH configuration must permit root authentication, and the adversary must satisfy the authentication and account-access requirements. A failed compliance check alone does not establish these conditions.</conditions>
+        <source href="https://attack.mitre.org/techniques/T1078/003/"/>
+      </attack>
+      <limitation>This mapping is a project-authored interpretation, not an official CIS-to-ATT&amp;CK mapping.</limitation>
+      <limitation>No CVE applicability is established by this configuration finding.</limitation>
+      <limitation>A passing result does not establish that all SSH access or local-account abuse is prevented.</limitation>
+      <verification>Compare the selected scan result with the saved effective SSH configuration and corresponding root-login and administrative-access test logs. Account for connection-specific Match settings. OpenSSH setting reference: https://man.openbsd.org/sshd_config#PermitRootLogin</verification>
+    </rule>
+  </benchmark>
+</enrichment>

@@ -1,0 +1,2 @@
+765e84bdce7f9055f9b9c2dd0ee2b713d4255f8eec94eac6d35ea4973c28919c  content/scap-security-guide-0.1.82.zip
+e311189ac70ff73be54121311fca324d6188f8c12ab53416090f595ff00e070c  content/scap-security-guide-0.1.82/ssg-ubuntu2404-ds.xml

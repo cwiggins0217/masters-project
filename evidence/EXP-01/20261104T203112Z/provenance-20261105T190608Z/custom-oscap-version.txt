@@ -1,0 +1,22 @@
+/home/attacker/Repos/github.com/cwiggins0217/masters-project/tools/openscap/build-enrichment
+OpenSCAP command line tool (oscap) 1.4.5
+Copyright 2009--2023 Red Hat Inc., Durham, North Carolina.
+
+==== Supported specifications ====
+SCAP Version: 1.3
+XCCDF Version: 1.2
+OVAL Version: 5.11.3
+CPE Version: 2.3
+Asset Identification Version: 1.1
+Asset Reporting Format Version: 1.1
+
+==== Capabilities added by auto-loaded plugins ====
+SCE Version: 1.0 (from libopenscap_sce.so.33)
+
+==== Paths ====
+Schema files: /home/attacker/Repos/github.com/cwiggins0217/masters-project/tools/openscap/schemas
+Default CPE files: /home/attacker/Repos/github.com/cwiggins0217/masters-project/tools/openscap/cpe
+
+==== Inbuilt CPE names ====
+Linux - cpe:/o:linux:linux_kernel:-
+

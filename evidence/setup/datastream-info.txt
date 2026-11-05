@@ -1,0 +1,276 @@
+Document type: Source Data Stream
+Imported: 2026-09-01T13:41:32
+
+Stream: scap_org.open-scap_datastream_from_xccdf_ssg-ubuntu2404-xccdf.xml
+Generated: 2026-09-01T13:39:13
+Version: 1.3
+Checklists:
+	Ref-Id: scap_org.open-scap_cref_ssg-ubuntu2404-xccdf.xml
+		Status: draft
+		Generated: 2026-09-01
+		Resolved: true
+		Profiles:
+			Title: CIS Ubuntu Linux 24.04 LTS Benchmark for Level 1 - Server
+				Id: xccdf_org.ssgproject.content_profile_cis_level1_server
+			Title: CIS Ubuntu Linux 24.04 LTS Benchmark for Level 1 - Workstation
+				Id: xccdf_org.ssgproject.content_profile_cis_level1_workstation
+			Title: CIS Ubuntu Linux 24.04 LTS Benchmark for Level 2 - Server
+				Id: xccdf_org.ssgproject.content_profile_cis_level2_server
+			Title: CIS Ubuntu Linux 24.04 LTS Benchmark for Level 2 - Workstation
+				Id: xccdf_org.ssgproject.content_profile_cis_level2_workstation
+			Title: Canonical Ubuntu 24.04 LTS Security Technical Implementation Guide (STIG) V1R5
+				Id: xccdf_org.ssgproject.content_profile_stig
+		Referenced check files:
+			ssg-ubuntu2404-oval.xml
+				system: http://oval.mitre.org/XMLSchema/oval-definitions-5
+			ssg-ubuntu2404-ocil.xml
+				system: http://scap.nist.gov/schema/ocil/2
+			ubuntu2404/checks/sce/all_apparmor_profiles_enforced.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/all_apparmor_profiles_in_enforce_complain_mode.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/apparmor_configured.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_rsyslog_enabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_systemd-journal-upload_enabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_systemd-journald_enabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/socket_systemd-journal-remote_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/set_ip6tables_default_rule.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/set_ipv6_loopback_traffic.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/set_loopback_traffic.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/ip6tables_rules_for_open_ports.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/iptables_rules_for_open_ports.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/set_iptables_default_rule.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv6_conf_all_accept_ra.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv6_conf_all_accept_redirects.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv6_conf_all_accept_source_route.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv6_conf_all_forwarding.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv6_conf_default_accept_ra.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv6_conf_default_accept_redirects.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv6_conf_default_accept_source_route.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_all_accept_redirects.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_all_accept_source_route.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_all_log_martians.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_all_rp_filter.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_all_secure_redirects.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_default_accept_redirects.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_default_accept_source_route.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_default_log_martians.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_default_rp_filter.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_default_secure_redirects.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_icmp_echo_ignore_broadcasts.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_icmp_ignore_bogus_error_responses.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_tcp_syncookies.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_all_send_redirects.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_conf_default_send_redirects.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_net_ipv4_ip_forward.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/nftables_ensure_default_deny_policy.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/set_nftables_base_chain.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/set_nftables_loopback_traffic.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/set_nftables_table.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/check_ufw_active.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/set_ufw_default_rule.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/set_ufw_loopback_traffic.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/ufw_rate_limit.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/ufw_rules_for_open_ports.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_bluetooth_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/file_permissions_unauthorized_world_writable.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/file_permissions_ungroupowned.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/no_files_unowned_by_user.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_autofs_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_kernel_dmesg_restrict.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_kernel_yama_ptrace_scope.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_fs_suid_dumpable.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/sysctl_kernel_randomize_va_space.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_apport_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_avahi-daemon_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_kdump_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_cron_enabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_dhcpd6_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_dhcpd_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_dnsmasq_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_named_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_vsftpd_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_httpd_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_nginx_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_dovecot_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_slapd_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_rpcbind_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_nfs_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_rsyncd_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_xinetd_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_ypserv_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_tftp_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_cups_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_squid_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_smb_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_snmpd_disabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_sshd_enabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_sssd_enabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/service_auditd_enabled.sh
+				system: http://open-scap.org/page/SCE
+			ubuntu2404/checks/sce/audit_rules_privileged_commands.sh
+				system: http://open-scap.org/page/SCE
+Checks:
+	Ref-Id: scap_org.open-scap_cref_ssg-ubuntu2404-oval.xml
+	Ref-Id: scap_org.open-scap_cref_ssg-ubuntu2404-ocil.xml
+	Ref-Id: scap_org.open-scap_cref_ssg-ubuntu2404-cpe-oval.xml
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-all_apparmor_profiles_enforced.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-all_apparmor_profiles_in_enforce_complain_mode.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-apparmor_configured.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_rsyslog_enabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_systemd-journal-upload_enabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_systemd-journald_enabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-socket_systemd-journal-remote_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-set_ip6tables_default_rule.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-set_ipv6_loopback_traffic.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-set_loopback_traffic.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-ip6tables_rules_for_open_ports.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-iptables_rules_for_open_ports.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-set_iptables_default_rule.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv6_conf_all_accept_ra.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv6_conf_all_accept_redirects.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv6_conf_all_accept_source_route.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv6_conf_all_forwarding.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv6_conf_default_accept_ra.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv6_conf_default_accept_redirects.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv6_conf_default_accept_source_route.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_all_accept_redirects.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_all_accept_source_route.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_all_log_martians.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_all_rp_filter.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_all_secure_redirects.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_default_accept_redirects.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_default_accept_source_route.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_default_log_martians.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_default_rp_filter.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_default_secure_redirects.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_icmp_echo_ignore_broadcasts.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_icmp_ignore_bogus_error_responses.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_tcp_syncookies.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_all_send_redirects.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_conf_default_send_redirects.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_net_ipv4_ip_forward.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-nftables_ensure_default_deny_policy.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-set_nftables_base_chain.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-set_nftables_loopback_traffic.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-set_nftables_table.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-check_ufw_active.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-set_ufw_default_rule.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-set_ufw_loopback_traffic.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-ufw_rate_limit.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-ufw_rules_for_open_ports.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_bluetooth_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-file_permissions_unauthorized_world_writable.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-file_permissions_ungroupowned.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-no_files_unowned_by_user.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_autofs_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_kernel_dmesg_restrict.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_kernel_yama_ptrace_scope.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_fs_suid_dumpable.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-sysctl_kernel_randomize_va_space.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_apport_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_avahi-daemon_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_kdump_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_cron_enabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_dhcpd6_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_dhcpd_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_dnsmasq_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_named_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_vsftpd_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_httpd_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_nginx_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_dovecot_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_slapd_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_rpcbind_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_nfs_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_rsyncd_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_xinetd_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_ypserv_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_tftp_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_cups_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_squid_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_smb_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_snmpd_disabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_sshd_enabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_sssd_enabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-service_auditd_enabled.sh
+	Ref-Id: scap_org.open-scap_cref_ubuntu2404-checks-sce-audit_rules_privileged_commands.sh
+Dictionaries:
+	Ref-Id: scap_org.open-scap_cref_ssg-ubuntu2404-cpe-dictionary.xml

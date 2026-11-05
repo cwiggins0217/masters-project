@@ -1,0 +1,1 @@
+600 -rw------- root:root /etc/ssh/sshd_config.d/00-complianceascode-hardening.conf
