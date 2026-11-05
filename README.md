@@ -164,8 +164,10 @@ Recorded release archive SHA-256:
 Project evidence:
 
 - [Week 1 progress and method record](whitepaper/week1-working-draft.md).
-- [Original Week 1 notebook]().
-- [Pre-intervention enriched report](evidence/).
-- [Post-intervention enriched report]().
+- [Original Week 1 notebook](whitepaper/notes-week1.md).
+- [Pre-intervention enriched
+  report](evidence/EXP-01/20261104T203112Z/pre/report.html).
+- [Post-intervention enriched
+  report](evidence/EXP-01/20261104T203112Z/post/report.html).
 
 Raw XML/ARF, effective configuration, scan logs, timestamps, and exit codes are referenced by the condition directories above. Mapping/build provenance and checksums are retained in the local archive; the exact generated manifest basename and full digest listing remain to be inserted into the final reproduction appendix. Project links identify evidence artifacts and are not substitutes for public research references.
