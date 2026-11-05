@@ -163,9 +163,9 @@ Recorded release archive SHA-256:
 
 Project evidence:
 
-- [Week 1 progress and method record](https://chatgpt.com/library?file_id=libfile_fda2c12a861c8191bfd7113c96d3c9b7&account_id=personal).
-- [Original Week 1 notebook](https://chatgpt.com/library?file_id=libfile_20e2d211ec788191948d366cb9b9ed56&account_id=personal).
-- [Pre-intervention enriched report](https://chatgpt.com/library?file_id=libfile_d4fb4e66cfc08191a1c4c6ea5d4ebdf7&account_id=personal).
-- [Post-intervention enriched report](https://chatgpt.com/library?file_id=libfile_5f3702154f448191afefe1dbf49a9c5e&account_id=personal).
+- [Week 1 progress and method record](whitepaper/week1-working-draft.md).
+- [Original Week 1 notebook]().
+- [Pre-intervention enriched report](evidence/).
+- [Post-intervention enriched report]().
 
 Raw XML/ARF, effective configuration, scan logs, timestamps, and exit codes are referenced by the condition directories above. Mapping/build provenance and checksums are retained in the local archive; the exact generated manifest basename and full digest listing remain to be inserted into the final reproduction appendix. Project links identify evidence artifacts and are not substitutes for public research references.

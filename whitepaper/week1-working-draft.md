@@ -154,7 +154,7 @@ This is a separate targeted condition, not a new full-profile evaluation. Its tw
 
 ### Evidence recovered from the Week 1 notebook
 
-Source: [notes-week1.md](https://chatgpt.com/library?file_id=libfile_20e2d211ec788191948d366cb9b9ed56&account_id=personal), supplied November 5. These are saved notebook excerpts, not a complete timestamped terminal transcript. Original notes have not been edited.
+Source: [notes-week1.md](), supplied November 5. These are saved notebook excerpts, not a complete timestamped terminal transcript. Original notes have not been edited.
 
 | Evidence | Recovered detail |
 |---|---|
@@ -308,7 +308,7 @@ A case is `correct`, `incorrect`, or `indeterminate` against a documented expect
 
 ## 5. Whitepaper progress
 
-- **Sections drafted or revised:** Research scope, four-week roadmap, laboratory comparison design, and reporting workflow documented in planning material. Formal enrichment method version 1.0 is now documented in section 4. Whitepaper draft v0.1 now contains the problem statement, research questions, six-rule scope, initial methods, EXP-01 case study, limitations, and evidence appendix: [openscap-whitepaper-draft.md](https://chatgpt.com/library?file_id=libfile_05b6a9327fbc81918cdc14611be80897&account_id=personal).
+- **Sections drafted or revised:** Research scope, four-week roadmap, laboratory comparison design, and reporting workflow documented in planning material. Formal enrichment method version 1.0 is now documented in section 4. Whitepaper draft v0.1 now contains the problem statement, research questions, six-rule scope, initial methods, EXP-01 case study, limitations, and evidence appendix: [openscap-whitepaper-draft.md]().
 - **Evidence-backed tables added:** This report records the November 3 baseline, EXP-01 rule transitions, saved configuration values, static enrichment validation, and the unchanged aggregate totals.
 - **Sources reviewed:** Source/version inventory for individual mapping claims remains to be recorded. Planning references should not be counted as completed literature review without review notes.
 
@@ -362,11 +362,9 @@ A case is `correct`, `incorrect`, or `indeterminate` against a documented expect
 - **Planning document:** `openscap-four-week-research-plan.md`.
 - **Report structure:** `openscap-weekly-progress-template.md`.
 - **EXP-01 raw evidence:** `/home/cis-test/masters-project/evidence/EXP-001/20261104T203112Z/{pre,post}/`, with `results.xml`, `results-arf.xml`, `report.html`, `sshd-effective.txt`, `scan.log`, `start-time.txt`, `end-time.txt`, and `exit-code.txt` listed in supplied output. Artifact checksum capture and verification reported complete; historical access-test limitations remain.
-- **Inspected enriched reports:** [pre-enriched.html](https://chatgpt.com/library?file_id=libfile_d4fb4e66cfc08191a1c4c6ea5d4ebdf7\&account_id=personal) and [post-enriched.html](https://chatgpt.com/library?file_id=libfile_5f3702154f448191afefe1dbf49a9c5e\&account_id=personal).
+- **Inspected enriched reports:** [pre-enriched.html]() and [post-enriched.html]().
 - **Current Parrot archive:** `/home/attacker/masters-project/evidence/EXP-01/20261104T203112Z`; pre/post and targeted follow-up result files confirmed present. Researcher reports every file in the generated SHA256SUMS manifest verified OK. Exact manifest timestamp and digest listing have not been supplied. Historical EXP-001 source paths above are retained as originally recorded.
 - **Mapping and prototype:** `lab-content/ubuntu2404-context.xml`; prototype branch `feature/report-enrichment`, commit `35efc53f8`; mapping copy, Git commit/status/diff, CMake cache, binary checksum, version output, and workstation OS captured through the supplied provenance procedure; checksum verification reported successful, actual manifest not independently inspected.
 - **Permissions follow-up:** `followup-permissions-20261105T184154Z/` under the EXP-01 evidence directory; terminal output reports both selected rules pass and exit 0; archived on Parrot with successful checksum verification reported; raw artifacts not independently inspected.
-- **Original notebook:** [notes-week1.md](https://chatgpt.com/library?file_id=libfile_20e2d211ec788191948d366cb9b9ed56&account_id=personal); includes baseline inventory, content hashes, intervention, scan commands, and partial access-test output.
-- **Current whitepaper:** [openscap-whitepaper-draft.md](https://chatgpt.com/library?file_id=libfile_05b6a9327fbc81918cdc14611be80897&account_id=personal), version 0.1, November 5, 2026.
-
-\<!-- Update this draft with actual remaining Week 1 observations. Preserve the distinction between reported historical evidence, inspected raw files, and planned work. -->
+- **Original notebook:** [notes-week1.md](); includes baseline inventory, content hashes, intervention, scan commands, and partial access-test output.
+- **Current whitepaper:** [openscap-whitepaper-draft.md](), version 0.1, November 5, 2026.
