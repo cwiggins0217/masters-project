@@ -1,0 +1,717 @@
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:3:<xsl:param name="assessment-uri" select="''"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:4:<xsl:param name="assessment-phase" select="''"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:5:<xsl:template name="evidence-assessment">
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:6:  <xsl:param name="item"/><xsl:param name="testresult"/><xsl:param name="result"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:8:    <xsl:variable name="a" select="document($assessment-uri)/assessment[@schema='1.0']"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:9:    <xsl:variable name="p" select="$a/phase[@name=$assessment-phase]"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:10:    <xsl:variable name="r" select="$p/rule[@id=$item/@id]"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:25:            <xsl:variable name="root-login" select="$item/@id='xccdf_org.ssgproject.content_rule_sshd_disable_root_login'"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:26:            <xsl:variable name="permissions" select="$item/@id='xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config'"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:27:            <xsl:variable name="setting" select="$p/setting[@name='permitrootlogin']"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:28:            <xsl:variable name="observed" select="count($setting)=1 and $setting/@status='observed' and count($setting/value)=1 and normalize-space($setting/value)!=''"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl.bak-20261117T160104235357Z:118:</xsl:template>
+tools/openscap/xsl/xccdf-report-assessment.xsl:3:<xsl:param name="assessment-uri" select="''"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:4:<xsl:param name="assessment-phase" select="''"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:5:<xsl:template name="evidence-assessment">
+tools/openscap/xsl/xccdf-report-assessment.xsl:6:  <xsl:param name="item"/><xsl:param name="testresult"/><xsl:param name="result"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:8:    <xsl:variable name="a" select="document($assessment-uri)/assessment[@schema='1.0']"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:9:    <xsl:variable name="p" select="$a/phase[@name=$assessment-phase]"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:10:    <xsl:variable name="r" select="$p/rule[@id=$item/@id]"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:25:            <xsl:variable name="root-login" select="$item/@id='xccdf_org.ssgproject.content_rule_sshd_disable_root_login'"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:26:            <xsl:variable name="permissions" select="$item/@id='xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config'"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:27:            <xsl:variable name="setting" select="$p/setting[@name='permitrootlogin']"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:28:            <xsl:variable name="observed" select="count($setting)=1 and $setting/@status='observed' and count($setting/value)=1 and normalize-space($setting/value)!=''"/>
+tools/openscap/xsl/xccdf-report-assessment.xsl:76:              <xsl:variable name="related"
+tools/openscap/xsl/xccdf-report-assessment.xsl:171:</xsl:template>
+tools/openscap/xsl/xccdf-references.xsl:41:<xsl:template name="convert-reference-url-to-name">
+tools/openscap/xsl/xccdf-references.xsl:42:    <xsl:param name="href"/>
+tools/openscap/xsl/xccdf-references.xsl:94:</xsl:template>
+tools/openscap/xsl/xccdf-references.xsl:96:<xsl:template name="get-all-references">
+tools/openscap/xsl/xccdf-references.xsl:97:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-references.xsl:102:                <xsl:variable name="reference">
+tools/openscap/xsl/xccdf-references.xsl:106:                </xsl:variable>
+tools/openscap/xsl/xccdf-references.xsl:114:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:41:<xsl:include href="xccdf-branding.xsl" />
+tools/openscap/xsl/xccdf-report-impl.xsl:42:<xsl:include href="xccdf-references.xsl" />
+tools/openscap/xsl/xccdf-report-impl.xsl:43:<xsl:include href="xccdf-resources.xsl" />
+tools/openscap/xsl/xccdf-report-impl.xsl:44:<xsl:include href="xccdf-share.xsl" />
+tools/openscap/xsl/xccdf-report-impl.xsl:46:<xsl:include href="xccdf-report-oval-details.xsl" />
+tools/openscap/xsl/xccdf-report-impl.xsl:47:<xsl:include href="xccdf-report-enrichment.xsl" />
+tools/openscap/xsl/xccdf-report-impl.xsl:48:<xsl:include href="xccdf-report-assessment.xsl" />
+tools/openscap/xsl/xccdf-report-impl.xsl:56:<xsl:template name="introduction">
+tools/openscap/xsl/xccdf-report-impl.xsl:57:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:58:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:68:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:70:<xsl:template name="characteristics">
+tools/openscap/xsl/xccdf-report-impl.xsl:71:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:72:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:73:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:168:                        <xsl:variable name="idref" select="@idref"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:177:                        <xsl:variable name="idref" select="@idref"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:218:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:220:<xsl:template name="compliance-and-scoring">
+tools/openscap/xsl/xccdf-report-impl.xsl:221:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:226:        <xsl:variable name="total_rules_count" select="count($testresult/cdf:rule-result[cdf:result])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:227:        <xsl:variable name="ignored_rules_count" select="count($testresult/cdf:rule-result[cdf:result/text() = 'notselected' or cdf:result/text() = 'notapplicable'])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:228:        <xsl:variable name="passed_rules_count" select="count($testresult/cdf:rule-result[cdf:result/text() = 'pass' or cdf:result/text() = 'fixed'])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:229:        <xsl:variable name="failed_rules_count" select="count($testresult/cdf:rule-result[cdf:result/text() = 'fail'])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:230:        <xsl:variable name="uncertain_rules_count" select="count($testresult/cdf:rule-result[cdf:result/text() = 'error' or cdf:result/text() = 'unknown'])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:231:        <xsl:variable name="not_ignored_rules_count" select="$total_rules_count - $ignored_rules_count"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:276:        <xsl:variable name="failed_rules_low_severity" select="count($testresult/cdf:rule-result[(cdf:result/text() = 'fail') and (@severity = 'low')])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:277:        <xsl:variable name="failed_rules_medium_severity" select="count($testresult/cdf:rule-result[(cdf:result/text() = 'fail') and (@severity = 'medium')])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:278:        <xsl:variable name="failed_rules_high_severity" select="count($testresult/cdf:rule-result[(cdf:result/text() = 'fail') and (@severity = 'high')])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:280:        <xsl:variable name="failed_rules_other_severity" select="$failed_rules_count - $failed_rules_high_severity - $failed_rules_medium_severity - $failed_rules_low_severity"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:312:                    <xsl:variable name="percent" select="(text() div @maximum) * 100"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:328:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:330:<xsl:template name="references-to-json">
+tools/openscap/xsl/xccdf-report-impl.xsl:331:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:335:        <xsl:variable name="href" select="@href"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:364:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:366:<xsl:template name="rule-overview-leaf-table-row">
+tools/openscap/xsl/xccdf-report-impl.xsl:367:    <xsl:param name="result" />
+tools/openscap/xsl/xccdf-report-impl.xsl:368:    <xsl:param name="item" />
+tools/openscap/xsl/xccdf-report-impl.xsl:369:    <xsl:param name="indent" />
+tools/openscap/xsl/xccdf-report-impl.xsl:370:    <xsl:param name="testresult" />
+tools/openscap/xsl/xccdf-report-impl.xsl:371:    <xsl:param name="profile" />
+tools/openscap/xsl/xccdf-report-impl.xsl:408:            <xsl:variable name="result_tooltip">
+tools/openscap/xsl/xccdf-report-impl.xsl:412:            </xsl:variable>
+tools/openscap/xsl/xccdf-report-impl.xsl:418:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:422:<xsl:template name="rule-overview-leaf">
+tools/openscap/xsl/xccdf-report-impl.xsl:423:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:424:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:425:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:426:    <xsl:param name="indent"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:428:    <xsl:variable name="ruleresult" select="key('testresult_ruleresults', concat($testresult/@id, '|', $item/@id))"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:432:        <xsl:variable name="result" select="cdf:result/text()"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:443:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:445:<xsl:template name="rule-overview-inner-node">
+tools/openscap/xsl/xccdf-report-impl.xsl:446:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:447:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:448:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:449:    <xsl:param name="indent"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:451:    <xsl:param name="failed_rule_results"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:452:    <xsl:param name="error_rule_results"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:453:    <xsl:param name="unknown_rule_results"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:454:    <xsl:param name="notchecked_rule_results"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:455:    <xsl:param name="notselected_rule_results"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:457:    <xsl:variable name="descendant_rules" select="$item/descendant::cdf:Rule"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:459:    <xsl:variable name="contained_rules_fail" select="count($descendant_rules[@id = $failed_rule_results/@idref])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:460:    <xsl:variable name="contained_rules_error" select="count($descendant_rules[@id = $error_rule_results/@idref])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:461:    <xsl:variable name="contained_rules_unknown" select="count($descendant_rules[@id = $unknown_rule_results/@idref])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:462:    <xsl:variable name="contained_rules_notchecked" select="count($descendant_rules[@id = $notchecked_rule_results/@idref])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:463:    <xsl:variable name="contained_rules_notselected" select="count($descendant_rules[@id = $notselected_rule_results/@idref])"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:464:    <xsl:variable name="contained_rules_need_attention" select="$contained_rules_fail + $contained_rules_error + $contained_rules_unknown + $contained_rules_notchecked"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:525:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:527:<xsl:template name="rule-overview">
+tools/openscap/xsl/xccdf-report-impl.xsl:528:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:529:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:530:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:603:                <xsl:variable name="failed_rule_results" select="$testresult/cdf:rule-result[cdf:result/text() = 'fail']"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:604:                <xsl:variable name="error_rule_results" select="$testresult/cdf:rule-result[cdf:result/text() = 'error']"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:605:                <xsl:variable name="unknown_rule_results" select="$testresult/cdf:rule-result[cdf:result/text() = 'unknown']"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:606:                <xsl:variable name="notchecked_rule_results" select="$testresult/cdf:rule-result[cdf:result/text() = 'notchecked']"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:607:                <xsl:variable name="notselected_rule_results" select="$testresult/cdf:rule-result[cdf:result/text() = 'notselected']"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:624:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:626:<xsl:template name="check-system-details-oval5">
+tools/openscap/xsl/xccdf-report-impl.xsl:627:    <xsl:param name="check"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:628:    <xsl:param name="oval-tmpl"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:629:    <xsl:param name="result"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:631:    <xsl:variable name="filename">
+tools/openscap/xsl/xccdf-report-impl.xsl:636:    </xsl:variable>
+tools/openscap/xsl/xccdf-report-impl.xsl:638:    <xsl:variable name="arf_results" select="(/arf:asset-report-collection/arf:reports/arf:report/arf:content/ovalres:oval_results)[1]"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:640:    <xsl:variable name="details">
+tools/openscap/xsl/xccdf-report-impl.xsl:674:    </xsl:variable>
+tools/openscap/xsl/xccdf-report-impl.xsl:677:        <xsl:variable name="details_origin">
+tools/openscap/xsl/xccdf-report-impl.xsl:682:        </xsl:variable>
+tools/openscap/xsl/xccdf-report-impl.xsl:690:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:692:<xsl:template name="check-system-details-sce">
+tools/openscap/xsl/xccdf-report-impl.xsl:693:    <xsl:param name="check"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:694:    <xsl:param name="sce-tmpl"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:712:            <xsl:variable name="filename">
+tools/openscap/xsl/xccdf-report-impl.xsl:717:            </xsl:variable>
+tools/openscap/xsl/xccdf-report-impl.xsl:720:                <xsl:variable name="stdout" select="document($filename)/sceres:sce_results/sceres:stdout/text()"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:721:                <xsl:variable name="stderr" select="document($filename)/sceres:sce_results/sceres:stderr/text()"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:738:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:740:<xsl:template name="check-system-details">
+tools/openscap/xsl/xccdf-report-impl.xsl:741:    <xsl:param name="check"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:742:    <xsl:param name="oval-tmpl"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:743:    <xsl:param name="sce-tmpl"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:744:    <xsl:param name="result"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:764:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:767:<xsl:template name="result-details-leaf-table">
+tools/openscap/xsl/xccdf-report-impl.xsl:768:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:769:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:770:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:771:    <xsl:param name="result"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:778:                <xsl:variable name="result_tooltip">
+tools/openscap/xsl/xccdf-report-impl.xsl:782:                </xsl:variable>
+tools/openscap/xsl/xccdf-report-impl.xsl:820:                        <xsl:variable name="old-result" select="cdf:old-result/text()"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:918:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:920:<xsl:template name="result-details-leaf">
+tools/openscap/xsl/xccdf-report-impl.xsl:921:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:922:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:923:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:925:    <xsl:variable name="ruleresult" select="key('testresult_ruleresults', concat($testresult/@id, '|', $item/@id))"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:927:        <xsl:variable name="result" select="cdf:result/text()"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:962:                    <xsl:variable name="check_system_details_ret">
+tools/openscap/xsl/xccdf-report-impl.xsl:969:                    </xsl:variable>
+tools/openscap/xsl/xccdf-report-impl.xsl:988:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:990:<xsl:template name="result-details-inner-node">
+tools/openscap/xsl/xccdf-report-impl.xsl:991:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:992:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:993:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:1010:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:1012:<xsl:template name="result-details">
+tools/openscap/xsl/xccdf-report-impl.xsl:1013:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:1014:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:1015:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:1030:</xsl:template>
+tools/openscap/xsl/xccdf-report-impl.xsl:1032:<xsl:template name="generate-report">
+tools/openscap/xsl/xccdf-report-impl.xsl:1033:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:1034:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:1036:    <xsl:variable name="profile" select="$benchmark/cdf:Profile[@id = $testresult/cdf:profile/@idref]"/>
+tools/openscap/xsl/xccdf-report-impl.xsl:1087:</xsl:template>
+tools/openscap/xsl/xccdf-guide.xsl:30:<xsl:include href="xccdf-guide-impl.xsl" />
+tools/openscap/xsl/xccdf-guide.xsl:32:<xsl:param name="benchmark_id"/>
+tools/openscap/xsl/xccdf-guide.xsl:33:<xsl:param name="profile_id"/>
+tools/openscap/xsl/xccdf-guide.xsl:36:<xsl:template match="/">
+tools/openscap/xsl/xccdf-guide.xsl:37:    <xsl:variable name="final_benchmark_id">
+tools/openscap/xsl/xccdf-guide.xsl:49:    </xsl:variable>
+tools/openscap/xsl/xccdf-guide.xsl:51:    <xsl:variable name="benchmark" select="//cdf:Benchmark[@id = $final_benchmark_id][1]"/>
+tools/openscap/xsl/xccdf-guide.xsl:81:</xsl:template>
+tools/openscap/xsl/xccdf-report-enrichment.xsl:9:<xsl:param name="enrichment-file" select="''"/>
+tools/openscap/xsl/xccdf-report-enrichment.xsl:12:<xsl:template name="security-context">
+tools/openscap/xsl/xccdf-report-enrichment.xsl:13:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-report-enrichment.xsl:15:        <xsl:variable name="map" select="document($enrichment-file)/e:enrichment"/>
+tools/openscap/xsl/xccdf-report-enrichment.xsl:19:        <xsl:variable name="benchmark" select="$item/ancestor::cdf:Benchmark"/>
+tools/openscap/xsl/xccdf-report-enrichment.xsl:20:        <xsl:variable name="entry" select="$map/e:benchmark[@id=$benchmark/@id and @version=$benchmark/cdf:version]/e:rule[@id=$item/@id]"/>
+tools/openscap/xsl/xccdf-report-enrichment.xsl:69:</xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:34:  <xsl:param name="reverse_DNS"/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:44:  <xsl:template match="@*|node()">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:48:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:51:  <xsl:template match="xccdf_11:*"> <!-- select just elements from xccdf 1.1 -->
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:76:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:79:  <xsl:template match="@id[parent::xccdf_11:Benchmark]"> 
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:80:    <xsl:variable name="old_id" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:85:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:88:  <xsl:template match="@id[parent::xccdf_11:Profile]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:89:    <xsl:variable name="old_id" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:94:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:97:  <xsl:template match="@id[parent::xccdf_11:Rule]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:98:    <xsl:variable name="old_id" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:103:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:106:  <xsl:template match="@id[parent::xccdf_11:Group]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:107:    <xsl:variable name="old_id" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:112:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:115:  <xsl:template match="@id[parent::xccdf_11:Value]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:116:    <xsl:variable name="old_id" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:121:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:124:  <xsl:template match="@id[parent::xccdf_11:TestResult]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:125:    <xsl:variable name="old_id" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:130:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:133:  <xsl:template match="@style[parent::xccdf_11:Benchmark][.='SCAP_1.1']">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:135:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:139:  <xsl:template match="@idref[parent::xccdf_11:*][not(parent::xccdf_11:platform)][not(parent::xccdf_11:requires)]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:140:    <xsl:variable name="old_idref" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:168:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:170:  <xsl:template name="migrate-requires">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:174:    <xsl:param name="string"/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:194:        <xsl:variable name="tail" select="substring-after($string, ' ')"/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:203:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:205:  <xsl:template match="@idref[parent::xccdf_11:requires]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:207:    <xsl:variable name="old_idref" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:209:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:212:  <xsl:template match="@value-id[parent::xccdf_11:*]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:213:    <xsl:variable name="old_value_id" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:229:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:233:  <xsl:template match="@extends[parent::xccdf_11:Group]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:234:    <xsl:variable name="old_extends" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:246:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:250:  <xsl:template match="@extends[parent::xccdf_11:Rule]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:251:    <xsl:variable name="old_extends" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:263:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:267:  <xsl:template match="@extends[parent::xccdf_11:Value]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:268:    <xsl:variable name="old_extends" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:280:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:284:  <xsl:template match="@extends[parent::xccdf_11:Profile]">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:285:    <xsl:variable name="old_extends" select="."/>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:297:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:300:  <xsl:template match="xccdf_11:sub">
+tools/openscap/xsl/xccdf_1.1_to_1.2.xsl:306:  </xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:34:<xsl:include href="xccdf-branding.xsl" />
+tools/openscap/xsl/xccdf-guide-impl.xsl:35:<xsl:include href="xccdf-resources.xsl" />
+tools/openscap/xsl/xccdf-guide-impl.xsl:36:<xsl:include href="xccdf-share.xsl" />
+tools/openscap/xsl/xccdf-guide-impl.xsl:37:<xsl:include href="xccdf-references.xsl" />
+tools/openscap/xsl/xccdf-guide-impl.xsl:45:<xsl:template name="introduction">
+tools/openscap/xsl/xccdf-guide-impl.xsl:46:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:47:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:57:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:59:<xsl:template name="profileinfo">
+tools/openscap/xsl/xccdf-guide-impl.xsl:60:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:61:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:101:                                <xsl:variable name="idref" select="@idref"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:117:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:119:<xsl:template name="revisionhistory">
+tools/openscap/xsl/xccdf-guide-impl.xsl:120:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:146:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:150:<xsl:template name="is-item-selected-final">
+tools/openscap/xsl/xccdf-guide-impl.xsl:151:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:152:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:160:    <xsl:variable name="profile_select" select="key('profile_selects', concat(generate-id($profile), '|', $item/@id))[last()]/@selected"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:173:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:175:<xsl:template name="guide-tree-leaf">
+tools/openscap/xsl/xccdf-guide-impl.xsl:176:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:177:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:178:    <xsl:param name="indent"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:180:    <xsl:variable name="selected_final">
+tools/openscap/xsl/xccdf-guide-impl.xsl:185:    </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:297:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:299:<xsl:template name="guide-count-contained-selected-rules-impl">
+tools/openscap/xsl/xccdf-guide-impl.xsl:300:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:301:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:303:    <xsl:variable name="selected_final">
+tools/openscap/xsl/xccdf-guide-impl.xsl:308:    </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:330:            <xsl:variable name="rule" select="."/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:331:            <xsl:variable name="rule_selected_final">
+tools/openscap/xsl/xccdf-guide-impl.xsl:336:            </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:340:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:342:<xsl:template name="guide-count-contained-selected-groups-impl">
+tools/openscap/xsl/xccdf-guide-impl.xsl:343:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:344:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:346:    <xsl:variable name="selected_group_final">
+tools/openscap/xsl/xccdf-guide-impl.xsl:351:    </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:362:            <xsl:variable name="group" select="."/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:363:            <xsl:variable name="group_selected_final">
+tools/openscap/xsl/xccdf-guide-impl.xsl:368:            </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:372:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:374:<xsl:template name="guide-count-contained-selected-rules">
+tools/openscap/xsl/xccdf-guide-impl.xsl:381:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:382:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:384:    <xsl:variable name="impl-ret">
+tools/openscap/xsl/xccdf-guide-impl.xsl:389:    </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:392:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:394:<xsl:template name="guide-count-contained-selected-groups">
+tools/openscap/xsl/xccdf-guide-impl.xsl:401:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:402:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:404:    <xsl:variable name="impl-ret-group">
+tools/openscap/xsl/xccdf-guide-impl.xsl:409:    </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:412:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:414:<xsl:template name="contained-groups-wording">
+tools/openscap/xsl/xccdf-guide-impl.xsl:415:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:416:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:418:    <xsl:variable name="contained_groups">
+tools/openscap/xsl/xccdf-guide-impl.xsl:423:    </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:435:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:437:<xsl:template name="guide-tree-inner-node">
+tools/openscap/xsl/xccdf-guide-impl.xsl:438:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:439:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:440:    <xsl:param name="indent"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:442:    <xsl:variable name="selected_final">
+tools/openscap/xsl/xccdf-guide-impl.xsl:447:    </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:450:        <xsl:variable name="contained_rules">
+tools/openscap/xsl/xccdf-guide-impl.xsl:455:        </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:457:        <xsl:variable name="contained_groups">
+tools/openscap/xsl/xccdf-guide-impl.xsl:462:        </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:556:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:558:<xsl:template name="table-of-contents-items">
+tools/openscap/xsl/xccdf-guide-impl.xsl:559:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:560:    <xsl:param name="levels"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:561:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:564:            <xsl:variable name="selected_final">
+tools/openscap/xsl/xccdf-guide-impl.xsl:569:            </xsl:variable>
+tools/openscap/xsl/xccdf-guide-impl.xsl:597:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:599:<xsl:template name="table-of-contents">
+tools/openscap/xsl/xccdf-guide-impl.xsl:600:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:601:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:608:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:610:<xsl:template name="guide-tree">
+tools/openscap/xsl/xccdf-guide-impl.xsl:611:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:612:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:627:</xsl:template>
+tools/openscap/xsl/xccdf-guide-impl.xsl:629:<xsl:template name="generate-guide">
+tools/openscap/xsl/xccdf-guide-impl.xsl:630:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:631:    <xsl:param name="profile_id"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:637:    <xsl:variable name="profile" select="$benchmark/cdf:Profile[@id = $profile_id]"/>
+tools/openscap/xsl/xccdf-guide-impl.xsl:691:</xsl:template>
+tools/openscap/xsl/xccdf_1.1_remove_dangling_sub.xsl:33:  <xsl:template match="@*|node()">
+tools/openscap/xsl/xccdf_1.1_remove_dangling_sub.xsl:37:  </xsl:template>
+tools/openscap/xsl/xccdf_1.1_remove_dangling_sub.xsl:39:  <xsl:template match="xccdf_11:sub">
+tools/openscap/xsl/xccdf_1.1_remove_dangling_sub.xsl:40:    <xsl:variable name="idref" select="@idref"/>
+tools/openscap/xsl/xccdf_1.1_remove_dangling_sub.xsl:52:  </xsl:template>
+tools/openscap/xsl/xccdf-branding.xsl:36:<xsl:param name="oscap-version"/>
+tools/openscap/xsl/xccdf-branding.xsl:38:<xsl:template name="xccdf-branding-logo">
+tools/openscap/xsl/xccdf-branding.xsl:48:</xsl:template>
+tools/openscap/xsl/xccdf-branding.xsl:50:<xsl:template name="xccdf-report-header">
+tools/openscap/xsl/xccdf-branding.xsl:59:</xsl:template>
+tools/openscap/xsl/xccdf-branding.xsl:61:<xsl:template name="xccdf-report-footer">
+tools/openscap/xsl/xccdf-branding.xsl:72:</xsl:template>
+tools/openscap/xsl/xccdf-branding.xsl:74:<xsl:template name="xccdf-guide-header">
+tools/openscap/xsl/xccdf-branding.xsl:83:</xsl:template>
+tools/openscap/xsl/xccdf-branding.xsl:85:<xsl:template name="xccdf-guide-footer">
+tools/openscap/xsl/xccdf-branding.xsl:96:</xsl:template>
+tools/openscap/xsl/oval-to-xccdf.xsl:26:    <xsl:template match="/">
+tools/openscap/xsl/oval-to-xccdf.xsl:42:    </xsl:template>
+tools/openscap/xsl/oval-to-xccdf.xsl:44:    <xsl:template match="oval-def:definition">
+tools/openscap/xsl/oval-to-xccdf.xsl:48:                <xsl:variable name="oval_severity" select="oval-def:metadata/oval-def:advisory/oval-def:severity/text()"/>
+tools/openscap/xsl/oval-to-xccdf.xsl:80:    </xsl:template>
+tools/openscap/xsl/oval-to-xccdf.xsl:82:    <xsl:template match="oval-def:cve">
+tools/openscap/xsl/oval-to-xccdf.xsl:86:    </xsl:template>
+tools/openscap/xsl/oval-to-xccdf.xsl:88:    <xsl:template match="oval-def:reference[@source='RHSA']">
+tools/openscap/xsl/oval-to-xccdf.xsl:94:    </xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:31:<xsl:param name="verbosity"/>
+tools/openscap/xsl/xccdf-share.xsl:36:<xsl:template name="rule-result-tooltip">
+tools/openscap/xsl/xccdf-share.xsl:37:    <xsl:param name="ruleresult"/>
+tools/openscap/xsl/xccdf-share.xsl:52:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:54:<xsl:template match="cdf:ident" mode="ident">
+tools/openscap/xsl/xccdf-share.xsl:66:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:68:<xsl:template name="item-title">
+tools/openscap/xsl/xccdf-share.xsl:69:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-share.xsl:70:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:84:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:86:<xsl:template name="item-idents-refs">
+tools/openscap/xsl/xccdf-share.xsl:87:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-share.xsl:112:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:114:<xsl:template name="item-idents">
+tools/openscap/xsl/xccdf-share.xsl:115:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-share.xsl:122:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:124:<xsl:template name="item-refs">
+tools/openscap/xsl/xccdf-share.xsl:125:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-share.xsl:128:            <xsl:variable name="href" select="@href"/>
+tools/openscap/xsl/xccdf-share.xsl:153:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:156:<xsl:template name="item-severity">
+tools/openscap/xsl/xccdf-share.xsl:157:    <xsl:param name="item"/>
+tools/openscap/xsl/xccdf-share.xsl:158:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:159:    <xsl:variable name="refine-rule" select="$profile/cdf:refine-rule[@idref=$item/@id]" />
+tools/openscap/xsl/xccdf-share.xsl:173:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:176:<xsl:template mode="sub-testresult" match="text()">
+tools/openscap/xsl/xccdf-share.xsl:177:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-share.xsl:178:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:179:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:182:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:184:<xsl:template mode="sub-testresult" match="cdf:fix//cdf:instance">
+tools/openscap/xsl/xccdf-share.xsl:185:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-share.xsl:186:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:187:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:189:    <xsl:variable name='ctx' select='@context'/>
+tools/openscap/xsl/xccdf-share.xsl:199:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:201:<xsl:template mode="sub-testresult" match="cdf:sub">
+tools/openscap/xsl/xccdf-share.xsl:202:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-share.xsl:203:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:204:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:206:    <xsl:variable name="subid" select="./@idref"/>
+tools/openscap/xsl/xccdf-share.xsl:219:            <xsl:variable name="value" select="key('values', concat($benchmark/@id, '|', $subid))"/>
+tools/openscap/xsl/xccdf-share.xsl:223:                    <xsl:variable name="selector" select="$profile/cdf:refine-value[@idref = $subid][last()]/@selector"/>
+tools/openscap/xsl/xccdf-share.xsl:227:                    <xsl:variable name="value_lastselector" select="$value/cdf:value[not(@selector)][last()]"/>
+tools/openscap/xsl/xccdf-share.xsl:243:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:245:<xsl:template mode="sub-testresult" match="*[namespace-uri()='http://www.w3.org/1999/xhtml']">
+tools/openscap/xsl/xccdf-share.xsl:246:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-share.xsl:247:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:248:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:266:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:268:<xsl:template mode="sub-testresult" match="node() | @*">
+tools/openscap/xsl/xccdf-share.xsl:269:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-share.xsl:270:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:271:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:282:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:284:<xsl:template mode="sub-testresult" match="cdf:title | cdf:description | cdf:fix | cdf:fixtext | cdf:front-matter | cdf:rear-matter | cdf:rationale | cdf:warning | cdf:notice">
+tools/openscap/xsl/xccdf-share.xsl:285:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-share.xsl:286:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:287:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:294:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:296:<xsl:template name="show-fixtext">
+tools/openscap/xsl/xccdf-share.xsl:297:    <xsl:param name="fixtext"/>
+tools/openscap/xsl/xccdf-share.xsl:298:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-share.xsl:299:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:300:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:310:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:312:<xsl:template name="show-fix">
+tools/openscap/xsl/xccdf-share.xsl:313:    <xsl:param name="fix"/>
+tools/openscap/xsl/xccdf-share.xsl:314:    <xsl:param name="testresult"/>
+tools/openscap/xsl/xccdf-share.xsl:315:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:316:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:318:    <xsl:variable name="fix_type">
+tools/openscap/xsl/xccdf-share.xsl:331:    </xsl:variable>
+tools/openscap/xsl/xccdf-share.xsl:371:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:373:<xsl:template name="show-title-front-matter-description-notices">
+tools/openscap/xsl/xccdf-share.xsl:376:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:377:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:448:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:450:<xsl:template name="rear-matter">
+tools/openscap/xsl/xccdf-share.xsl:451:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:452:    <xsl:param name="profile"/>
+tools/openscap/xsl/xccdf-share.xsl:468:</xsl:template>
+tools/openscap/xsl/xccdf-share.xsl:470:<xsl:template name="warn-unresolved">
+tools/openscap/xsl/xccdf-share.xsl:471:    <xsl:param name="benchmark"/>
+tools/openscap/xsl/xccdf-share.xsl:477:</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:77:	<xsl:template name="oval_res_style">
+tools/openscap/xsl/oval-results-report.xsl:115:	</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:118:	<xsl:template name="ResultColorTable">
+tools/openscap/xsl/oval-results-report.xsl:168:	</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:171:	<xsl:template match="oval-res:oval_results">
+tools/openscap/xsl/oval-results-report.xsl:231:							<xsl:variable name="systemMod2">
+tools/openscap/xsl/oval-results-report.xsl:236:							</xsl:variable>
+tools/openscap/xsl/oval-results-report.xsl:302:	</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:305:	<xsl:template name="SystemInfo">
+tools/openscap/xsl/oval-results-report.xsl:306:		<xsl:param name="sysInfoElm"/>
+tools/openscap/xsl/oval-results-report.xsl:338:	</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:341:	<xsl:template name="Interfaces">
+tools/openscap/xsl/oval-results-report.xsl:342:		<xsl:param name="iterfacesElm"/>
+tools/openscap/xsl/oval-results-report.xsl:344:			<xsl:variable name="interfaceMod2">
+tools/openscap/xsl/oval-results-report.xsl:349:			</xsl:variable>
+tools/openscap/xsl/oval-results-report.xsl:365:	</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:368:	<xsl:template name="ResultGenerator">
+tools/openscap/xsl/oval-results-report.xsl:369:		<xsl:param name="generatorElm"/>
+tools/openscap/xsl/oval-results-report.xsl:381:	</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:384:	<xsl:template name="SCGenerator">
+tools/openscap/xsl/oval-results-report.xsl:385:		<xsl:param name="generatorElm"/>
+tools/openscap/xsl/oval-results-report.xsl:394:	</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:397:	<xsl:template name="DefGenerator">
+tools/openscap/xsl/oval-results-report.xsl:398:		<xsl:param name="generatorElm"/>
+tools/openscap/xsl/oval-results-report.xsl:410:	</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:413:    <xsl:template name="Generator">
+tools/openscap/xsl/oval-results-report.xsl:414:        <xsl:param name="generatorElm"/>
+tools/openscap/xsl/oval-results-report.xsl:415:        <xsl:variable name="MessyNumber" select="string($generatorElm/oval:timestamp)"/>
+tools/openscap/xsl/oval-results-report.xsl:448:    </xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:451:    <xsl:template name="GeneratorDefTotals">
+tools/openscap/xsl/oval-results-report.xsl:452:        <xsl:param name="definitionsElm"/>
+tools/openscap/xsl/oval-results-report.xsl:488:    </xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:491:    <xsl:template name="GeneratorResTotals">
+tools/openscap/xsl/oval-results-report.xsl:492:        <xsl:param name="resultsElm"/>
+tools/openscap/xsl/oval-results-report.xsl:507:    </xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:510:	<xsl:template name="DefinitionsResults">
+tools/openscap/xsl/oval-results-report.xsl:511:		<xsl:param name="definitionsElm"/>
+tools/openscap/xsl/oval-results-report.xsl:569:	</xsl:template>
+tools/openscap/xsl/oval-results-report.xsl:572:	<xsl:template name="Definition">
+tools/openscap/xsl/oval-results-report.xsl:573:		<xsl:param name="definitionElm"/>
+tools/openscap/xsl/oval-results-report.xsl:574:		<xsl:variable name="defClass"><xsl:value-of select="key('definition-index', @definition_id)/@class"/></xsl:variable>
+tools/openscap/xsl/oval-results-report.xsl:575:		<xsl:variable name="defResult"><xsl:value-of select="$definitionElm/@result"/></xsl:variable>
+tools/openscap/xsl/oval-results-report.xsl:578:			<xsl:variable name="class_prefix">
+tools/openscap/xsl/oval-results-report.xsl:586:			</xsl:variable>
+tools/openscap/xsl/oval-results-report.xsl:587:			<xsl:variable name="classMod2">
+tools/openscap/xsl/oval-results-report.xsl:592:			</xsl:variable>
+tools/openscap/xsl/oval-results-report.xsl:601:						<xsl:variable name="idUrl" select="concat('http://oval.mitre.org/repository/data/getDef?id=', $definitionElm/@definition_id)"/>
+tools/openscap/xsl/oval-results-report.xsl:637:	</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:38:<xsl:param name='oscap-version'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:39:<xsl:param name='verbosity'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:40:<xsl:param name='pwd'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:43:<xsl:variable name='now' select='edate:date-time()'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:45:<xsl:variable name='generator' select="'OpenSCAP stylesheet'"/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:54:<xsl:template match="text()" mode='sub'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:56:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:59:<xsl:template match="cdf:fix//cdf:instance" mode='sub'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:60:  <xsl:variable name='ctx' select='@context'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:67:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:70:<xsl:template match="cdf:sub" mode='sub'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:71:  <xsl:variable name="subid" select="./@idref"/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:72:  <xsl:variable name="plain" select="ancestor::cdf:Benchmark/cdf:plain-text[@id=$subid]"/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:73:  <xsl:variable name="val" select="ancestor::cdf:Benchmark//cdf:Value[@id=$subid]"/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:78:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:81:<xsl:template match='htm:object[starts-with(@data, "#xccdf:value:")]' mode='sub'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:82:  <xsl:variable name='id' value='substring(@data, 13)'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:83:  <xsl:variable name='sub' select='ancestor::cdf:TestResult/cdf:target-facts/cdf:fact[@name=$id]/text()|ancestor::cdf:Benchmark//cdf:Value[@id=$id]/cdf:value[1]/text()|ancestor::cdf:Benchmark/cdf:plain-text[@id=$id][1]/text()'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:88:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:91:<xsl:template match='htm:object[starts-with(@data, "#xccdf:title:")]' mode='sub'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:92:  <xsl:variable name='id' value='substring(@data, 13)'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:93:  <xsl:variable name='sub' select='ancestor::cdf:Benchmark//cdf:Group/cdf:title|ancestor::cdf:Benchmark//cdf:Rule/cdf:title|ancestor::cdf:Benchmark//cdf:Value/cdf:title'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:98:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:101:<xsl:template match='htm:a[starts-with(@href, "#xccdf:link:")]' mode='sub'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:102:  <xsl:variable name='id' value='substring(@href, 12)'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:108:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:111:<xsl:template match='@href' mode='sub'><xsl:param name='id'/>#item-<xsl:value-of select='$id'/></xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:114:<xsl:template match="htm:*" mode='sub'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:119:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:122:<xsl:template match='node()|@*' mode='sub'><xsl:copy><xsl:copy-of select='@*'/><xsl:apply-templates select='node()' mode='sub'/></xsl:copy></xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:124:<xsl:template match='cdf:description|cdf:fix|cdf:fixtext|cdf:front-matter|cdf:rear-matter|cdf:rationale|cdf:warning' mode='sub'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:126:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:130:<xsl:param name='profile'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:131:<xsl:param name='keep-profiles'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:132:<xsl:param name='clean-profile-notes'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:134:<xsl:variable name='theprofile' select='/cdf:Benchmark/cdf:Profile[@id=$profile]'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:137:<xsl:template mode='profile' match='node()|@*'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:139:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:142:<xsl:template mode='profile' match='cdf:Profile'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:146:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:149:<xsl:template mode='profile' match='cdf:Group|cdf:Rule'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:150:  <xsl:variable name='id' select='@id'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:151:  <xsl:variable name='cid' select='@cluster-id'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:152:  <xsl:variable name='sel' select='$theprofile/cdf:select[@idref=$id or @idref=$cid][1]'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:153:  <xsl:variable name='rr' select='$theprofile/cdf:refine-rule[@idref=$id or @idref=$cid][1]'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:160:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:163:<xsl:template mode='profile' match='cdf:check'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:164:  <xsl:variable name='name' select='name()'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:165:  <xsl:variable name='rule' select='ancestor::cdf:Rule[1]'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:166:  <xsl:variable name='rr' select='$theprofile/cdf:refine-rule[@idref=$rule/@id or @idref=$rule/@cluster-id][1]'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:170:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:173:<xsl:template mode='profile' match='cdf:profile-note'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:177:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:180:<xsl:template mode='profile' match='cdf:Value'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:181:  <xsl:variable name='id' select='@id'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:182:  <xsl:variable name='cid' select='@cluster-id'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:183:  <xsl:variable name='rv' select='$theprofile/cdf:refine-value[@idref=$id or @idref=$cid][1]'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:184:  <xsl:variable name='sv' select='$theprofile/cdf:set-value[@idref=$id or @idref=$cid][1]'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:195:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:198:<xsl:template mode='profile' match='cdf:value|cdf:default|cdf:match|cdf:lower-bound|cdf:upper-bound|cdf:choices'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:199:  <xsl:variable name='val' select='ancestor::cdf:Value'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:200:  <xsl:variable name='name' select='name()'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:201:  <xsl:variable name='rv' select='$theprofile/cdf:refine-value[@idref=$val/@id or @idref=$val/@cluster-id][1]'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:205:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:208:<xsl:template mode='profile' match='@selector[not(ancestor::cdf:Profile)]'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:211:<xsl:template match='/'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:213:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:215:<xsl:template mode='apply-profile' match='cdf:Benchmark'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:218:</xsl:template>
+tools/openscap/xsl/legacy-xccdf-share.xsl:221:<xsl:param name='profile'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:222:<xsl:param name='substitute' select='1'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:224:<xsl:variable name='warn-unresolved' select='1'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:227:<xsl:variable name='benchmark.s1'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:232:</xsl:variable>
+tools/openscap/xsl/legacy-xccdf-share.xsl:234:<xsl:variable name='benchmark.s2'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:239:</xsl:variable>
+tools/openscap/xsl/legacy-xccdf-share.xsl:241:<xsl:variable name='root' select='exsl:node-set($benchmark.s2)/cdf:Benchmark'/>
+tools/openscap/xsl/legacy-xccdf-share.xsl:243:<xsl:template name='warn-unresolved'>
+tools/openscap/xsl/legacy-xccdf-share.xsl:247:</xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:77:<xsl:import href="legacy-xccdf-share.xsl" />
+tools/openscap/xsl/legacy-fix.xsl:82:<xsl:param name='result-id'/>
+tools/openscap/xsl/legacy-fix.xsl:83:<xsl:param name='profile' select='string(/cdf:Benchmark/cdf:TestResult[@id=$result-id]/cdf:profile/@idref)'/>
+tools/openscap/xsl/legacy-fix.xsl:84:<xsl:param name='template' select='"bash"'/>
+tools/openscap/xsl/legacy-fix.xsl:87:<xsl:variable name='tplfile'>
+tools/openscap/xsl/legacy-fix.xsl:95:</xsl:variable>
+tools/openscap/xsl/legacy-fix.xsl:97:<xsl:variable name='tpl' select='document($tplfile)'/>
+tools/openscap/xsl/legacy-fix.xsl:98:<xsl:variable name='sys' select='concat(" ", $tpl/tpl:fixtemplate/@system, " ")'/>
+tools/openscap/xsl/legacy-fix.xsl:100:<xsl:variable name='dummy'>
+tools/openscap/xsl/legacy-fix.xsl:102:</xsl:variable>
+tools/openscap/xsl/legacy-fix.xsl:104:<xsl:variable name='benchmark' select='$root'/>
+tools/openscap/xsl/legacy-fix.xsl:105:<xsl:variable name='testresult' select='$root/cdf:TestResult[@id=$result-id]'/>
+tools/openscap/xsl/legacy-fix.xsl:106:<xsl:variable name='dummy2'>
+tools/openscap/xsl/legacy-fix.xsl:108:</xsl:variable>
+tools/openscap/xsl/legacy-fix.xsl:114:<xsl:template match='/'>
+tools/openscap/xsl/legacy-fix.xsl:127:</xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:129:<xsl:template match='cdf:Rule'>
+tools/openscap/xsl/legacy-fix.xsl:130:  <xsl:variable name='fix' select='cdf:fix[contains($sys, concat(" ", @system, ""))][1]'/>
+tools/openscap/xsl/legacy-fix.xsl:131:  <xsl:variable name='val'><xsl:apply-templates mode='text' select='$fix/node()'/></xsl:variable>
+tools/openscap/xsl/legacy-fix.xsl:136:        <xsl:variable name='msg'>Skipping fix generation for rule <xsl:value-of select='@id'/> because it contains instance substitutions</xsl:variable>
+tools/openscap/xsl/legacy-fix.xsl:150:</xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:152:<xsl:template match='cdf:rule-result'>
+tools/openscap/xsl/legacy-fix.xsl:153:  <xsl:variable name='rule' select='key("item", @idref)'/>
+tools/openscap/xsl/legacy-fix.xsl:154:  <xsl:variable name='fix' select='(cdf:fix|$rule/cdf:fix)[contains($sys, concat(" ", @system, ""))][last()]'/>
+tools/openscap/xsl/legacy-fix.xsl:155:  <xsl:variable name='val'><xsl:apply-templates mode='text' select='$fix/node()'/></xsl:variable>
+tools/openscap/xsl/legacy-fix.xsl:166:</xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:168:<xsl:template name='linecomment'>
+tools/openscap/xsl/legacy-fix.xsl:169:  <xsl:param name='content'/>
+tools/openscap/xsl/legacy-fix.xsl:170:  <xsl:variable name='cnt' select='normalize-space($content)'/>
+tools/openscap/xsl/legacy-fix.xsl:171:  <xsl:variable name='commentbeg' select='$tpl/tpl:fixtemplate/tpl:linecomment[1]'/>
+tools/openscap/xsl/legacy-fix.xsl:175:</xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:177:<xsl:template match='text()'><xsl:value-of select='normalize-space(.)'/></xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:180:<xsl:template name='tpl.elem'>
+tools/openscap/xsl/legacy-fix.xsl:181:  <xsl:param name='elem'/>
+tools/openscap/xsl/legacy-fix.xsl:182:  <xsl:param name='val'/>
+tools/openscap/xsl/legacy-fix.xsl:183:  <xsl:param name='fix'/>
+tools/openscap/xsl/legacy-fix.xsl:184:  <xsl:param name='rule'/>
+tools/openscap/xsl/legacy-fix.xsl:185:  <xsl:param name='result'/>
+tools/openscap/xsl/legacy-fix.xsl:193:</xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:195:<xsl:template mode='fixtpl' match='tpl:*'>
+tools/openscap/xsl/legacy-fix.xsl:196:  <xsl:param name='val'/>
+tools/openscap/xsl/legacy-fix.xsl:197:  <xsl:param name='rule'/>
+tools/openscap/xsl/legacy-fix.xsl:198:  <xsl:param name='fix'/>
+tools/openscap/xsl/legacy-fix.xsl:199:  <xsl:param name='result'/>
+tools/openscap/xsl/legacy-fix.xsl:206:</xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:208:<xsl:template mode='fixtpl' match='tpl:sub'>
+tools/openscap/xsl/legacy-fix.xsl:209:  <xsl:param name='val'/>
+tools/openscap/xsl/legacy-fix.xsl:210:  <xsl:param name='rule'/>
+tools/openscap/xsl/legacy-fix.xsl:211:  <xsl:param name='fix'/>
+tools/openscap/xsl/legacy-fix.xsl:212:  <xsl:param name='result'/>
+tools/openscap/xsl/legacy-fix.xsl:214:</xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:216:<xsl:template mode='fixtpl' match='tpl:if'>
+tools/openscap/xsl/legacy-fix.xsl:217:  <xsl:param name='val'/>
+tools/openscap/xsl/legacy-fix.xsl:218:  <xsl:param name='rule'/>
+tools/openscap/xsl/legacy-fix.xsl:219:  <xsl:param name='fix'/>
+tools/openscap/xsl/legacy-fix.xsl:220:  <xsl:param name='result'/>
+tools/openscap/xsl/legacy-fix.xsl:229:</xsl:template>
+tools/openscap/xsl/legacy-fix.xsl:231:<xsl:template mode='fixtpl' match='text()'><xsl:value-of select='.'/></xsl:template>
+tools/openscap/xsl/xccdf-resources-build.sh:34:echo "<xsl:template name=\"css-sources\"><![CDATA[" >> $XCCDF_RESOURCES
+tools/openscap/xsl/xccdf-resources-build.sh:38:echo "]]></xsl:template>" >> $XCCDF_RESOURCES
+tools/openscap/xsl/xccdf-resources-build.sh:39:echo "<xsl:template name=\"js-sources\"><![CDATA[" >> $XCCDF_RESOURCES
+tools/openscap/xsl/xccdf-resources-build.sh:43:echo "]]></xsl:template>" >> $XCCDF_RESOURCES
+tools/openscap/xsl/xccdf-report.xsl:41:<xsl:include href="xccdf-report-impl.xsl" />
+tools/openscap/xsl/xccdf-report.xsl:44:<xsl:param name="testresult_id"/>
+tools/openscap/xsl/xccdf-report.xsl:45:<xsl:param name="benchmark_id"/>
+tools/openscap/xsl/xccdf-report.xsl:48:<xsl:param name='pwd'/>
+tools/openscap/xsl/xccdf-report.xsl:49:<xsl:param name='oval-template'/>
+tools/openscap/xsl/xccdf-report.xsl:50:<xsl:param name='sce-template'/>
+tools/openscap/xsl/xccdf-report.xsl:52:<xsl:variable name='oval-tmpl'>
+tools/openscap/xsl/xccdf-report.xsl:58:</xsl:variable>
+tools/openscap/xsl/xccdf-report.xsl:60:<xsl:variable name='sce-tmpl'>
+tools/openscap/xsl/xccdf-report.xsl:66:</xsl:variable>
+tools/openscap/xsl/xccdf-report.xsl:73:<xsl:template match="/">
+tools/openscap/xsl/xccdf-report.xsl:74:    <xsl:variable name='end_times'>
+tools/openscap/xsl/xccdf-report.xsl:81:    </xsl:variable>
+tools/openscap/xsl/xccdf-report.xsl:83:    <xsl:variable name="last_test_time" select="exsl:node-set($end_times)/s:times/s:t[1]/@t"/>
+tools/openscap/xsl/xccdf-report.xsl:85:    <xsl:variable name="final_result_id">
+tools/openscap/xsl/xccdf-report.xsl:94:    </xsl:variable>
+tools/openscap/xsl/xccdf-report.xsl:96:    <xsl:variable name="final_benchmark_id">
+tools/openscap/xsl/xccdf-report.xsl:112:    </xsl:variable>
+tools/openscap/xsl/xccdf-report.xsl:114:    <xsl:variable name="testresult" select="//cdf:TestResult[@id=$final_result_id]"/>
+tools/openscap/xsl/xccdf-report.xsl:115:    <xsl:variable name="benchmark" select="//cdf:Benchmark[@id=$final_benchmark_id]"/>
+tools/openscap/xsl/xccdf-report.xsl:148:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:44:<xsl:template mode='brief' match='ovalres:oval_results'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:45:    <xsl:param name='definition-id' />
+tools/openscap/xsl/xccdf-report-oval-details.xsl:47:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:49:<xsl:template mode='brief' match='ovalres:extend_definition'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:51:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:53:<xsl:template mode='brief' match='ovalres:criterion'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:57:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:59:<xsl:template mode='brief' match='ovalres:criteria'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:62:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:64:<xsl:template mode='brief' match='ovalres:definition'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:66:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:69:<xsl:template mode='brief' match='ovalres:test'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:70:    <xsl:param name='title'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:71:    <xsl:variable name='items' select='ovalres:tested_item'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:112:                            <xsl:variable name="currentResult" select="@result" />
+tools/openscap/xsl/xccdf-report-oval-details.xsl:129:            <xsl:variable name='object_id' select='key("oval-testdef", @test_id)/*[local-name()="object"]/@object_ref'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:130:            <xsl:variable name='object_info' select='key("oval-objectdef",$object_id)'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:131:            <xsl:variable name='state_id' select='key("oval-testdef", @test_id)/*[local-name()="state"]/@state_ref'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:132:            <xsl:variable name='comment' select='$object_info[1]/@comment'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:159:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:161:<xsl:template mode='normal' match='ovalres:tested_variable'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:165:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:167:<xsl:template mode='tableintable' match='ovalres:tested_variable'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:175:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:177:<xsl:template mode='object' match='*[starts-with(namespace-uri(), "http://oval.mitre.org/XMLSchema/oval-definitions") and contains(local-name(), "_object")]'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:178:    <xsl:param name="tested_var"/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:179:    <xsl:param name="object_id"/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:185:                    <xsl:variable name="matching_var" select="$tested_var[@variable_id = current()/@var_ref]"/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:205:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:207:<xsl:template mode='state' match='*[starts-with(namespace-uri(), "http://oval.mitre.org/XMLSchema/oval-definitions") and contains(local-name(), "_state")]'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:215:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:217:<xsl:template mode='message' match='ovalsys:object'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:221:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:225:<xsl:template mode='item-head' match='node()' priority='-5'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:226:<xsl:template mode='item-body' match='node()' priority='-5'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:230:<xsl:template mode='item-head' match='*'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:231:    <xsl:param name="resultColumn" select="false"/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:235:            <xsl:variable name='label' select='translate(local-name(), "_", " ")'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:236:            <xsl:variable name='first_letter' select='translate(substring($label,1,1), "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:237:            <xsl:variable name='rest' select='substring($label,2)'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:241:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:243:<xsl:template mode='item-body' match='*'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:244:    <xsl:param name="result"/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:267:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:271:<xsl:template mode='item-head' match='ovalunixsc:file_item'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:273:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:275:<xsl:template mode='item-body' match='ovalunixsc:file_item'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:276:    <xsl:param name="result"/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:277:    <xsl:variable name='path' select='concat(ovalunixsc:path, "/", ovalunixsc:filename)'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:323:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:325:<xsl:template mode='permission' match='*'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:330:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:334:<xsl:template mode='item-head' match='ovalindsc:textfilecontent_item'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:336:</xsl:template>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:338:<xsl:template mode='item-body' match='ovalindsc:textfilecontent_item'>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:339:    <xsl:param name="result"/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:340:    <xsl:variable name='path' select='concat(ovalindsc:path, "/", ovalindsc:filename)'/>
+tools/openscap/xsl/xccdf-report-oval-details.xsl:358:</xsl:template>
+tools/openscap/xsl/xccdf-resources.xsl:4:<xsl:template name="css-sources"><![CDATA[
+tools/openscap/xsl/xccdf-resources.xsl:19:table.treetable span.indenter{display:inline-block;margin:0;padding:0;text-align:right;user-select:none;-khtml-user-select:none;-moz-user-select:none;-o-user-select:none;-webkit-user-select:none;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;width:19px}table.treetable span.indenter a{background-position:left center;background-repeat:no-repeat;display:inline-block;text-decoration:none;width:19px}table.treetable tr.collapsed span.indenter a{background-image:url(data:image/png;base64,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)}table.treetable tr.expanded span.indenter a{background-image:url(data:image/png;base64,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)}table.treetable tr.branch{background-color:#f9f9f9}table.treetable tr.selected{background-color:#3875d7;color:#fff}table.treetable tr span.indenter a{outline:0}tr.rule-overview-needs-attention td a{color:#d9534f}td.rule-result div,span.rule-result{text-align:center;font-weight:bold;color:#fff;background:gray}td.rule-result-fail div,span.rule-result-fail{background:#d9534f}td.rule-result-error div,span.rule-result-error{background:#d9534f}td.rule-result-unknown div,span.rule-result-unknown{background:#f0ad4e}td.rule-result-pass div,span.rule-result-pass{background:#5cb85c}td.rule-result-fixed div,span.rule-result-fixed{background:#5cb85c}.js-only{display:none}.rule-result-filtered,.rule-result-filtered>*{display:none !important}.search-no-match,.search-no-match>*{display:none !important}.rule-detail-fail,.rule-detail-error,.rule-detail-unknown{border:2px solid #d9534f}#footer{text-align:center;margin-top:50px}pre{overflow:auto !important;word-wrap:normal !important;white-space:pre-wrap}div.check-system-details,div.remediation,div.description{width:0;min-width:100%;overflow-x:auto}div.profile-description{white-space:pre-wrap}div.modal-body{margin:50px;padding:0}div.horizontal-scroll{overflow-x:auto}div.top-spacer-10{margin-top:10px}@media print{.noprint{display:none}.label{border:0;padding:0}.container{width:100%}abbr[title]{border:0;text-decoration:none}div.progress{overflow:visible;height:auto}div.progress-bar{width:auto;float:none;width:auto !important;text-align:left}div.panel-body{padding:4px}}]]></xsl:template>
+tools/openscap/xsl/xccdf-resources.xsl:20:<xsl:template name="js-sources"><![CDATA[
+tools/openscap/xsl/xccdf-resources.xsl:37:;if("undefined"==typeof jQuery){throw new Error("Bootstrap's JavaScript requires jQuery")}+function(a){var b=a.fn.jquery.split(" ")[0].split(".");if(b[0]<2&&b[1]<9||1==b[0]&&9==b[1]&&b[2]<1||b[0]>3){throw new Error("Bootstrap's JavaScript requires jQuery version 1.9.1 or higher, but lower than version 4")}}(jQuery),+function(b){function c(g){return this.each(function(){var e=b(this),h=e.data("bs.alert");h||e.data("bs.alert",h=new f(this)),"string"==typeof g&&h[g].call(e)})}var a='[data-dismiss="alert"]',f=function(g){b(g).on("click",a,this.close)};f.VERSION="3.3.7",f.TRANSITION_DURATION=150,f.prototype.close=function(k){function h(){g.detach().trigger("closed.bs.alert").remove()}var l=b(this),j=l.attr("data-target");j||(j=l.attr("href"),j=j&&j.replace(/.*(?=#[^\s]*$)/,""));var g=b("#"===j?[]:j);k&&k.preventDefault(),g.length||(g=l.closest(".alert")),g.trigger(k=b.Event("close.bs.alert")),k.isDefaultPrevented()||(g.removeClass("in"),b.support.transition&&g.hasClass("fade")?g.one("bsTransitionEnd",h).emulateTransitionEnd(f.TRANSITION_DURATION):h())};var d=b.fn.alert;b.fn.alert=c,b.fn.alert.Constructor=f,b.fn.alert.noConflict=function(){return b.fn.alert=d,this},b(document).on("click.bs.alert.data-api",a,f.prototype.close)}(jQuery),+function(d){function h(l){var a=l.attr("data-target");a||(a=l.attr("href"),a=a&&/#[A-Za-z]/.test(a)&&a.replace(/.*(?=#[^\s]*$)/,""));var m=a&&d(a);return m&&m.length?m:l.parent()}function c(a){a&&3===a.which||(d(j).remove(),d(f).each(function(){var m=d(this),l=h(m),e={relatedTarget:this};l.hasClass("open")&&(a&&"click"==a.type&&/input|textarea/i.test(a.target.tagName)&&d.contains(l[0],a.target)||(l.trigger(a=d.Event("hide.bs.dropdown",e)),a.isDefaultPrevented()||(m.attr("aria-expanded","false"),l.removeClass("open").trigger(d.Event("hidden.bs.dropdown",e)))))}))}function k(a){return this.each(function(){var e=d(this),l=e.data("bs.dropdown");l||e.data("bs.dropdown",l=new b(this)),"string"==typeof a&&l[a].call(e)})}var j=".dropdown-backdrop",f='[data-toggle="dropdown"]',b=function(a){d(a).on("click.bs.dropdown",this.toggle)};b.VERSION="3.3.7",b.prototype.toggle=function(q){var p=d(this);if(!p.is(".disabled, :disabled")){var l=h(p),e=l.hasClass("open");if(c(),!e){"ontouchstart" in document.documentElement&&!l.closest(".navbar-nav").length&&d(document.createElement("div")).addClass("dropdown-backdrop").insertAfter(d(this)).on("click",c);var m={relatedTarget:this};if(l.trigger(q=d.Event("show.bs.dropdown",m)),q.isDefaultPrevented()){return}p.trigger("focus").attr("aria-expanded","true"),l.toggleClass("open").trigger(d.Event("shown.bs.dropdown",m))}return !1}},b.prototype.keydown=function(p){if(/(38|40|27|32)/.test(p.which)&&!/input|textarea/i.test(p.target.tagName)){var u=d(this);if(p.preventDefault(),p.stopPropagation(),!u.is(".disabled, :disabled")){var t=h(u),m=t.hasClass("open");if(!m&&27!=p.which||m&&27==p.which){return 27==p.which&&t.find(f).trigger("focus"),u.trigger("click")}var q=" li:not(.disabled):visible a",s=t.find(".dropdown-menu"+q);if(s.length){var e=s.index(p.target);38==p.which&&e>0&&e--,40==p.which&&e<s.length-1&&e++,~e||(e=0),s.eq(e).trigger("focus")}}}};var g=d.fn.dropdown;d.fn.dropdown=k,d.fn.dropdown.Constructor=b,d.fn.dropdown.noConflict=function(){return d.fn.dropdown=g,this},d(document).on("click.bs.dropdown.data-api",c).on("click.bs.dropdown.data-api",".dropdown form",function(a){a.stopPropagation()}).on("click.bs.dropdown.data-api",f,b.prototype.toggle).on("keydown.bs.dropdown.data-api",f,b.prototype.keydown).on("keydown.bs.dropdown.data-api",".dropdown-menu",b.prototype.keydown)}(jQuery),+function(b){function c(f,g){return this.each(function(){var j=b(this),h=j.data("bs.modal"),e=b.extend({},a.DEFAULTS,j.data(),"object"==typeof f&&f);h||j.data("bs.modal",h=new a(this,e)),"string"==typeof f?h[f](g):e.show&&h.show(g)})}var a=function(g,f){this.options=f,this.$body=b(document.body),this.$element=b(g),this.$dialog=this.$element.find(".modal-dialog"),this.$backdrop=null,this.isShown=null,this.originalBodyPad=null,this.scrollbarWidth=0,this.ignoreBackdropClick=!1,this.options.remote&&this.$element.find(".modal-content").load(this.options.remote,b.proxy(function(){this.$element.trigger("loaded.bs.modal")},this))};a.VERSION="3.3.7",a.TRANSITION_DURATION=300,a.BACKDROP_TRANSITION_DURATION=150,a.DEFAULTS={backdrop:!0,keyboard:!0,show:!0},a.prototype.toggle=function(e){return this.isShown?this.hide():this.show(e)},a.prototype.show=function(f){var h=this,g=b.Event("show.bs.modal",{relatedTarget:f});this.$element.trigger(g),this.isShown||g.isDefaultPrevented()||(this.isShown=!0,this.checkScrollbar(),this.setScrollbar(),this.$body.addClass("modal-open"),this.escape(),this.resize(),this.$element.on("click.dismiss.bs.modal",'[data-dismiss="modal"]',b.proxy(this.hide,this)),this.$dialog.on("mousedown.dismiss.bs.modal",function(){h.$element.one("mouseup.dismiss.bs.modal",function(j){b(j.target).is(h.$element)&&(h.ignoreBackdropClick=!0)})}),this.backdrop(function(){var j=b.support.transition&&h.$element.hasClass("fade");h.$element.parent().length||h.$element.appendTo(h.$body),h.$element.show().scrollTop(0),h.adjustDialog(),j&&h.$element[0].offsetWidth,h.$element.addClass("in"),h.enforceFocus();var e=b.Event("shown.bs.modal",{relatedTarget:f});j?h.$dialog.one("bsTransitionEnd",function(){h.$element.trigger("focus").trigger(e)}).emulateTransitionEnd(a.TRANSITION_DURATION):h.$element.trigger("focus").trigger(e)}))},a.prototype.hide=function(f){f&&f.preventDefault(),f=b.Event("hide.bs.modal"),this.$element.trigger(f),this.isShown&&!f.isDefaultPrevented()&&(this.isShown=!1,this.escape(),this.resize(),b(document).off("focusin.bs.modal"),this.$element.removeClass("in").off("click.dismiss.bs.modal").off("mouseup.dismiss.bs.modal"),this.$dialog.off("mousedown.dismiss.bs.modal"),b.support.transition&&this.$element.hasClass("fade")?this.$element.one("bsTransitionEnd",b.proxy(this.hideModal,this)).emulateTransitionEnd(a.TRANSITION_DURATION):this.hideModal())},a.prototype.enforceFocus=function(){b(document).off("focusin.bs.modal").on("focusin.bs.modal",b.proxy(function(e){document===e.target||this.$element[0]===e.target||this.$element.has(e.target).length||this.$element.trigger("focus")},this))},a.prototype.escape=function(){this.isShown&&this.options.keyboard?this.$element.on("keydown.dismiss.bs.modal",b.proxy(function(e){27==e.which&&this.hide()},this)):this.isShown||this.$element.off("keydown.dismiss.bs.modal")},a.prototype.resize=function(){this.isShown?b(window).on("resize.bs.modal",b.proxy(this.handleUpdate,this)):b(window).off("resize.bs.modal")},a.prototype.hideModal=function(){var e=this;this.$element.hide(),this.backdrop(function(){e.$body.removeClass("modal-open"),e.resetAdjustments(),e.resetScrollbar(),e.$element.trigger("hidden.bs.modal")})},a.prototype.removeBackdrop=function(){this.$backdrop&&this.$backdrop.remove(),this.$backdrop=null},a.prototype.backdrop=function(h){var k=this,j=this.$element.hasClass("fade")?"fade":"";if(this.isShown&&this.options.backdrop){var g=b.support.transition&&j;if(this.$backdrop=b(document.createElement("div")).addClass("modal-backdrop "+j).appendTo(this.$body),this.$element.on("click.dismiss.bs.modal",b.proxy(function(e){return this.ignoreBackdropClick?void (this.ignoreBackdropClick=!1):void (e.target===e.currentTarget&&("static"==this.options.backdrop?this.$element[0].focus():this.hide()))},this)),g&&this.$backdrop[0].offsetWidth,this.$backdrop.addClass("in"),!h){return}g?this.$backdrop.one("bsTransitionEnd",h).emulateTransitionEnd(a.BACKDROP_TRANSITION_DURATION):h()}else{if(!this.isShown&&this.$backdrop){this.$backdrop.removeClass("in");var f=function(){k.removeBackdrop(),h&&h()};b.support.transition&&this.$element.hasClass("fade")?this.$backdrop.one("bsTransitionEnd",f).emulateTransitionEnd(a.BACKDROP_TRANSITION_DURATION):f()}else{h&&h()}}},a.prototype.handleUpdate=function(){this.adjustDialog()},a.prototype.adjustDialog=function(){var e=this.$element[0].scrollHeight>document.documentElement.clientHeight;this.$element.css({paddingLeft:!this.bodyIsOverflowing&&e?this.scrollbarWidth:"",paddingRight:this.bodyIsOverflowing&&!e?this.scrollbarWidth:""})},a.prototype.resetAdjustments=function(){this.$element.css({paddingLeft:"",paddingRight:""})},a.prototype.checkScrollbar=function(){var f=window.innerWidth;if(!f){var g=document.documentElement.getBoundingClientRect();f=g.right-Math.abs(g.left)}this.bodyIsOverflowing=document.body.clientWidth<f,this.scrollbarWidth=this.measureScrollbar()},a.prototype.setScrollbar=function(){var e=parseInt(this.$body.css("padding-right")||0,10);this.originalBodyPad=document.body.style.paddingRight||"",this.bodyIsOverflowing&&this.$body.css("padding-right",e+this.scrollbarWidth)},a.prototype.resetScrollbar=function(){this.$body.css("padding-right",this.originalBodyPad)},a.prototype.measureScrollbar=function(){var f=document.createElement("div");f.className="modal-scrollbar-measure",this.$body.append(f);var g=f.offsetWidth-f.clientWidth;return this.$body[0].removeChild(f),g};var d=b.fn.modal;b.fn.modal=c,b.fn.modal.Constructor=a,b.fn.modal.noConflict=function(){return b.fn.modal=d,this},b(document).on("click.bs.modal.data-api",'[data-toggle="modal"]',function(f){var j=b(this),h=j.attr("href"),g=b(j.attr("data-target")||h&&h.replace(/.*(?=#[^\s]+$)/,"")),e=g.data("bs.modal")?"toggle":b.extend({remote:!/#/.test(h)&&h},g.data(),j.data());j.is("a")&&f.preventDefault(),g.one("show.bs.modal",function(k){k.isDefaultPrevented()||g.one("hidden.bs.modal",function(){j.is(":visible")&&j.trigger("focus")})}),c.call(g,e,this)})}(jQuery),+function(b){function c(h){var g,j=h.attr("data-target")||(g=h.attr("href"))&&g.replace(/.*(?=#[^\s]+$)/,"");return b(j)}function a(g){return this.each(function(){var e=b(this),j=e.data("bs.collapse"),h=b.extend({},f.DEFAULTS,e.data(),"object"==typeof g&&g);!j&&h.toggle&&/show|hide/.test(g)&&(h.toggle=!1),j||e.data("bs.collapse",j=new f(this,h)),"string"==typeof g&&j[g]()})}var f=function(h,g){this.$element=b(h),this.options=b.extend({},f.DEFAULTS,g),this.$trigger=b('[data-toggle="collapse"][href="#'+h.id+'"],[data-toggle="collapse"][data-target="#'+h.id+'"]'),this.transitioning=null,this.options.parent?this.$parent=this.getParent():this.addAriaAndCollapsedClass(this.$element,this.$trigger),this.options.toggle&&this.toggle()};f.VERSION="3.3.7",f.TRANSITION_DURATION=350,f.DEFAULTS={toggle:!0},f.prototype.dimension=function(){var e=this.$element.hasClass("width");return e?"width":"height"},f.prototype.show=function(){if(!this.transitioning&&!this.$element.hasClass("in")){var k,m=this.$parent&&this.$parent.children(".panel").children(".in, .collapsing");if(!(m&&m.length&&(k=m.data("bs.collapse"),k&&k.transitioning))){var h=b.Event("show.bs.collapse");if(this.$element.trigger(h),!h.isDefaultPrevented()){m&&m.length&&(a.call(m,"hide"),k||m.data("bs.collapse",null));var g=this.dimension();this.$element.removeClass("collapse").addClass("collapsing")[g](0).attr("aria-expanded",!0),this.$trigger.removeClass("collapsed").attr("aria-expanded",!0),this.transitioning=1;var j=function(){this.$element.removeClass("collapsing").addClass("collapse in")[g](""),this.transitioning=0,this.$element.trigger("shown.bs.collapse")};if(!b.support.transition){return j.call(this)}var l=b.camelCase(["scroll",g].join("-"));this.$element.one("bsTransitionEnd",b.proxy(j,this)).emulateTransitionEnd(f.TRANSITION_DURATION)[g](this.$element[0][l])}}}},f.prototype.hide=function(){if(!this.transitioning&&this.$element.hasClass("in")){var h=b.Event("hide.bs.collapse");if(this.$element.trigger(h),!h.isDefaultPrevented()){var g=this.dimension();this.$element[g](this.$element[g]())[0].offsetHeight,this.$element.addClass("collapsing").removeClass("collapse in").attr("aria-expanded",!1),this.$trigger.addClass("collapsed").attr("aria-expanded",!1),this.transitioning=1;var j=function(){this.transitioning=0,this.$element.removeClass("collapsing").addClass("collapse").trigger("hidden.bs.collapse")};return b.support.transition?void this.$element[g](0).one("bsTransitionEnd",b.proxy(j,this)).emulateTransitionEnd(f.TRANSITION_DURATION):j.call(this)}}},f.prototype.toggle=function(){this[this.$element.hasClass("in")?"hide":"show"]()},f.prototype.getParent=function(){return b(this.options.parent).find('[data-toggle="collapse"][data-parent="'+this.options.parent+'"]').each(b.proxy(function(e,h){var g=b(h);this.addAriaAndCollapsedClass(c(g),g)},this)).end()},f.prototype.addAriaAndCollapsedClass=function(h,j){var g=h.hasClass("in");h.attr("aria-expanded",g),j.toggleClass("collapsed",!g).attr("aria-expanded",g)};var d=b.fn.collapse;b.fn.collapse=a,b.fn.collapse.Constructor=f,b.fn.collapse.noConflict=function(){return b.fn.collapse=d,this},b(document).on("click.bs.collapse.data-api",'[data-toggle="collapse"]',function(k){var j=b(this);j.attr("data-target")||k.preventDefault();var g=c(j),e=g.data("bs.collapse"),h=e?"toggle":j.data();a.call(g,h)})}(jQuery),+function(a){function b(){var d=document.createElement("bootstrap"),f={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"};for(var c in f){if(void 0!==d.style[c]){return{end:f[c]}}}return !1}a.fn.emulateTransitionEnd=function(d){var c=!1,g=this;a(this).one("bsTransitionEnd",function(){c=!0});var f=function(){c||a(g).trigger(a.support.transition.end)};return setTimeout(f,d),this},a(function(){a.support.transition=b(),a.support.transition&&(a.event.special.bsTransitionEnd={bindType:a.support.transition.end,delegateType:a.support.transition.end,handle:function(c){return a(c.target).is(this)?c.handleObj.handler.apply(this,arguments):void 0}})})}(jQuery);function openRuleDetailsDialog(d){var a=$('<button type="button" class="close btn btn-sm btn-default" data-dismiss="modal" aria-hidden="false" title="Close">&#x274c;</button>');var b=$('<div id="detail-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false"><div id="detail-modal-body" class="modal-body"></div></div>');$("body").prepend(b);var c=$("#rule-detail-"+d).clone();c.attr("id","");c.children(".panel-heading").append(a);a.css({"float":"right"});a.css({"margin-top":"-=23px"});$("#detail-modal-body").append(c);$("#detail-modal").on("hidden.bs.modal",function(f){$("#detail-modal").remove()});$("#detail-modal").modal();return false}function toggleRuleDisplay(b){var a=b.value;if(b.checked){$(".rule-overview-leaf-"+a).removeClass("rule-result-filtered");$(".rule-detail-"+a).removeClass("rule-result-filtered")}else{$(".rule-overview-leaf-"+a).addClass("rule-result-filtered");$(".rule-detail-"+a).addClass("rule-result-filtered")}stripeTreeTable()}function toggleResultDetails(b){var a=$("#result-details");if(a.is(":visible")){a.hide();$(b).html("Show all result details")}else{a.show();$(b).html("Hide all result details")}return false}function ruleSearchMatches(e,c){if(c.length==0){return true}var b=true;var d=e.children(".keywords").text().toLowerCase();var a;for(a=0;a<c.length;++a){if(d.indexOf(c[a].toLowerCase())<0){b=false;break}}return b}function ruleSearch(){var c=$("#search-input").val();var a=c.split(/[\s,\.;]+/);var b=0;$(".rule-detail").each(function(){var d=$(this).attr("id").substring(12);var e=$("#rule-overview-leaf-"+d);var f=$(this);if(ruleSearchMatches(f,a)){e.removeClass("search-no-match");f.removeClass("search-no-match");++b}else{e.addClass("search-no-match");f.addClass("search-no-match")}});if(!c){$("#search-matches").html("")}else{if(b>0){$("#search-matches").html(b.toString()+" rules match.")}else{$("#search-matches").html("No rules match your search criteria!")}}}var is_original=true;var original_treetable=null;$(document).ready(function(){$("#result-details").hide();$(".js-only").show();$(".form-group select").val("default");$(".toggle-rule-display").each(function(){toggleRuleDisplay(this)});original_treetable=$(".treetable").clone();$(".treetable").treetable({column:0,expandable:true,clickableNodeNames:true,initialState:"expanded",indent:0});is_original=true;stripeTreeTable()});function resetTreetable(){if(!is_original){$(".treetable").remove();$("#rule-overview").append(original_treetable.clone());$(".treetable").treetable({column:0,expandable:true,clickableNodeNames:true,initialState:"expanded",indent:0});$(".toggle-rule-display").each(function(){toggleRuleDisplay(this)});is_original=true}}function newGroupLine(a,c){var b=24;if(a.length>b){a=a.substring(0,b-1)+"…"}return'<tr class="rule-overview-inner-node" data-tt-id="'+c+'"><td colspan="3"><small>'+a+"</small> = <strong>"+c+"</strong></td></tr>"}var KeysEnum={DEFAULT:"default",SEVERITY:"severity",RESULT:"result",NIST:"NIST SP 800-53 ID",DISA_CCI:"DISA CCI",DISA_SRG:"DISA SRG",DISA_STIG_ID:"DISA STIG ID",PCI_DSS:"PCI DSS Requirement",CIS:"CIS Recommendation"};function getTargetGroupsList(f,d){switch(d){case KeysEnum.SEVERITY:var b=f.children(".rule-severity").text();return[b];case KeysEnum.RESULT:var a=f.children(".rule-result").text();return[a];default:try{var c=JSON.parse(f.attr("data-references"))}catch(e){return["unknown"]}if(!c.hasOwnProperty(d)){return["unknown"]}return c[d]}}function sortGroups(a,b){switch(b){case KeysEnum.SEVERITY:return["high","medium","low"];case KeysEnum.RESULT:return a.sort();default:return a.sort(function(e,d){var f=e.split(/[.()-]/);var g=d.split(/[.()-]/);var c=0;var j=Math.min(f.length,g.length);var h=/^[1-9][0-9]*$/;for(i=0;i<j&&c==0;i++){if(f[i].match(h)==null||f[i].match(h)==null){c=f[i].localeCompare(g[i])}else{c=parseInt(f[i])-parseInt(g[i])}}if(c==0){c=f.length-g.length}return c})}}function groupRulesBy(c){resetTreetable();if(c==KeysEnum.DEFAULT){return}var b={};$(".rule-overview-leaf").each(function(){$(this).children("td:first").css("padding-left","0px");var j=$(this).attr("data-tt-id");var g=getTargetGroupsList($(this),c);for(i=0;i<g.length;i++){var e=g[i];if(!b.hasOwnProperty(e)){b[e]=[newGroupLine(c,e)]}var h=$(this).clone();h.attr("data-tt-id",j+"copy"+i);h.attr("data-tt-parent-id",e);var f=h.wrap("<div>").parent().html();b[e].push(f)}});$(".treetable").remove();var a=sortGroups(Object.keys(b),c);var d="";for(i=0;i<a.length;i++){d+=b[a[i]].join("\n")}new_table='<table class="treetable table table-bordered"><thead><tr><th>Group</th> <th style="width: 120px; text-align: center">Severity</th><th style="width: 120px; text-align: center">Result</th></tr></thead><tbody>'+d+"</tbody></table>";$("#rule-overview").append(new_table);is_original=false;$(".treetable").treetable({column:0,expandable:true,clickableNodeNames:true,initialState:"expanded",indent:0});stripeTreeTable()}function stripeTreeTable(){var a=$(".rule-overview-leaf:not(.rule-result-filtered)");var b=false;$(a).each(function(){$(this).css("background-color",b?"#F9F9F9":"inherit");b=!b})};]]></xsl:template>
