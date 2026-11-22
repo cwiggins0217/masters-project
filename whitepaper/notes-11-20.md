@@ -428,3 +428,225 @@ experimental evidence validation and specialized interpretation logic.
 That is a defensible scope for your project. You can demonstrate the
 architecture using a controlled collection of rules without claiming
 that it automatically explains every possible hardening control.
+
+
+Assessment data
+    |
+    v
+week2-renderer/assessment.xml
+    |
+    v
+xsltproc
+    | --stringparam assessment-uri
+    | --stringparam assessment-phase
+    v
+xccdf-report-assessment.xsl
+    |
+    v
+Phase and rule selection
+    |
+    v
+Assessment validation
+    |
+    v
+HTML report
+
+our latest search identified the program responsible for converting comparison data into assessment.xml:
+week2-renderer/comparison-to-xml.pl
+
+
+More importantly, we also found the upstream comparison program:
+week2-comparison/compare-exp01.pl
+
+
+This is the missing link in the architecture we've been reconstructing.
+1. The evidence
+Your search output contains:
+week2-renderer/comparison-to-xml.pl:15:
+    print '<phase name="',$phase,'">';
+
+week2-renderer/comparison-to-xml.pl:16:
+    for my $key (qw(test_result_id start_time end_time)) {
+        print el($key,$p->{metadata}{$key});
+    }
+
+
+This establishes that comparison-to-xml.pl emits XML phase elements and scan metadata.
+
+We also found:
+week2-comparison/compare-exp01.pl:54:
+    $s->{metadata} = {
+        test_result_id => $tr->getAttribute('id'),
+
+
+And an intermediate artifact:
+masters-project/analysis/week2-exp01/comparison.json
+
+
+The assessment XML itself contains a json-sha256 attribute, which suggests that its generation is linked to a JSON comparison input.
+
+2. The reconstructed pipeline
+OpenSCAP scan results and saved observations
+
+Experimental evidence
+
+
+compare-exp01.pl
+
+Extracts and compares experimental data
+
+
+comparison.json
+
+Intermediate structured comparison
+
+
+comparison-to-xml.pl
+
+Serializes comparison data to assessment XML
+
+
+assessment.xml
+
+Phases, rule results, settings, provenance and limitations
+
+
+xccdf-report-assessment.xsl
+
+Selects, validates and renders assessment data
+
+
+Enriched HTML report
+
+Assessment and supporting context
+
+
+The converter's complete input and output behavior still needs
+verification, but the two scripts and intermediate JSON strongly support
+this pipeline.
+3. What this changes about our understanding Earlier, we suspected that
+   assessment.xml might have been manually constructed.
+
+We now have evidence of a programmatic conversion process.
+
+However, we still need to distinguish automatically extracted
+information from manually supplied observations and interpretations.
+
+That distinction matters for your methodology because it determines how
+much of the assessment pipeline is automated.
+
+
+1. The complete data pipeline
+results.xml
+
+OpenSCAP scan results
+
+
+sshd-effective.txt
+
+Captured SSH configuration
+
+
+
+
+compare-exp01.pl
+
+Extracts results, compares phases, checks consistency, records provenance
+
+
+comparison.json
+
+Intermediate assessment data
+
+
+comparison-to-xml.pl
+
+Converts JSON assessment data into XML
+
+
+assessment.xml
+
+Phase-specific assessment records
+
+
+xccdf-report-assessment.xsl
+
+Matches assessment records to XCCDF rule results and renders assessment content
+
+
+Enriched HTML report
+
+OpenSCAP results with contextual explanations and supporting evidence
+
+
+This diagram represents the assessment branch. The complete report
+transformation also receives the original XCCDF results.xml and the
+separate enrichment context input.
+
+2. What the comparison script actually does
+compare-exp01.pl performs several distinct operations.
+Operation	Implementation
+Reads scan results	Parses results.xml with XML::LibXML
+Identifies evaluations	Locates XCCDF TestResult elements
+Extracts selected rules	Finds rule-result entries using idref
+Extracts SSH settings	Parses sshd-effective.txt
+Compares phases	Evaluates pre/post and post/followup transitions
+Checks consistency	Compares root-login scan results with saved PermitRootLogin
+Records provenance	Calculates SHA-256 hashes of input files
+Handles missing evidence	Produces indeterminate values and explanatory reasons
+
+The implementation is deliberately scoped to two controls:
+- sshd_disable_root_login
+- file_permissions_sshd_drop_in_config
+It also extracts three SSH configuration settings.
+
+This is a specialized evidence extractor, not a general-purpose CIS assessment engine.
+3. How the assessment is calculated
+The script identifies rule-result transitions and classifies them.
+
+For example, its logic distinguishes:
+Pre	Post	Assessment
+fail	pass	improved
+pass	fail	regressed
+pass	pass	unchanged
+fail	fail	unchanged
+unknown	pass	indeterminate
+
+The script also evaluates consistency between the root-login rule's verdict and the captured PermitRootLogin value.
+
+This is a separate assessment from whether the configuration change actually prevented an attack or preserved functionality.
+
+The code explicitly acknowledges that limitation.
+4. What comparison-to-xml.pl adds
+The second script is primarily a serializer.
+
+It reads the comparison JSON and produces the XML structure expected by your assessment XSLT.
+
+It also:
+- Escapes XML-special characters.
+- Validates the JSON schema version.
+- Computes a SHA-256 hash of the JSON input.
+- Includes source paths and hashes.
+- Writes phase-specific records and comparisons.
+- Adds an explicit follow-up capture note.
+An important distinction: the XML converter does not independently verify the experimental evidence. It serializes the results supplied by the comparison script, with some additional fixed explanatory content.
+5. What this means for your whitepaper
+You can now accurately describe the implementation as three stages:
+
+Evidence extraction and comparison: A Perl program processes saved OpenSCAP results and SSH configuration observations, producing structured JSON with rule outcomes, comparison classifications, consistency checks, and source hashes.
+
+Assessment serialization: A second Perl program converts the intermediate JSON into an XML document conforming to the assessment structure expected by the report extension.
+
+Report integration: The modified OpenSCAP XSLT renderer uses phase and rule identifiers to select assessment records, checks their agreement with the current XCCDF evaluation, and renders additional explanatory information.
+
+This is a stronger architectural account than simply describing the project as an XSLT modification.
+6. Two methodological limitations worth documenting
+There are two issues in the source that you should preserve in your research discussion.
+
+First, the comparison script receives experiment directories through command-line arguments. It does not independently verify that the directories correspond to the correct VM snapshot or experimental condition.
+
+Second, the root-login consistency check compares saved effective SSH configuration values with scan results. It does not prove whether SSH authentication actually succeeded or failed.
+
+These are meaningful boundaries on what the assessment can conclude.
+
+
