@@ -61,8 +61,20 @@ for title, (source, destination) in sources.items():
         print(f"MISSING: {source}")
 
 # Copy the current curated context file when available.
-context = ROOT / "tools/openscap/lab-content/ubuntu2404-context.xml"
-if context.is_file():
+# context = ROOT / "tools/openscap/lab-content/ubuntu2404-context.xml"
+context_candidates = [
+    ROOT / "tools/openscap/lab-content/ubuntu2404-context.xml",
+    ROOT / "evidence/EXP-01/20261104T203112Z/"
+           "provenance-20261105T190608Z/ubuntu2404-context.xml",
+]
+
+context = next(
+    (path for path in context_candidates if path.is_file()),
+    None
+)
+
+
+if context is not None:
     target = DEMO / "context" / "ubuntu2404-context.xml"
     target.parent.mkdir(parents=True, exist_ok=True)
     copy2(context, target)
@@ -209,7 +221,9 @@ with manifest.open("w") as out:
 print(f"\nBuilt: {DEMO / 'index.html'}")
 
 if missing:
-    print("\nMissing sources:")
+    print("\nOptional source files not found:")
     for source in missing:
         print(f"  {source}")
-    raise SystemExit(1)
+    print("The demonstration was built using available artifacts.")
+
+

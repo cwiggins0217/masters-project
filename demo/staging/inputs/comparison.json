@@ -1,0 +1,213 @@
+{
+   "comparisons" : [
+      {
+         "assessment" : "improved",
+         "from" : "pre",
+         "rule_id" : "xccdf_org.ssgproject.content_rule_sshd_disable_root_login",
+         "to" : "post",
+         "transition" : "fail -> pass"
+      },
+      {
+         "assessment" : "regressed",
+         "from" : "pre",
+         "rule_id" : "xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config",
+         "to" : "post",
+         "transition" : "pass -> fail"
+      },
+      {
+         "assessment" : "unchanged",
+         "from" : "post",
+         "rule_id" : "xccdf_org.ssgproject.content_rule_sshd_disable_root_login",
+         "to" : "followup",
+         "transition" : "pass -> pass"
+      },
+      {
+         "assessment" : "improved",
+         "from" : "post",
+         "rule_id" : "xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config",
+         "to" : "followup",
+         "transition" : "fail -> pass"
+      }
+   ],
+   "experiment" : "EXP-01",
+   "limitations" : [
+      "Curated security context is separate and is not modified by this extractor.",
+      "Transitions describe scan results, not attack prevention or successful authentication.",
+      "Input directories identify conditions by operator selection; target, snapshot lineage, benchmark/content hashes and capture context require review.",
+      "The follow-up is targeted; never substitute its results into full-profile totals.",
+      "No effective setting or access-test outcome is carried forward into a later condition.",
+      "Permission results alone do not establish file mode, ownership or write capability.",
+      "Hashes identify bytes read now; they do not independently authenticate historical evidence."
+   ],
+   "phases" : {
+      "followup" : {
+         "metadata" : {
+            "end_time" : "2026-11-05T18:41:56+00:00",
+            "profiles" : [
+               "xccdf_org.ssgproject.content_profile_cis_level1_server"
+            ],
+            "start_time" : "2026-11-05T18:41:55+00:00",
+            "targets" : [
+               "scap-exp01"
+            ],
+            "test_result_id" : "xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_level1_server"
+         },
+         "root_login_consistency" : {
+            "reason" : "Scan=pass; saved PermitRootLogin=no. Capture timing and Match context require review.",
+            "status" : "consistent"
+         },
+         "rules" : {
+            "xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config" : {
+               "rule_id" : "xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config",
+               "source" : "scan",
+               "status" : "pass"
+            },
+            "xccdf_org.ssgproject.content_rule_sshd_disable_root_login" : {
+               "rule_id" : "xccdf_org.ssgproject.content_rule_sshd_disable_root_login",
+               "source" : "scan",
+               "status" : "pass"
+            }
+         },
+         "settings" : {
+            "passwordauthentication" : {
+               "source" : "effective_ssh",
+               "status" : "observed",
+               "value" : "yes"
+            },
+            "permitrootlogin" : {
+               "source" : "effective_ssh",
+               "status" : "observed",
+               "value" : "no"
+            },
+            "pubkeyauthentication" : {
+               "source" : "effective_ssh",
+               "status" : "observed",
+               "value" : "yes"
+            }
+         },
+         "sources" : {
+            "effective_ssh" : {
+               "path" : "/home/attacker/masters-project/evidence/EXP-01/20261104T203112Z/followup-permissions-20261105T184154Z/sshd-effective.txt",
+               "sha256" : "01bc8329aba2fabe953195591f470e91d818a53921dbea0dc64c2a6bb993a2e0"
+            },
+            "scan" : {
+               "path" : "/home/attacker/masters-project/evidence/EXP-01/20261104T203112Z/followup-permissions-20261105T184154Z/results.xml",
+               "sha256" : "ca22aec20f158682312024f5847f7029c8c9f288df1f727a1157855cc1809221"
+            }
+         }
+      },
+      "post" : {
+         "metadata" : {
+            "end_time" : "2026-11-04T21:01:56+00:00",
+            "profiles" : [
+               "xccdf_org.ssgproject.content_profile_cis_level1_server"
+            ],
+            "start_time" : "2026-11-04T21:00:44+00:00",
+            "targets" : [
+               "scap-exp01"
+            ],
+            "test_result_id" : "xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_level1_server"
+         },
+         "root_login_consistency" : {
+            "reason" : "Scan=pass; saved PermitRootLogin=no. Capture timing and Match context require review.",
+            "status" : "consistent"
+         },
+         "rules" : {
+            "xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config" : {
+               "rule_id" : "xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config",
+               "source" : "scan",
+               "status" : "fail"
+            },
+            "xccdf_org.ssgproject.content_rule_sshd_disable_root_login" : {
+               "rule_id" : "xccdf_org.ssgproject.content_rule_sshd_disable_root_login",
+               "source" : "scan",
+               "status" : "pass"
+            }
+         },
+         "settings" : {
+            "passwordauthentication" : {
+               "source" : "effective_ssh",
+               "status" : "observed",
+               "value" : "yes"
+            },
+            "permitrootlogin" : {
+               "source" : "effective_ssh",
+               "status" : "observed",
+               "value" : "no"
+            },
+            "pubkeyauthentication" : {
+               "source" : "effective_ssh",
+               "status" : "observed",
+               "value" : "yes"
+            }
+         },
+         "sources" : {
+            "effective_ssh" : {
+               "path" : "/home/attacker/masters-project/evidence/EXP-01/20261104T203112Z/post/sshd-effective.txt",
+               "sha256" : "01bc8329aba2fabe953195591f470e91d818a53921dbea0dc64c2a6bb993a2e0"
+            },
+            "scan" : {
+               "path" : "/home/attacker/masters-project/evidence/EXP-01/20261104T203112Z/post/results.xml",
+               "sha256" : "a7b94b76489f613d9f8383c86e402665e3035c72fbab76cacc5a594b742a59a5"
+            }
+         }
+      },
+      "pre" : {
+         "metadata" : {
+            "end_time" : "2026-11-04T20:35:06+00:00",
+            "profiles" : [
+               "xccdf_org.ssgproject.content_profile_cis_level1_server"
+            ],
+            "start_time" : "2026-11-04T20:33:50+00:00",
+            "targets" : [
+               "scap-exp01"
+            ],
+            "test_result_id" : "xccdf_org.open-scap_testresult_xccdf_org.ssgproject.content_profile_cis_level1_server"
+         },
+         "root_login_consistency" : {
+            "reason" : "Scan=fail; saved PermitRootLogin=without-password. Capture timing and Match context require review.",
+            "status" : "consistent"
+         },
+         "rules" : {
+            "xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config" : {
+               "rule_id" : "xccdf_org.ssgproject.content_rule_file_permissions_sshd_drop_in_config",
+               "source" : "scan",
+               "status" : "pass"
+            },
+            "xccdf_org.ssgproject.content_rule_sshd_disable_root_login" : {
+               "rule_id" : "xccdf_org.ssgproject.content_rule_sshd_disable_root_login",
+               "source" : "scan",
+               "status" : "fail"
+            }
+         },
+         "settings" : {
+            "passwordauthentication" : {
+               "source" : "effective_ssh",
+               "status" : "observed",
+               "value" : "yes"
+            },
+            "permitrootlogin" : {
+               "source" : "effective_ssh",
+               "status" : "observed",
+               "value" : "without-password"
+            },
+            "pubkeyauthentication" : {
+               "source" : "effective_ssh",
+               "status" : "observed",
+               "value" : "yes"
+            }
+         },
+         "sources" : {
+            "effective_ssh" : {
+               "path" : "/home/attacker/masters-project/evidence/EXP-01/20261104T203112Z/pre/sshd-effective.txt",
+               "sha256" : "154611996e1b125affd3f68ba87ecbd773da405501855882f3b9135d9237d3d4"
+            },
+            "scan" : {
+               "path" : "/home/attacker/masters-project/evidence/EXP-01/20261104T203112Z/pre/results.xml",
+               "sha256" : "82a35a31f47fd5ceb6ab3277f316b0e0a734c1f805b0d930b89a8c519b5b6a1c"
+            }
+         }
+      }
+   },
+   "schema_version" : "1.0"
+}

@@ -5,11 +5,9 @@ author: "Christopher Wiggins"
 date: "November 2026"
 
 documentclass: article
-classoption:
-    - twocolumn
-fontsize: 10pt
+fontsize: 11pt
 geometry:
-    - margin=0.75in
+    - margin=1.00in
 ---
 
 ```abstract
