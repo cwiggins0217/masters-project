@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenSCAP — Enrichment and Assessment Demonstration</title>
+<style>
+:root { color-scheme: light; }
+body {
+    max-width: 980px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    font: 16px/1.65 system-ui, sans-serif;
+    background: #f7f7f5;
+    color: #252a2b;
+}
+header { border-bottom: 1px solid #ccd0cf; padding-bottom: 1.5rem; }
+h1 { font-size: 2rem; line-height: 1.2; }
+h2 { font-size: 1.3rem; }
+section {
+    background: white;
+    border: 1px solid #dadddc;
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+}
+a { color: #205b7a; }
+li { margin: .5rem 0; }
+table { width: 100%; border-collapse: collapse; }
+td, th { padding: .6rem; border-bottom: 1px solid #ddd; text-align: left; }
+footer { color: #666; font-size: .85rem; margin: 2rem 0; }
+</style>
+</head>
+<body>
+<header>
+<h1>OpenSCAP Report Enrichment and Assessment</h1>
+<p>Master's project — Ubuntu 24.04 LTS, ComplianceAsCode 0.1.82</p>
+<p>An offline demonstration of contextual security reporting,
+compliance assessment, and observed operational impact.</p>
+</header>
+<main>
+<section><h2>EXP-01 — SSH</h2><p>Compare standard OpenSCAP results with project-enriched reports. Phase-dependent assessed reports will be added after their inputs are located and verified.</p><ul><li><a href="reports/exp01-original-pre.html">EXP-01 — Original baseline</a></li>
+<li><a href="reports/exp01-original-post.html">EXP-01 — Original post-hardening</a></li>
+<li><a href="reports/exp01-enriched-pre.html">EXP-01 — Enriched baseline</a></li>
+<li><a href="reports/exp01-enriched-post.html">EXP-01 — Enriched post-hardening</a></li>
+<li><a href="reports/exp01-pre-assessed.html">EXP-01 — Assessed baseline</a></li>
+<li><a href="reports/exp01-post-assessed.html">EXP-01 — Assessed post-hardening</a></li>
+<li><a href="reports/exp01-followup-assessed.html">EXP-01 — Assessed follow-up</a></li></ul></section><section><h2>EXP-02 — nginx</h2><p>Running to disabled to masked: HTTP availability was lost before the service-disabled rule changed from FAIL to PASS.</p><ul><li><a href="reports/exp02-original-baseline.html">EXP-02 — Original baseline</a></li></ul></section><section><h2>EXP-03 — Cron</h2><p>Directory permissions changed from 0755 to 0700. The selected compliance rule passed, unprivileged read access was restricted, and the tested heartbeat continued executing.</p><ul><li><a href="reports/exp03-original-pre.html">EXP-03 — Original baseline</a></li>
+<li><a href="reports/exp03-original-post.html">EXP-03 — Original post-hardening</a></li></ul></section>
+<section>
+<h2>Experiment comparison</h2>
+<table>
+<tr><th>Experiment</th><th>Compliance</th><th>Observed functionality</th></tr>
+<tr><td>SSH</td><td>Root-login FAIL → PASS</td>
+<td>Root and administrator access tests</td></tr>
+<tr><td>nginx</td><td>Service FAIL → FAIL → PASS</td>
+<td>HTTP service unavailable after disabling</td></tr>
+<tr><td>Cron</td><td>Directory permissions FAIL → PASS</td>
+<td>Test heartbeat continued</td></tr>
+</table>
+</section>
+<section>
+<h2>Scope and limitations</h2>
+<p>Security explanations are curated and project-authored.
+Rule compliance, functionality, and attacker capability are
+separate measurements. The available experiments do not establish
+comprehensive resistance to attack.</p>
+</section>
+</main>
+<footer>Generated from preserved repository artifacts.
+Source files are not modified by this builder.</footer>
+</body></html>
