@@ -1,0 +1,10 @@
+flowchart TD
+  A["VM + SCAP content/profile"] --> B["OpenSCAP scan"]
+  B --> C["XCCDF/ARF results"]
+  D["SSH tests + intervention records"] --> E["Assessment builder"]
+  C --> E
+  E --> F["assessment.xml"]
+  G["Curated rule context XML"] --> H["XSLT report renderer"]
+  C --> H
+  F --> H
+  H --> I["Pre/post HTML reports"]

@@ -21,10 +21,10 @@ uname -r
 
 lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINTS
 NAME                      SIZE FSTYPE      MOUNTPOINTS
-sda                        64G             
-├─sda1                      1M             
+sda                        64G
+├─sda1                      1M
 ├─sda2                      2G ext4        /boot
-└─sda3                     62G LVM2_member 
+└─sda3                     62G LVM2_member
   └─ubuntu--vg-ubuntu--lv  31G ext4        /
 
 fintmnt --real
@@ -33,15 +33,15 @@ TARGET  SOURCE                            FSTYPE OPTIONS
 └─/boot /dev/sda2                         ext4   rw,relatime
 
 ip -br address
-lo               UNKNOWN        127.0.0.1/8 ::1/128 
-ens18            UP             10.10.20.198/24 metric 100 fe80::be24:11ff:feb9:6812/64 
+lo               UNKNOWN        127.0.0.1/8 ::1/128
+ens18            UP             10.10.20.198/24 metric 100 fe80::be24:11ff:feb9:6812/64
 
 ip route
-default via 10.10.20.1 dev ens18 proto dhcp src 10.10.20.198 metric 100 
-10.10.20.0/24 dev ens18 proto kernel scope link src 10.10.20.198 metric 100 
-10.10.20.1 dev ens18 proto dhcp scope link src 10.10.20.198 metric 100 
+default via 10.10.20.1 dev ens18 proto dhcp src 10.10.20.198 metric 100
+10.10.20.0/24 dev ens18 proto kernel scope link src 10.10.20.198 metric 100
+10.10.20.1 dev ens18 proto dhcp scope link src 10.10.20.198 metric 100
 sudo ss -lntup
-Netid State  Recv-Q Send-Q      Local Address:Port Peer Address:PortProcess                                               
+Netid State  Recv-Q Send-Q      Local Address:Port Peer Address:PortProcess
 udp   UNCONN 0      0              127.0.0.54:53        0.0.0.0:*    users:(("systemd-resolve",pid=575,fd=16))            
 udp   UNCONN 0      0           127.0.0.53%lo:53        0.0.0.0:*    users:(("systemd-resolve",pid=575,fd=14))            
 udp   UNCONN 0      0      10.10.20.198%ens18:68        0.0.0.0:*    users:(("systemd-network",pid=561,fd=21))            
@@ -134,7 +134,7 @@ securitykeyprovider internal
 streamlocalbindmask 0177
 streamlocalbindunlink no
 strictmodes yes
-subsystem sftp /usr/lib/openssh/sftp-server 
+subsystem sftp /usr/lib/openssh/sftp-server
 syslogfacility AUTH
 tcpkeepalive yes
 trustedusercakeys none
