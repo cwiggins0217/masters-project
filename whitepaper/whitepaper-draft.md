@@ -482,9 +482,112 @@ revision, and visual browser review were still listed as follow-up work.
 
 # Evaluation and Results
 
+The evaluation has two parts, and the results of each are kept separate.
+The experiment was testing whether the reporting software handles
+evidence as intended, and showing what the report can say about a
+hardening change using selected system controls.
+
+## Prototype evaluation
+
+The assessment builder and renderer were evaluated for the following:
+
+- It preserves OpenSCAP's original rule result
+- It associates evidence with the correct phase, target, profile,
+  TestResult, and rule
+- It distinguishes a real SSH authentication denial from a connection
+  faliure
+- It can handle missing or conflicting evidence without presenting an
+  unsupported conclusion
+- It can render the assessment and supporting evidence links
+
+The package's tests cover recorded pre/post outcomes, missing evidence,
+transport failure, and mismatched scan metadata.
+
+## Main system experiment: Fresh SSH run
+
+The November 17 used a prepared baseline with a root public key
+deliberately placed and authorized to test direct root SSH access.
+
+| Measurement | Before intervention | After intervention |
+|---|---|---|
+| Effective `PermitRootLogin` | `without-password` | `no` |
+| `sshd_disable_root_login` | Fail | Pass |
+| Drop-in permissions rule | Pass | Pass |
+| Controlled direct-root SSH | Root identity; exit 0 | Authentication denied; exit 255 |
+| `cis-test` login followed by sudo | Succeeded; exit 0 | Succeeded; exit 0 |
+| Full-profile scan exit | 2 | 2 |
+
+The intervention added a root-owned, mode 0600 SSH drop-in setting
+`PermitRootLogin no`. The recorded procedure validated and reloaded SSH.
+The file hash of the authorized key remained unchanged across the
+intervention, distinguishing the configuration change from a change to
+the file. The result supports the following: the tested root SSH route
+changed from successful to denied while the tested account
+administrative workflow remained available. It does not establish that
+every administrative task or service remained functional. Other SSH
+cipher, key-exchange, and MAC checks remained `failed`, which is why the
+profile scan still exited 2.
+
+```sh
+evidence and information will be displayed here
+```
+
+## Historical SSH permissions case
+
+The separate November 4-5 run demonstrates why related-rule context
+matters:
+
+| Rule | Pre | Initial post | Follow-up |
+|---|---|---|---|
+| Disable root SSH login | Fail | Pass | Pass |
+| SSH drop-in permissions | Pass | Fail | Pass |
+
+The new drop-in was recorded with mode 0644, and the permissions result
+failed. The later correction to mode 0600 restored a pass. This is an
+example of a related control changing the interpretation of the
+remediation.
+
+## Supporting Observations
+
+In the nginx experiment, the baseline served the expected page with HTTP
+200. Later, nginx was disabled and inactive while its package remained
+installed. The draft shows the complete paired evidence/report
+presentation was not part of the... well fuck me
+
+## Overall Interpretation
+
+
+
 # Discussion
 
+Overall, I think there is enough evidence to support that the prototype
+demonstrated the ability to combine scan results with selected
+configuration and behavior evidence into a report and change its
+interpretation between different (before/after) phases. Barring
+limitations of the method and data gathered, the demonstration was
+within the tested scope.
+
+The SSH result shows that
+
+
 # Conclusion and Future Work
+
+1. Finish and document integration: record the exact source revision and
+   visually review the reports and evidence links, if those tasks are
+   still outstanding.
+2. Improve repeatability: repeat the SSH comparison and capture the
+   credential identity in both phases, along with more clear timing and
+   target identity
+3. Test more operational conditions: check connection-specific SSH
+   `Match` rules, perform a recovery trial, and test additional required
+   workflows.
+4. Complete additional cases: finish paired evidence and report
+   evaluation for nginx and cron before presenting them as validated
+   extensions.
+5. Review the context mappings: have another reviewer check the rule
+   explanations and ATT&CK relationship.
+6. Evaluate usability: conduct an administrator study only if there is a
+   desire to claim the reports improve comprehension or decisions.
 
 # Appendix
 
